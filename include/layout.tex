@@ -1,0 +1,51 @@
+\usepackage{setspace}
+\usepackage{geometry}
+
+
+% Seitenränder -----------------------------------------------------------------
+\setlength{\topskip}{\ht\strutbox} % behebt Warnung von geometry
+\geometry{a4paper,left=30mm,right=30mm,top=30mm,bottom=35mm}
+
+\usepackage[
+automark, % Kapitelangaben in Kopfzeile automatisch erstellen
+headsepline, % Trennlinie unter Kopfzeile
+ilines % Trennlinie linksbündig ausrichten
+]{scrpage2}
+
+% Kopf- und Fußzeilen ----------------------------------------------------------
+\pagestyle{scrheadings}
+% chapterpagestyle gibt es nicht in scrartcl
+\renewcommand{\chapterpagestyle}{scrheadings}
+\clearscrheadfoot
+
+% Kopfzeile
+\renewcommand{\headfont}{\normalfont} % Schriftform der Kopfzeile
+\ihead{\textsc{Versuch 1}\\[0.5ex] \textit{\headmark}}
+\chead{E-Technik Praktikum\\Technische Informatik}
+\ohead{\includegraphics*[scale=0.25]{../include/logo.png}}
+\setlength{\headheight}{15mm} % Höhe der Kopfzeile
+%\setheadwidth[0pt]{textwithmarginpar} % Kopfzeile über den Text hinaus verbreitern (falls Logo den Text überdeckt)
+
+% Fußzeile
+\ifoot{\today}
+\cfoot{}
+\ofoot{\pagemark}
+
+% Abschnittsüberschriften im selben Stil wie beim Inhaltsverzeichnis einrücken
+\renewcommand*{\othersectionlevelsformat}[3]{
+    \makebox[\headingSpace][l]{#3\autodot}
+}
+
+
+%\onehalfspacing % Zeilenabstand 1,5 Zeilen
+\frenchspacing % erzeugt ein wenig mehr Platz hinter einem Punkt
+
+% Schusterjungen und Hurenkinder vermeiden
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Aufzählungen anpassen
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}

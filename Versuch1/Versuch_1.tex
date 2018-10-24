@@ -1,30 +1,14 @@
 \documentclass[11pt,a4paper,titlepage]{scrreprt}
-\usepackage[utf8x]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{ucs}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{xcolor}
-\usepackage{gensymb}
-\usepackage{graphicx}
-\usepackage{mdwlist}
-\usepackage{siunitx}
-\usepackage{nccmath}
-\sisetup{locale=DE}
-\usepackage[european]{circuitikz}
 
-\newcommand{\spannung}[1]{\textcolor{blue}{#1}}
-\newcommand{\strom}[1]{\textcolor{red}{#1}}
-\newcommand{\widerstand}[1]{\textcolor{violet}{#1}}
-\newcommand{\capacity}[1]{\textcolor{green}{#1}}
-\newcommand{\glaettung}[1]{\textcolor{purple}{#1}}
-\newcommand{\TODO}[1]{\textbf{\textcolor{red}{!!!!TODO: #1 !!!!}}}
+\input{../include/packages.tex}
+\input{../include/layout.tex}
+\input{../include/befehle.tex}
 
-\input{./include/customMeter.tex}
+\newcommand{\vnumber}{1}
+\newcommand{\vname}{Stromversorgungsschaltung}
 
 \begin{document}
-	\input{./include/titlepage.tex}
+	\input{../include/titlepage.tex}
 
 
    \tableofcontents
@@ -62,6 +46,21 @@
 				 (T.B2) to[short, l_=Osz. Gnd.] (1,-4 -| T.B2);
 			\end{circuitikz}
 		\end{center}
+    
+    
+        \begin{table}[!hbtp]
+            \caption{Oszillographeneinstellung}
+            \label{tbl:oszillographeneinstellung}
+            \renewcommand{\arraystretch}{1.3}
+            \begin{tabular}{l|l}
+                Kanal Y1 & $\SI{5}{\volt}$ pro Teil, Signal bei $\spannung{u_1(t)}$\\
+                Kanal Y1 & $\SI{5}{\volt}$ pro Teil, Signal bei $s\spannung{u_2(t)}$\\
+                Kopplung & DC\\
+                Trigger & Y1, in, norm, level\\
+                Darstellung & Chopped\\
+                Zeitablenkung & \SI{5}{\micro\second}
+            \end{tabular}
+        \end{table}
 		
 		\subsection{Messaufgaben}
 			\subsubsection{Messaufgabe 1}
@@ -71,25 +70,31 @@
 				
 						
 			\subsubsection{Messaufgabe 2}
-				\paragraph{Aufgabe:} Messen sie mit dem Oszillograph und Multimeter
+                \paragraph{Aufgabe:} Zeichen Sie die Spannungsverläufe auf
+            \subsubsection{Messaufgabe 3}
+				\paragraph{Aufgabe:} Messen Sie mit dem Oszillograph und Multimeter
 					\begin{table}[!hbtp]
 						\caption{Messergebnisse Einweggleichrichtung ohne Kondensator}
 						\label{tbl:messergebnisse1.1}
 						\renewcommand{\arraystretch}{1.3}
 						\begin{tabular}{ll|l}
-							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ \hline
-							Frequenz der Eingangsspannung & $f$ & \\%\SI{50}{\hertz} \\
-							Brummspannungsfrequenz & $f_{br}$ &\\%\SI{50}{\hertz} \\
-							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\% \SI{22}[-]{\volt} -- \SI{22}{\volt} \\
-							Scheitelwert & \spannung{$U_{2_{max}}$} &\\% \SI{0}{\volt} -- \SI{21,3}{\volt} \\
-							Stromflusswinkel &  $\alpha [ \degree]$& \\%\SI{0}{\degree}\\
-							Brummspannung &  \spannung{$U_{brmax}$} &\\% \SI{21,3}{\volt}\\ \hline
-							Effektivwert & \spannung{$U_{1}$} &\\% \SI{16,06}{\volt} \\
-							Gleichspannung & \spannung{$U_{2-}$} & \\%\SI{6,84}{\volt}\\
+							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ 
+                            \multicolumn{3}{l}{Oszillograph:}\\\hline
+							Frequenz der Eingangsspannung & $f$ & \\
+							Brummspannungsfrequenz & $f_{br}$ &\\
+							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\
+							Scheitelwert & \spannung{$U_{2_{max}}$} &\\
+							Stromflusswinkel &  $\alpha [ \degree]$& \\
+							Brummspannung &  \spannung{$U_{brmax}$} &\\
+                                                        \multicolumn{3}{l}{Multimeter:}\\\hline
+							Effektivwert & \spannung{$U_{1}$} &\\% \
+							Gleichspannung & \spannung{$U_{2-}$} & \\
 						\end{tabular}
 					\end{table}
 		\subsection{Auswertung}
-			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den gemessenen und den theoretischen Wert an (mit Herleitung).\\
+			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den gemessenen und den theoretischen Wert an (mit Herleitung).
+            
+            \paragraph{Aufgabe 2:} Erklären Sie die indirekte Strommessung mit dem Oszillograph, und geben Sie den gemessenen und errechneten Wert an. Begründen Sie den Unterschied zwischen den Werten.
 	
 		\section{Einweggleichrichtung mit Glättungskondensator}
 			
@@ -141,13 +146,15 @@
 						\label{tbl:messergebnisse1.2}
 						\renewcommand{\arraystretch}{1.3}
 						\begin{tabular}{ll|l}
-							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ \hline
+							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\
+                                                        \multicolumn{3}{l}{Oszillograph:}\\\hline
 							Frequenz der Eingangsspannung & $f$ & \\
 							Brummspannungsfrequenz & $f_{br}$ &\\
 							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\
 							Scheitelwert & \spannung{$U_{2_{max}}$} &\\
 							Stromflusswinkel &  $\alpha [ \degree]$&\\
-							Brummspannung &  \spannung{$U_{brmax}$} &\\ \hline
+							Brummspannung &  \spannung{$U_{brmax}$} &\\
+                            \multicolumn{3}{l}{Multimeter:}\\\hline
 							Effektivwert & \spannung{$U_{1}$} &\\
 							Gleichspannung & \spannung{$U_{2-}$} &\\
 						\end{tabular}
@@ -159,9 +166,7 @@
 					\begin{equation*}
 						\glaettung{G} = 2 \cdot 3,14 \cdot f \cdot \capacity{C} \cdot \widerstand{R}
 					\end{equation*}
-					mit Lastwiderstand \widerstand{R} = $1\,k\Omega$,\\ 
-					Kapazität des Glättungskondensator \capacity{C} = $100\mu$F und\\ 
-					Frequenz der Eingangswechselspannung $f$ = 50~Hz
+					(siehe Anhang)
 	
 	\chapter{Brückengleichrichtung}
 		\section{Brückengleichrichtung ohne Glättungskondensator}
@@ -218,20 +223,23 @@
 				\label{tbl:messergebnisse2.1}
 				\renewcommand{\arraystretch}{1.3}
 				\begin{tabular}{ll|l}
-					\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ \hline
+					\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\
+                                                \multicolumn{3}{l}{Oszillograph:}\\\hline
 					Frequenz der Eingangsspannung & $f$ & \\
 					Brummspannungsfrequenz & $f_{br}$ & \\
 					Scheitelwerte & \spannung{$U_{1_{max}}$} & \\
 					Scheitelwert & \spannung{$U_{2_{max}}$} &\\
 					Stromflusswinkel &  $\alpha [ \degree]$& \\
-					Brummspannung &  \spannung{$U_{brmax}$} &\\ \hline
+					Brummspannung &  \spannung{$U_{brmax}$} &\\
+                                                \multicolumn{3}{l}{Multimeter:}\\\hline
 					Effektivwert & \spannung{$U_{1}$} &\\
 					Gleichspannung & \spannung{$U_{2-}$} & \\
 				\end{tabular}
 			\end{table}
+        
 			\subsection{Auswertung}
-			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den theoretischen Wert an (Herleitung, Diodenspannung vernachlässigt).\\
-		 \pagebreak
+			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den theoretischen Wert an (Herleitung, Diodenspannung vernachlässigt).
+            
 		\section{Brückengleichrichtung mit Glättungskondensator}
 			\paragraph{Messaufbau:}
 			\begin{itemize*}
@@ -285,10 +293,10 @@
 			\subsection{Messaufgaben}
 			\subsubsection{Messaufgabe 1}
 			\paragraph{Aufgabe:}   Messen und skizzieren Sie für \capacity{C} mit \SI{33}{\mu\farad} die Spannungs- und Stromverläufe von $\spannung{U_2(t)}$ und $\strom{I_2(t)}$ auf.
-			\paragraph{Durchführung:}  Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$ einstellen. Werte messen und aufschreiben.\\
+			\paragraph{Durchführung:}  Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$ einstellen. Werte messen und aufschreiben. Zeichnung anfertigen.
 
 			\subsubsection{Messaufgabe 2}
-			\paragraph{Aufgabe:}  Protokollieren Sie die Werte für verschiedene Größen des Kondensators C1 in u.a. Tabelle. (Setzen Sie abwechseln die verschiedenen Kondensatoren in die Schaltung ein). 
+			\paragraph{Aufgabe:}  Protokollieren Sie die Werte für verschiedene Größen des Kondensators $\capacity{C_1}$ in u.a. Tabelle. (Setzen Sie abwechseln die verschiedenen Kondensatoren in die Schaltung ein). 
             
     			\begin{table}[!hbtp]
     				\caption{Messwertetabelle Brückengleichrichtung mit Glättungskondensator}
@@ -296,10 +304,10 @@
     				\renewcommand{\arraystretch}{1.3}
                     \begin{center}
     				\begin{tabular}{l|c|c|c|c}
-    					\capacity{C} [\si{\mu\farad}] & \SI{33}{\mu\farad} &\SI{100}{\mu\farad} &\SI{220}{\mu\farad} &\SI{1000}{\mu\farad}\\ \hline
+    					$\capacity{C_1}$ [\si{\mu\farad}] & \SI{33}{\mu\farad} &\SI{100}{\mu\farad} &\SI{220}{\mu\farad} &\SI{1000}{\mu\farad}\\ \hline
     					$f_{Eingang} [\si{\hertz}]$  &  &  &  & \\
     					$f_{br} [\si{\hertz}]$ &  &  &  & \\
-    					$\spannung{U_{brss}} [\si{\volt}]$ &  &  &  &   \\
+    					$\spannung{U_{brss}} [\si{\volt}]$ &  &  &  &   \\\hline
     					$\mfrac{\spannung{U_1}}{\spannung{U_2}}$ &  &  &  & \\
     					W ($10^{-2}$) & &  &  &  \\
     					$\spannung{U_1} [\si{\volt}]$ &  &  &  & \\
@@ -311,11 +319,10 @@
             
 			\subsection{Auswertung}
 			\paragraph{Aufgabe 1:}  Berechnen Sie die Verhältnisse $\mfrac{\spannung{U_1}}{\spannung{U_2}}$, $W =\mfrac{\spannung{U_{2w}}}{\spannung{U_2}}$, sowie den Glättungsfaktor G für obige Messreihe. Rechnen Sie mit $\spannung{U_{2w}} = \mfrac{\spannung{U_{2brss}}}{2,828}$. Beurteilen Sie die Ergebnisse in Bezug auf die Dimensionierung von Stromversorgungsschaltungen.\\
-            \\
-            Stromversorgungsschaltungen sollten immer einen Kondensator im Verhältnis $\mfrac{\widerstand{R_{Last}}}{\capacity{C}}~=~\mfrac{1}{10^{-6}}$ besitzen.
             
             
 	\chapter{Siebschaltungen}
+    Die Ausgangsspannungen und -Ströme der Gleichrichterschaltungen enthalten noch relativ große Wechselanteile (Brummanteile). Mit Hilfe von Siebschaltungen (Tiefpass Netzwerke) können diese Wechselanteile nochmals reduziert werden.
     	\section{RC-Siebung}
             \paragraph{Messaufbau:}
             \begin{itemize*}
@@ -459,11 +466,74 @@
             \paragraph{Aufgabe:} Spannungsregler - Wirkungsgrad. Lastwiderstand $\widerstand{R_{Last}} = \SI{100}{\ohm}$ Messen Sie mit dem  Multimeter: $\spannung{U_{2-}}$ und $\spannung{U_{3-}}$, Werte notieren.
             
             \subsubsection{Messaufgabe 3}
-            \paragraph{Aufgabe:}  Ermitteln Sie die Eingangsspannung U1 bei der die Schaltung für $\widerstand{R_{Last}} = \SI{56}{\ohm}$ noch einwandfrei regelt und geben Sie den Spannungswert an. Beobachten Sie dazu die Ausgangsspannung $\spannung{U_3(t)}$ mit dem Oszillograph.
+            \paragraph{Aufgabe:}  Ermitteln Sie die Eingangsspannung $\spannung{U_1}$ bei der die Schaltung für $\widerstand{R_{Last}} = \SI{56}{\ohm}$ noch einwandfrei regelt und geben Sie den Spannungswert an. Beobachten Sie dazu die Ausgangsspannung $\spannung{U_3(t)}$ mit dem Oszillograph. Stellen Sie zum Messen von $\spannung{U_{3brss}}$ den Oszillograph auf AC-Kopplung, um den Gleichspannungsanteil zu unterdrücken.
             
             \subsection{Auswertung}
-        	\paragraph{Aufgabe 1: }  Berechnen Sie zu allen Messwerten die Verlustleistung $P_v = P_{ce}$ und den Wirkungsgrad des Spannungsreglers (Eigenverbrauch vernachlässigt). Tragen Sie die Daten in die Tabelle 4.1 ein\\
+        	\paragraph{Aufgabe 1: }  Berechnen Sie zu allen Messwerten die Verlustleistung $P_v = P_{ce}$ und den Wirkungsgrad des Spannungsreglers (Eigenverbrauch vernachlässigt). Tragen Sie die Daten in die Tabelle 4.1 ein und geben Sie die Berechnungen nachvollziehbar in der Ausarbeitung an!
             
            \listoftables
-           \listoffigures
+           
+           
+           \chapter{Anhang}
+           \textbf{Gehört nicht zur Ausarbeitung, deshalb nicht übernehmen!}
+           
+           \section{Glättungsfaktor $\glaettung{G}$}
+           Der Glättungsfaktor  $\glaettung{G}$ beschreibt bei Brummspannungen $\spannung{U_w}$ das Verhältnis des Eingangs zum Ausgang. Die Spannung am Verbraucher verläuft umso „glatter“ je größer die Zeitkonstante tc = CR im Verhältnis zur Periodendauer T der Eingangswechselspannung u (t) ist.
+           
+           Definition:
+           \begin{align*}
+           \glaettung{G} &= 2 \cdot \pi \cdot f \cdot \capacity{C} \cdot \widerstand{R} \quad \text{ mit }\\
+           \widerstand{R} &= \text{Lastwiderstand} \\
+           \capacity{C} &= \text{Glättungskondensator}\\
+           f &= \text{Frequenz der Eingangswechselspannung}
+           \end{align*}
+           \section{Welligkeit einer Mischspannung}
+           Der  gleichgerichteten  Wechselspannung  ist  ein  nichtsinusförmiger  Wechselanteil  (Brummspannung)  mit  der  Schwingungsbreite  $\spannung{U_{brss}}$ überlagert.  Der  Effektivwert  dieser  Spannung  kann  mittels  der  Fourieranalyse  (franz.  Mathematiker)  berechnet  werden.  Die  Brummspannung  enthält neben  der  Grundschwingung  $f_{br}$ Schwingungsanteile  mit  geradzahligem Vielfachen  der  Grundschwingungsfrequenz: $2f_{br}; 4f_{br}; 6f_{br}$.
+
+           Definition:
+           \begin{align*}
+           W &= \frac{\spannung{U_w}}{\spannung{U_{\_}}}\\
+           \spannung{U_2} &= \text{effektive Welligkeitsspannung}\\
+           \spannung{U_{\_}} &= \text{arithmetischer Mittelwert der Mischspannung} 
+           \end{align*}
+           
+           
+           Welligkeit:\\
+           Einweggleichrichtung (ohne C)   W = 1,21\\
+           Brückengleichrichter  (ohne C)    W = 0,485\\
+           
+           \textbf{Hinweis:} Näherung  zur messtechnischen Bestimmung  der  Welligkeitsspannung $\spannung{U_w}$ aus  der  Brummspannung $\spannung{U_{brss}}$ bei der Ausnahme, dass $\spannung{U_2}$ enthält nur den Grundschwingungsanteil $f_{br}$ und $\spannung{U_{brss}} << \spannung{U_{\_}}$ dann:
+           
+           \begin{equation*}
+           \spannung{U_w} = \frac{\spannung{U_{brss}}}{ 2 \cdot 1,4141}
+           \end{equation*}
+ 
+           \section{Stromflusswinkel "`$a$"'}
+           Der  Gleichspannungsanteil  $U_{\_}$  am  Ausgang  einer  Gleichrichterschaltung  mit  Glättungskondensator hängt vom Stromflusswinkel "`$a$"', dh. von der Stromführungszeit durch die Gleichrichterdiode (Ladezeit des Kondensators) ab. Es gilt z.B für die Einwegschaltung:
+           
+           \begin{align*}
+           \spannung{U_{2\_}} &= 1,4141 \cdot \spannung{U_1} \cdot \cos(\frac{a}{2})\\
+           \spannung{U_1}&= \text{Effektivwert der sinusförmigen Eingangsspannung}\\
+           \spannung{U_2}&= \text{arithmetischer Mittelwert der Ausgangsspannung}\\
+           \end{align*}
+           
+           Beispiel: Gleichrichterschaltung mit Glättungskondensator und ohne Lastwiderstand.
+           \begin{equation*}
+           a = 0^0 \implies \spannung{U_{2\_}} = 1,4141 \cdot \spannung{U_1} = \spannung{U_{1\max}}
+           \end{equation*}
+           \section{Siebfaktor $S$}
+           Siebglieder sind Tiefpassglieder. Der Siebfaktor gibt an, wievielmal größer die Welligkeitsspannung am Eingang $\spannung{U_{w1}}$ der Siebschaltung ist als am Ausgang $\spannung{U_{w2}}$.
+           \begin{equation*}
+           S = \frac{\spannung{U_{1w}}}{\spannung{U_{2w}}}
+           \end{equation*}
+           Eine Reihenschaltung aus einem Serienwiderstand $\widerstand{R_s}$ und einem parallelen Siebkondensator $\capacity{C_s}$:
+           \begin{align*}
+            S &= \frac{\spannung{U_{w1}}}{\spannung{U_{w2}}} = \sqrt{\frac{\widerstand{R_s}^2 + X_c^2}{X_c}}
+           \end{align*}
+           Näherung für $\widerstand{R_s} >> X_c$
+           \begin{align*}
+           S = \frac{\widerstand{R_s}}{X_c} = 2 \cdot \pi \cdot f_g \cdot \capacity{C_s} \cdot \widerstand{R_s}\\
+           f_g = \text{Grundschwingung der Brummspannung}
+           \end{align*}
+           
 \end{document}

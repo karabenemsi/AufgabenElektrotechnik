@@ -1,33 +1,14 @@
-\documentclass[a4paper,titlepage,parskip]{scrreprt}
-\usepackage[utf8x]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{ucs}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{xcolor}
-\usepackage{gensymb}
-\usepackage{graphicx}
-\usepackage{mdwlist}
-\usepackage{siunitx}
-\usepackage{nccmath}
-\usepackage{subcaption}
-\sisetup{locale=DE}
-\usepackage[european]{circuitikz}
+\documentclass[11pt,a4paper,titlepage]{scrreprt}
 
-\newcommand{\spannung}[1]{\textcolor{blue}{#1}}
-\newcommand{\strom}[1]{\textcolor{red}{#1}}
-\newcommand{\widerstand}[1]{\textcolor{violet}{#1}}
-\newcommand{\capacity}[1]{\textcolor{green}{#1}}
-\newcommand{\glaettung}[1]{\textcolor{purple}{#1}}
-\newcommand{\TODO}[1]{\textbf{\huge\textcolor{red}{!!!! #1 !!!!}}}
+\input{../include/packages.tex}
+\input{../include/layout.tex}
+\input{../include/befehle.tex}
 
-\input{./include/customMeter.tex}
-
+\newcommand{\vnumber}{3}
+\newcommand{\vname}{Grundlagen Messtechnik}
 
 \begin{document}
-    \input{./include/titlepage.tex}
-
+	\input{../include/titlepage.tex}
 
    \tableofcontents
 
@@ -93,14 +74,6 @@
                 \end{center}
         \subsection{Auswertung}
           \subsubsection{Aufgabe 1:} Stellen Sie die Messreihen für $\strom{I} = f(\spannung{U})$ und $\widerstand{R} = konstant$  aus Messaufgabe 1 graphisch dar. Ermitteln Sie daraus für jeweils 2 Kurvenpunkte den Proportionalitätsfaktor $m$. Geben Sie die Funktionsverläufe in der Form von $\strom{I} = m \cdot \spannung{U}$ an.
-		   \pagebreak           
-           \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[scale=0.6]{./Kennlinien/1_1_A1_1.PNG}
-                \end{center}
-                \caption{$\strom{I} = f(\spannung{U})$ mit $\widerstand{R} = \SI{47}{\ohm} = konstant$}
-                \label{fig:1_1_A1}
-            \end{figure}
             
             \begin{equation*}
             	m = \frac{\Delta \strom{I}}{\Delta \spannung{U}} = \frac{\SI{42}{\milli\ampere}}{\SI{2}{\volt}} = 0,021
@@ -110,14 +83,6 @@
             	\strom{I} = 0,021 \cdot \spannung{U}
             \end{equation*}
             
-            \pagebreak
-            \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[scale=0.6]{./Kennlinien/1_1_A1_2.PNG}
-                \end{center}
-                \caption{$\strom{I} = f(\spannung{U})$ mit $\widerstand{R} = \SI{1000}{\ohm} = konstant$}
-                \label{fig:1_1_A1}
-            \end{figure}
             
             \begin{equation*}
             	m = \frac{\Delta \strom{I}}{\Delta \spannung{U}} = \frac{\SI{2}{\milli\ampere}}{\SI{2}{\volt}} = 0,001
@@ -129,14 +94,6 @@
           
           \subsubsection{Aufgabe 2:} Wie ist der Proportionalitätsfaktor zu interpretieren ? 
           
-          Der Proportionalitätsfaktor m beschreibt den Leitwert $G$, also die Umkehrung des ohm'schen Widerstands. Der Wert für den Widerstand lässt sich ganz einfach berechnen: 
-          \begin{equation*}
-          		\widerstand{R} = \frac{1}{G} = \frac{1}{0,021} = \SI{47}{\ohm}
-          \end{equation*}
-          und
-		  \begin{equation*}
-          		\widerstand{R} = \frac{1}{G} = \frac{1}{0,001} = \SI{1000}{\ohm}
-          \end{equation*}
     \chapter{Eigenschaften von Messgeräten}
 
 
@@ -177,7 +134,6 @@
 		   		\spannung{U_0} = \spannung{U_L} + \widerstand{R_i} \cdot (\strom{I_L} + \strom{I_V}) = \SI{4,7}{\volt} + \SI{1}{\ohm} \cdot (\SI{100}{\milli\ampere} + \SI{4,8}{\micro\ampere}) = \SI{4,8000048}{\volt}
 		   \end{equation*}
 		   
-       \pagebreak    
        \section{Spannungsrichtiges Messen bei Strom- Spannungs- Messung}
        
          \paragraph{Messaufbau:}
@@ -247,7 +203,6 @@
                 = \frac{\SI{4,09}{\volt} - \SI{3,92}{\volt}}{\SI{39,5}{\milli\ampere} - \SI{39,2}{\milli\ampere}}\\
                 &= \SI{566,66}{\ohm}
             \end{align*}
-        \pagebreak    
         \section{Stromrichtiges Messen bei gleichzeitiger Strom- Spannungs- Messung}
        
              \paragraph{Messaufbau:}
@@ -318,7 +273,6 @@
                 \strom{I_{X2}} &= \SI{0,16}{\milli\ampere}\\
                 \widerstand{R_{UI}} &= \frac{\spannung{U}}{\strom{I_{X2}} - \strom{I_{X1}}} = \SI{2,2}{\kilo\ohm}
                 \end{align*}
-         \pagebreak       
         \section{Einfluss des Messgeräteinnenwiederstandes auf die Messgenauigkeit}
             \paragraph{Messaufbau:}
             \begin{itemize*}
@@ -402,7 +356,6 @@
             
              Durch den zusätzlichen Widerstand vergrößert sich der Gesamtwiderstand der Schaltung, wodurch auch der Gesamtstrom verändert wird. Er verringert sich. Um entgegen zu wirken sollte der Innenwiederstand in diesem Fall sehr klein sein.
             
-         \pagebreak       
         \section{Kurvenformfehler bei Messgeräten}
         
             \paragraph{Messaufbau:}
@@ -546,13 +499,6 @@
                 \begin{align*}
                     \underline{X} = f
                 \end{align*}
-                					\begin{figure}[!htbp]
-                                        \begin{center}
-                                            \includegraphics[scale=0.8]{./Kennlinien/3_1_A1.PNG}
-                                        \end{center}
-                                        \caption{Frequenzspektrum $\underline{X}$}
-                                        \label{fig:3_1_A1}
-                                    \end{figure}
                                     
                d)
                 \begin{align*}
@@ -561,7 +507,6 @@
                      \varphi &=  \frac12\pi
                 \end{align*}
                 
-        \pagebreak        
         \section{Speisung eines ohmschen Verbrauchers mit einer Sinusspannung}
             \paragraph{Messaufbau:}
                 \begin{itemize*}
@@ -596,7 +541,6 @@
                     \paragraph{Aufgabe:} Messen Sie mit dem Multimeter $\spannung{U}$, $\strom{I}$ und $\spannung{U_m}$\\
                      Messen Sie mit dem Oszillograph den Phasenwinkel $\varphi(\spannung{u},\strom{I})$ für 10 Augenblickwerte für $\spannung{U(t)}$ und $\strom{I(t)}$ = $\frac{\spannung{U_m(t)}}{\widerstand{R}}$
                     \paragraph{Durchführung:} Schaltung aufbauen. Die Speisespannung $\spannung{U(t)}$ am Frequenzgenerator einstellen: Spannung $U_{SS} = \SI{8}{\volt}$, Periodendauer  $T = \SI{10}{\milli\second}$ 
-					\pagebreak                    
                     \paragraph{Ergebnisse:}
                         \begin{center}
                             \begin{table}[!hbtp]
@@ -629,13 +573,6 @@
                     \pagebreak
                 \subsubsection{Aufgabe 2:}   Stellen Sie $\spannung{U(t)}$, $\strom{I(t)}$ und $P(t)$ graphisch dar.(In einer Zeichnung, verschieden farbig)
                 
-				\begin{figure}[!htbp]
-              		\begin{center}
-                  		\includegraphics[scale=0.5]{./Kennlinien/3_1_A2.PNG}
-                	\end{center}
-                	\caption{$\spannung{U(t)}, \strom{I(t)} und P(t)$}
-                	\label{fig:1_1_A1}
-            	\end{figure}                
                 
                 \subsubsection{Aufgabe 3:}  Was messen Sie mit den Strom- und Spannungsmessern im Wechselstrombereich ? Welche Leistung können Sie daraus berechnen. (Multimeter benutzen)
                 \begin{align*}
@@ -664,7 +601,6 @@
                          
                 
                  
-        \pagebreak                
         \section{Speisung eines kapazitiven Verbrauchers mit einer Sinusspannung}
             \paragraph{Messaufbau:}
                 \begin{itemize*}
@@ -691,7 +627,6 @@
                    \paragraph{Aufgabe:} Messen Sie mit dem Multimeter $\spannung{U}$, $\strom{I}$ und $\spannung{U_m}$\\
                    Messen Sie mit dem Oszillograph den Phasenwinkel $\varphi(\spannung{u},\strom{I})$ für 10 Augenblickwerte für $\spannung{U(t)}$ und $\strom{I(t)}$ = $\frac{\spannung{U_m(t)}}{\widerstand{R}}$
                    \paragraph{Durchführung:} Schaltung aufbauen. Die Speisespannung $\spannung{U(t)}$ am Frequenzgenerator einstellen: Spannung $U_{SS} = \SI{8}{\volt}$, Periodendauer  $T = \SI{10}{\milli\second}$ 
-					\pagebreak                   
                    \paragraph{Ergebnisse:}
                    \begin{center}
                        \begin{table}[!hbtp]
@@ -724,15 +659,7 @@
                    \pagebreak
                    \subsubsection{Aufgabe 2:}   Stellen Sie $\spannung{U(t)}$, $\strom{I(t)}$ und $P(t)$ graphisch dar.(In einer Zeichnung, verschieden farbig)
                    
-					\begin{figure}[!htbp]
-              			\begin{center}
-                  			\includegraphics[scale=0.5]{./Kennlinien/3_2_A2.PNG}
-                		\end{center}
-                		\caption{$\spannung{U(t)}, \strom{I(t)} und P(t)$}
-                		\label{fig:3_2_A2}
-            		\end{figure}                   
                               
-        \pagebreak                
         \section{Bestimmen der Größe eines Kondensators anhand der Auf- bzw. Entladekurve}
         
             \paragraph{Messaufbau:}
@@ -781,13 +708,6 @@ die gewählte Art an.
             \subsection{Auswertung}
                 \paragraph{Aufgabe 1:}Auf- und Entladekurve graphisch darstellen. Berechnen Sie aus den Messwerten die Größe des Kondensators. Mathematische Darstellung der Berechnung.
                 	  
-                	  \begin{figure}[!htbp]
-              			\begin{center}
-                  			\includegraphics[scale=0.5]{./Kennlinien/3_3_A1.PNG}
-                		\end{center}
-                		\caption{$\spannung{U_C(t)}$}
-                		\label{fig:1_1_A3}
-            		  \end{figure} 
             		  
             		  Als Näherung wird angenommen, dass sich der Kondensator nach $5 \cdot \tau$ vollständig aufgeladen bzw. entladen hat. Daraus folgt:
             		  \begin{equation*}

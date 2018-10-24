@@ -1,33 +1,14 @@
-\documentclass[a4paper,titlepage,parskip]{scrreprt}
-\usepackage[utf8x]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{ucs}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{xcolor}
-\usepackage{gensymb}
-\usepackage{graphicx}
-\usepackage{mdwlist}
-\usepackage{siunitx}
-\usepackage{nccmath}
-\usepackage{subcaption}
-\sisetup{locale=DE}
-\usepackage[european]{circuitikz}
-\usetikzlibrary{calc}
+\documentclass[11pt,a4paper,titlepage]{scrreprt}
 
-\newcommand{\spannung}[1]{\textcolor{blue}{#1}}
-\newcommand{\strom}[1]{\textcolor{red}{#1}}
-\newcommand{\widerstand}[1]{\textcolor{violet}{#1}}
-\newcommand{\capacity}[1]{\textcolor{green}{#1}}
-\newcommand{\glaettung}[1]{\textcolor{purple}{#1}}
-\newcommand{\TODO}[1]{\textbf{\huge\textcolor{red}{!!!! #1 !!!!}}}
+\input{../include/packages.tex}
+\input{../include/layout.tex}
+\input{../include/befehle.tex}
 
-\input{./include/customMeter.tex}
-
+\newcommand{\vnumber}{4}
+\newcommand{\vname}{Grundlagen Digitaltechnik}
 
 \begin{document}
-  \input{./include/titlepage.tex}
+	\input{../include/titlepage.tex}
   \tableofcontents
 
 
@@ -65,7 +46,7 @@
 
     \begin{figure}[!htbp]
       \begin{center}
-        \includegraphics[width=0.6\textwidth]{./Kennlinien/1_1_Z1.jpg}
+        \includegraphics[width=0.6\textwidth]{./1_1_Z1.jpg}
       \end{center}
     \end{figure}
 
@@ -273,12 +254,6 @@
       \subsection{Auswertung}
         \paragraph{Auswertung A1:} Zeichnen Sie die Kennlinie.
 
-          \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[width=0.8\textwidth]{./Kennlinien/1_3_2_A1.PNG}
-              \end{center}
-              \caption{Kennlinie $\spannung{U_a}$}
-          \end{figure}
 
         \paragraph{Auswertung A2:} Ermitteln Sie aus der Übertragungskennlinie:\\
           a) Schaltschwelle(Umschaltspannung) $\spannung{U_{th}}$\\
@@ -369,13 +344,6 @@
       \subsection{Auswertung}
         \paragraph{Auswertung A1:} Stellen Sie die Eingangkennlinie graphisch dar.
 
-          \begin{figure}[!htbp]
-                \begin{center}
-                    \includegraphics[width=0.8\textwidth]{./Kennlinien/2_1_2_A1.PNG}
-                \end{center}
-                \caption{Eingangkennlinie}
-                \label{fig:3_1_A1}
-            \end{figure}
 
         \paragraph{Auswertung A2:} Wie groß sind die Eingangsströme bei den "`Worst-Case"' Eingangsspannungen?
 
@@ -493,12 +461,6 @@
       \subsection{Auswertung}
         \paragraph{Auswertung A1:} Stellen Sie die Ausgangskennlinien graphisch dar($\spannung{U_a} = f(\strom{I_a})$).
 
-         \begin{figure}[!htbp]
-             \begin{center}
-                 \includegraphics[width=0.8\textwidth]{./Kennlinien/2_2_2_A2.PNG}
-             \end{center}
-             \caption{$\spannung{U_a} = f(\strom{I_a})$}
-         \end{figure}
 
         \paragraph{Auswertung A2:} Bestimmen Sie in LS-TTL- Einheiten:\\
           a) den maximalen Ausgangslastfaktor aus der Ausgangskennlinie $\spannung{U_a} = f(\strom{I_a})$ und der Eingangskennlinie $\strom{I_e} = f(\spannung{U_e})$ (High und Low)\\
@@ -646,22 +608,10 @@
 
           Tragen Sie die Signalverläufe X1 und X2 in ein zu erstellendes Zeitdiagramm ein.
 
-        \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[width=0.8\textwidth]{./Kennlinien/3_1_1_M1.PNG}
-              \end{center}
-              \caption{Signalverläufe X1 und X2}
-          \end{figure}
 
         \paragraph{Messaufgabe M2:} Messen Sie die Signalverläufe von X1 und X4 mit dem Oszillograph und stellen Sie die
           Signalverläufe graphisch mit Zeitangabe (farbig) dar.
 
-        \begin{figure}[!htbp]
-            \begin{center}
-                \includegraphics[width=0.8\textwidth]{./Kennlinien/3_1_1_M2.PNG}
-            \end{center}
-            \caption{Signalverläufe von X1 und X4}
-        \end{figure}
       \subsection{Auswertung}
         \paragraph{Zwischenaufgabe:} Wie viele Ic's werden benötigt?
         
@@ -774,24 +724,6 @@
       \subsection{Messaufgaben}
         \paragraph{Messaufgabe M1:} Messen Sie die Signale X0, X1 und X3 der Schaltung mit dem Oszillograph. Stellen Sie die Signalverläufe von X0, X1 und X3 in einer Zeichnung untereinander da.
 
-          \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[width=0.8\textwidth]{./Kennlinien/4_1_1_M1_1.PNG}
-              \end{center}
-              \caption{Signalverläuf X0}
-          \end{figure}
-          \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[width=0.8\textwidth]{./Kennlinien/4_1_1_M1_2.PNG}
-              \end{center}
-              \caption{Signalverläuf X1}
-          \end{figure}
-          \begin{figure}[!htbp]
-              \begin{center}
-                  \includegraphics[width=0.8\textwidth]{./Kennlinien/4_1_1_M1_3.PNG}
-              \end{center}
-              \caption{Signalverläuf X2}
-          \end{figure}
 
         \paragraph{Messaufgabe M2:} Erklären Sie den Begriff Impulsdauer. Wie groß ist hier die Impulsdauer $t_i$ des Ausgangssignals?
 
@@ -809,12 +741,6 @@
         \paragraph{Auswertung A1:} Beschreiben Sie die Funktionsweise der Schaltung.
         
             An N1/1 wird die Rechteckfrequenz invertiert. Die Frequenz X0 wird auch an einem Eingang des zweiten Gliedes N1/2 angelegt. Das Ausgangssignal von N1/1 wird durch den Kondensator verzögert an N1/2 angelegt. Durch die Verzögerung schält das Glied N1/2 um. Das Signal X2 wird nun an N1/3 invertiert und ergibt bei X3 eine Spannungsspitze ("`spike"').
-             \begin{figure}[!htbp]
-                \begin{center}
-                    \includegraphics[width=0.8\textwidth]{./Kennlinien/4_1_2_A1.PNG}
-                \end{center}
-                \caption{Zeitablaufdiagramm}
-            \end{figure}
               \begin{center}
                 \begin{table}[!hbtp]
                     \caption{Wahrheitstabelle}
