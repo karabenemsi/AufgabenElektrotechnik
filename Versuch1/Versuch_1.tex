@@ -1,0 +1,469 @@
+\documentclass[11pt,a4paper,titlepage]{scrreprt}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{siunitx}
+\usepackage{nccmath}
+\sisetup{locale=DE}
+\usepackage[european]{circuitikz}
+
+\newcommand{\spannung}[1]{\textcolor{blue}{#1}}
+\newcommand{\strom}[1]{\textcolor{red}{#1}}
+\newcommand{\widerstand}[1]{\textcolor{violet}{#1}}
+\newcommand{\capacity}[1]{\textcolor{green}{#1}}
+\newcommand{\glaettung}[1]{\textcolor{purple}{#1}}
+\newcommand{\TODO}[1]{\textbf{\textcolor{red}{!!!!TODO: #1 !!!!}}}
+
+\input{./include/customMeter.tex}
+
+\begin{document}
+	\input{./include/titlepage.tex}
+
+
+   \tableofcontents
+	   
+	\chapter{Einweggleichrichtung}
+		\section{Einweggleichrichtung mit ohmscher Belastung ohne Kondensator}
+		\paragraph{Messaufbau:}
+		\begin{itemize*}
+			\item 1 Widerstand $\widerstand{R} = 1\,k\Omega$
+			\item 1 Widerstand $\widerstand{R_m} = 10\,\Omega$
+			\item 1 Diode V1, Typ 1N4001
+		\end{itemize*}		
+		\begin{center}
+			\begin{circuitikz}[scale=1.3]
+				 \draw
+				 (0,0) node[transformer,yscale=2] (T) {}
+				 (T.B1) node[anchor=west] {}
+				 (T.B2) node[anchor=west] {}
+				 (T.A1) node[anchor=east] {230\,V 50\,Hz};
+				 \ctikzset{label/align = smart}
+				 \draw
+				 (T.B1) to[short] (1,0)
+				 (1,0) to[myvoltmeter, l^=$\spannung{U_{1}} {=} 16\,V$, *-*] (1,-3 |-T.B2)
+				 (T.B1) to[D, l=1N 4001, i>^=$\strom{I_1}$] (4,0)
+				 to[myvoltmeter, l^=$\spannung{U_2}$, *-*] (4,-3 |-T.B2)
+				 node[rground]{}
+				 to[R, l=$\widerstand{R_m}$] (T.B2)
+				 (4,0) to[short] (6,0)
+				 (6,0) to[R, l=$\widerstand{R}$, i>^=$\strom{I_2}$] (6,-3 |-T.B2)
+				 (6,-3 |-T.B2) to[short] (4,-3 |-T.B2)
+				 
+				 % Oszillo Anschlüsse
+				 (4,0) to[short, l_=Kanal Y2] (4,1)
+				 (T.B1) to[short, l=Kanal Y1] (1,1-| T.B1)
+				 (T.B2) to[short, l_=Osz. Gnd.] (1,-4 -| T.B2);
+			\end{circuitikz}
+		\end{center}
+		
+		\subsection{Messaufgaben}
+			\subsubsection{Messaufgabe 1}
+				\paragraph{Aufgabe:} Skizzieren Sie die Spannungs- und Stromverläufe \spannung{$U_1(t)$}, \spannung{$U_2(t)$} und \strom{$I_1(t)$}.
+				\paragraph{Durchführung:} Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$ einstellen mit Regler am roten Netztrafo. Oszillograph anschließen. Messen Sie den Diodenstrom \strom{$I_D(t)$} indirekt am Messwiderstand \widerstand{$R_m$}.
+
+				
+						
+			\subsubsection{Messaufgabe 2}
+				\paragraph{Aufgabe:} Messen sie mit dem Oszillograph und Multimeter
+					\begin{table}[!hbtp]
+						\caption{Messergebnisse Einweggleichrichtung ohne Kondensator}
+						\label{tbl:messergebnisse1.1}
+						\renewcommand{\arraystretch}{1.3}
+						\begin{tabular}{ll|l}
+							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ \hline
+							Frequenz der Eingangsspannung & $f$ & \\%\SI{50}{\hertz} \\
+							Brummspannungsfrequenz & $f_{br}$ &\\%\SI{50}{\hertz} \\
+							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\% \SI{22}[-]{\volt} -- \SI{22}{\volt} \\
+							Scheitelwert & \spannung{$U_{2_{max}}$} &\\% \SI{0}{\volt} -- \SI{21,3}{\volt} \\
+							Stromflusswinkel &  $\alpha [ \degree]$& \\%\SI{0}{\degree}\\
+							Brummspannung &  \spannung{$U_{brmax}$} &\\% \SI{21,3}{\volt}\\ \hline
+							Effektivwert & \spannung{$U_{1}$} &\\% \SI{16,06}{\volt} \\
+							Gleichspannung & \spannung{$U_{2-}$} & \\%\SI{6,84}{\volt}\\
+						\end{tabular}
+					\end{table}
+		\subsection{Auswertung}
+			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den gemessenen und den theoretischen Wert an (mit Herleitung).\\
+	
+		\section{Einweggleichrichtung mit Glättungskondensator}
+			
+			\paragraph{Messaufbau}
+			\begin{itemize*}
+				\item 1 Widerstand $\widerstand{R} = 1\,k\Omega$
+				\item 1 Widerstand $\widerstand{R_m} = 10\,\Omega$
+				\item 1 Diode V1, Typ 1N4001
+				\item 1 Kondensator $\capacity{C} = 100\,\mu F,40\,V Elektrolyt$
+			\end{itemize*}
+			\begin{center}
+				\begin{circuitikz}[scale=1.3]
+					\draw
+					(0,0) node[transformer,yscale=2] (T) {}
+					(T.B1) node[anchor=west] {}
+					(T.B2) node[anchor=west] {}
+					(T.A1) node[anchor=east] {230\,V 50\,Hz}
+					;
+					\ctikzset{label/align = smart}
+					\draw
+					(T.B1) to[short] (1,0)
+					(1,0) to[myvoltmeter, l^=$\spannung{U_1}$] (1,-3 |-T.B2)
+					(T.B1) to[D, l=1N4001, i>^=$\strom{I_1}$] (4,0)
+					to[eC, l^=\capacity{C} , i>^=$\strom{I_C}$] (4,-3 |-T.B2)
+					(3,0) to[short] (7,0)
+					(5,0) to[R, l=$\widerstand{R}$, i>^=$\strom{I_2}$] (5,-3 |-T.B2)
+					(5,0) to[short] (7,0)
+					to[myvoltmeter, l^=$\spannung{U_2}$] (7,-3 |-T.B2)
+					to[short] (4,-3 |-T.B2)
+					to[R, l=$\widerstand{R_m}$] (T.B2)
+					
+					% Oszillo Anschlüsse
+					(4,0) to[short, l_=Kanal Y2] (4,1)
+					(T.B1) to[short, l=Kanal Y1] (1,1-| T.B1)
+					(T.B2) to[short, l_=Osz. Gnd.] (1,-4 -| T.B2)
+					;
+				\end{circuitikz}
+			\end{center}
+			
+			\subsection{Messaufgaben}
+				\subsubsection{Messaufgabe 1}
+					\paragraph{Aufgabe:} Messen Sie die Spannungs- und Stromverläufe  $\spannung{U_1(t)}, \spannung{U_2(t)}, \strom{I_2(t)} = \frac{\spannung{U_2(t)}}{\widerstand{R}}$ mit dem Oszillographen.
+					\paragraph{Durchführung:} Schaltung aufbauen. $\spannung{U_1} = 16\,V$ einstellen.\\ 		
+
+				\subsubsection{Messaufgabe 2}
+					\paragraph{Aufgabe:} Messen sie mit dem Oszillograph und Multimeter
+					\begin{table}[!hbtp]
+						\caption{Messergebnisse Einweggleichrichtung mit Kondensator}
+						\label{tbl:messergebnisse1.2}
+						\renewcommand{\arraystretch}{1.3}
+						\begin{tabular}{ll|l}
+							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ \hline
+							Frequenz der Eingangsspannung & $f$ & \\
+							Brummspannungsfrequenz & $f_{br}$ &\\
+							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\
+							Scheitelwert & \spannung{$U_{2_{max}}$} &\\
+							Stromflusswinkel &  $\alpha [ \degree]$&\\
+							Brummspannung &  \spannung{$U_{brmax}$} &\\ \hline
+							Effektivwert & \spannung{$U_{1}$} &\\
+							Gleichspannung & \spannung{$U_{2-}$} &\\
+						\end{tabular}
+					\end{table}
+			\subsection{Auswertung}
+				\paragraph{Aufgabe 1:} Bestätigen Sie die Näherung $\spannung{U_2} \approx  \sqrt{2} \cdot (\spannung{U_1} - 0,65) \cdot \cos(\frac{a}{2})$				
+				
+				\paragraph{Aufgabe 2:} Bestimmen Sie den Glättungsfaktor \glaettung{G}\\
+					\begin{equation*}
+						\glaettung{G} = 2 \cdot 3,14 \cdot f \cdot \capacity{C} \cdot \widerstand{R}
+					\end{equation*}
+					mit Lastwiderstand \widerstand{R} = $1\,k\Omega$,\\ 
+					Kapazität des Glättungskondensator \capacity{C} = $100\mu$F und\\ 
+					Frequenz der Eingangswechselspannung $f$ = 50~Hz
+	
+	\chapter{Brückengleichrichtung}
+		\section{Brückengleichrichtung ohne Glättungskondensator}
+			\paragraph{Messaufbau:}
+			\begin{itemize*}
+				\item 1 Widerstand $\widerstand{R} = 1\,k\Omega$
+				\item 1 Widerstand $\widerstand{R_m} = 10\,\Omega$
+				\item Brückengleichrichter Typ B80 C 1000/1500
+			\end{itemize*}
+			\begin{center}
+				\begin{circuitikz}[scale=1.3]
+					\draw
+					(-0.5,4) node[transformer,yscale=1.2] (T) {}
+					(T.B1) node[anchor=west] {}
+					(T.B2) node[anchor=west] {}
+					(T.A1) node[anchor=east] {}
+					(0,4.2 -| T.base) node{\SI{230}{\volt}, \SI{50}{\hertz} $\rightarrow$ \SI{16}{\volt}, \SI{50}{\hertz}}
+					;
+					\ctikzset{label/align = smart}
+					\draw
+					(T.B1) to[open, v^=$\spannung{U_1}$] (T.B2)
+					(1,3) to[Do] (2,4 |-T.B1)
+					to[Do] (3,3)
+					(1,3) to[Do] (2,2 |-T.B2)
+					to[Do] (3,3)
+					(T.B1) to[short, i_=$\strom{I_1}$] (2,4 |-T.B1)
+					(T.B2) to[short] (2,2 |-T.B2)
+					;
+					\draw
+					(3,3) to[short , i_=$\strom{I_2}$] (7,3)
+					(5.5,3) to[R, l=$\widerstand{R}$, *-* ] (5.5,0)
+					(7,3) to[myvoltmeter, l=$\spannung{U_2}$] (7,0)
+					to[short] (4,0)
+					to[R, l=$\widerstand{R_m}$] (1,0)
+					to[short] (1,3)
+					% Oszillo Anschlüsse
+					(5.5,0) to[short, l_=Kanal Y2] (5.5,-1)
+					(4,3) to[short, l_=Kanal Y1] (4,4)
+					(1.5,0) to[short, l_=Osz. Gnd.] (1.5,-1)
+					;
+				\end{circuitikz}
+			\end{center}
+			
+			\subsection{Messaufgaben}
+			\subsubsection{Messaufgabe 1}
+			\paragraph{Aufgabe:} Zeichnen Sie die Spannungs- und Stromveräufe $\spannung{U_1(t)}, \spannung{U_2(t)}$ und $\strom{I_2(t)}$ auf
+			\paragraph{Durchführung:}  Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$  einstellen. Oszillograph anschließen.\\
+			
+			
+			\subsubsection{Messaufgabe 2}
+			\paragraph{Aufgabe:} Messen sie mit dem Oszillograph und Multimeter
+			\begin{table}[!hbtp]
+				\caption{Messergebnisse Brückengleichrichtung ohne Glättungskondensator}
+				\label{tbl:messergebnisse2.1}
+				\renewcommand{\arraystretch}{1.3}
+				\begin{tabular}{ll|l}
+					\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ \hline
+					Frequenz der Eingangsspannung & $f$ & \\
+					Brummspannungsfrequenz & $f_{br}$ & \\
+					Scheitelwerte & \spannung{$U_{1_{max}}$} & \\
+					Scheitelwert & \spannung{$U_{2_{max}}$} &\\
+					Stromflusswinkel &  $\alpha [ \degree]$& \\
+					Brummspannung &  \spannung{$U_{brmax}$} &\\ \hline
+					Effektivwert & \spannung{$U_{1}$} &\\
+					Gleichspannung & \spannung{$U_{2-}$} & \\
+				\end{tabular}
+			\end{table}
+			\subsection{Auswertung}
+			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den theoretischen Wert an (Herleitung, Diodenspannung vernachlässigt).\\
+		 \pagebreak
+		\section{Brückengleichrichtung mit Glättungskondensator}
+			\paragraph{Messaufbau:}
+			\begin{itemize*}
+				\item 1 Widerstand $\widerstand{R} = 1\,k\Omega$
+				\item 1 Widerstand $\widerstand{R_m} = 10\,\Omega$
+				\item 1 Kondensator \capacity{C} = 33 µF, 40 V
+				\item 1 Kondensator \capacity{C} = 100 µF, 40 V
+				\item 1 Kondensator \capacity{C} = 220 µF, 40 V
+				\item 1 Kondensator \capacity{C} = 1000 µF, 40 V
+				\item Brückengleichrichter Typ B80 C 1000/1500
+			\end{itemize*}
+			\begin{center}
+				\begin{circuitikz}[scale=1.3]
+					\draw
+					(-0.5,4) node[transformer,yscale=1.2] (T) {}
+					(T.B1) node[anchor=west] {}
+					(T.B2) node[anchor=west] {}
+					(T.A1) node[anchor=east] {}
+					(0,4.2 -| T.base) node{\SI{230}{\volt}, \SI{50}{\hertz} $\rightarrow$ \SI{16}{\volt}, \SI{50}{\hertz}}
+					;
+					\ctikzset{label/align = smart}
+					\draw
+					(T.B1) to[open, v^=$\spannung{U_1}$] (T.B2)
+					(1,3) to[Do] (2,4 |-T.B1)
+					to[Do] (3,3)
+					(1,3) to[Do] (2,2 |-T.B2)
+					to[Do] (3,3)
+					(T.B1) to[short, i_=$\strom{I_1}$] (2,4 |-T.B1)
+					(T.B2) to[short] (2,2 |-T.B2)
+					;
+					\draw
+					(3,3) to[short] (4,3)
+						  to[short, i_=$\strom{I_2}$] (5.5,3)
+						  to[short] (7,3)
+					(4,3) to[eC, l=$\capacity{C}$, *-* ] (4,0)
+					(5.5,3) to[R, l=$\widerstand{R}$, *-* ] (5.5,0)
+					(7,3) to[myvoltmeter, l=$\spannung{U_2}$] (7,0)
+						  to[short] (4,0)
+						  to[R, l=$\widerstand{R_m}$] (1,0)
+						  to[short] (1,3)
+					
+					% Oszillo Anschlüsse
+					(5.5,0) to[short, l_=Kanal Y2] (5.5,-1)
+					(5,3) to[short, l=Kanal Y1] (5,4)
+					(1.5,0) to[short, l_=Osz. Gnd.] (1.5,-1)
+					;
+				\end{circuitikz}
+			\end{center}
+			
+
+			\subsection{Messaufgaben}
+			\subsubsection{Messaufgabe 1}
+			\paragraph{Aufgabe:}   Messen und skizzieren Sie für \capacity{C} mit \SI{33}{\mu\farad} die Spannungs- und Stromverläufe von $\spannung{U_2(t)}$ und $\strom{I_2(t)}$ auf.
+			\paragraph{Durchführung:}  Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$ einstellen. Werte messen und aufschreiben.\\
+
+			\subsubsection{Messaufgabe 2}
+			\paragraph{Aufgabe:}  Protokollieren Sie die Werte für verschiedene Größen des Kondensators C1 in u.a. Tabelle. (Setzen Sie abwechseln die verschiedenen Kondensatoren in die Schaltung ein). 
+            
+    			\begin{table}[!hbtp]
+    				\caption{Messwertetabelle Brückengleichrichtung mit Glättungskondensator}
+    				\label{tbl:messergebnisse2.2}
+    				\renewcommand{\arraystretch}{1.3}
+                    \begin{center}
+    				\begin{tabular}{l|c|c|c|c}
+    					\capacity{C} [\si{\mu\farad}] & \SI{33}{\mu\farad} &\SI{100}{\mu\farad} &\SI{220}{\mu\farad} &\SI{1000}{\mu\farad}\\ \hline
+    					$f_{Eingang} [\si{\hertz}]$  &  &  &  & \\
+    					$f_{br} [\si{\hertz}]$ &  &  &  & \\
+    					$\spannung{U_{brss}} [\si{\volt}]$ &  &  &  &   \\
+    					$\mfrac{\spannung{U_1}}{\spannung{U_2}}$ &  &  &  & \\
+    					W ($10^{-2}$) & &  &  &  \\
+    					$\spannung{U_1} [\si{\volt}]$ &  &  &  & \\
+                        $\spannung{U_2} [\si{\volt}]$ &  &  &  & \\
+                        G &	 &  &  & 
+    				\end{tabular}
+                \end{center}
+    			\end{table}
+            
+			\subsection{Auswertung}
+			\paragraph{Aufgabe 1:}  Berechnen Sie die Verhältnisse $\mfrac{\spannung{U_1}}{\spannung{U_2}}$, $W =\mfrac{\spannung{U_{2w}}}{\spannung{U_2}}$, sowie den Glättungsfaktor G für obige Messreihe. Rechnen Sie mit $\spannung{U_{2w}} = \mfrac{\spannung{U_{2brss}}}{2,828}$. Beurteilen Sie die Ergebnisse in Bezug auf die Dimensionierung von Stromversorgungsschaltungen.\\
+            \\
+            Stromversorgungsschaltungen sollten immer einen Kondensator im Verhältnis $\mfrac{\widerstand{R_{Last}}}{\capacity{C}}~=~\mfrac{1}{10^{-6}}$ besitzen.
+            
+            
+	\chapter{Siebschaltungen}
+    	\section{RC-Siebung}
+            \paragraph{Messaufbau:}
+            \begin{itemize*}
+                \item 1 Widerstand $\widerstand{R} = \SI{470}{\ohm}$
+                \item 1 Widerstand $\widerstand{R_s} = $ ? $ \si{\ohm}$
+                \item 1 Kondensator $\capacity{C_1} = \SI{22}{\mu\farad}, \SI{40}{\volt}$
+                \item 1 Kondensator $\capacity{C_s} = $ ? $\si{\mu\farad}, \SI{40}{\volt}$
+                \item Brückengleichrichter Typ B80 C 1000/1500
+            \end{itemize*}
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (-0.5,4) node[transformer,yscale=1.2] (T) {}
+                    (T.B1) node[anchor=west] {}
+                    (T.B2) node[anchor=west] {}
+                    (T.A1) node[anchor=east] {}
+                    (0,4.2 -| T.base) node{\SI{230}{\volt}, \SI{50}{\hertz} $\rightarrow$ \SI{16}{\volt}, \SI{50}{\hertz}}
+                    ;
+                    \ctikzset{label/align = smart}
+                    \draw
+                    (T.B1) to[open, v^=$\spannung{U_1}$] (T.B2)
+                    (1,3) to[Do] (2,4 |-T.B1)
+                    to[Do] (3,3)
+                    (1,3) to[Do] (2,2 |-T.B2)
+                    to[Do] (3,3)
+                    (T.B1) to[short, i_=$\strom{I_1}$] (2,4 |-T.B1)
+                    (T.B2) to[short] (2,2 |-T.B2)
+                    ;
+                    \draw
+                    (3,3) to[short] (4,3)
+                          to[R, l=$\widerstand{R_s}$, i_=$\strom{I_2}$] (6.2,3)
+                          to[short] (8,3)
+                    (3.5,3) to[eC, l_=$\capacity{C_1}$, *-* ] (3.5,0)
+                    (6.2,3) to[eC, l_=$\capacity{C_s}$, *-* ] (6.2,0)
+                    (8,3) to[myvoltmeter , l=$\spannung{U_3}$] (8,0)
+                    to[short] (4,0)
+                    to[R, l=$\widerstand{R_m}$] (1,0)
+                    to[short] (1,3)
+                    (4.5,3) to[myvoltmeter , l=$\spannung{U_2}$, *-*] (4.5,0)
+                    (7,3) to[R , l=$\widerstand{R}$, *-*] (7,0)
+                    ;
+                \end{circuitikz}
+            \end{center}
+            
+            \subsection{Messaufgaben}
+            \subsubsection{Messaufgabe 1}
+            \paragraph{Aufgabe:}  Für die Gleichrichterschaltung aus 2.2 ist ein RC-Siebglied auszulegen. Dimensionieren Sie den Serienwiderstand $\widerstand{R_s}$ (Widerstand, Leistung) und den Siebkondensator $\capacity{C_s}$ so, dass der Siebfaktor $s = \frac{\spannung{U_{2w}}}{\spannung{U_{3w}}}$ ca. $10$ beträgt. Rechnen Sie mit der im Anhang angegebenen Näherungsformel für RC-Siebung. Folgende Randbedingungen sind einzuhalten: der zusätzliche Spannungsabfall am Serienwiderstand Rs darf $10\,\%$ der Ausgangsspannung (bei Nennstrom) nicht überschreiten. maximale Ausgangslast $\widerstand{R} = \SI{470}{\ohm}$. Messen Sie die Verhältnisse bei einer Belastung von $\widerstand{R} = \SI{470}{\ohm}$ mit dem Oszillograph nach.
+            \paragraph{Durchführung: } Schaltung aufbauen, Messwerte (Restwelligkeit) protokollieren und graphisch darstellen ($\spannung{U_1}, \spannung{U_2}, \spannung{U_3} $).
+            
+        
+    \chapter{Spannungsstabilisierung}
+        \section{Spannungsserienstabilisierung mit einem längsgeregeltem DC/DC-Wandler}
+            \paragraph{Messaufbau:}
+            \begin{itemize*}
+                \item 1 Widerstand $\widerstand{R_{Last}} = \SI{56}{\ohm}, 10\,\%, \SI{3}{\watt}$
+                \item 1 Widerstand $\widerstand{R_{Last}} = \SI{220}{\ohm}, 10\,\%, \SI{3}{\watt}$
+                \item 1 Widerstand $\widerstand{R_{Last}} = \SI{470}{\ohm}, 10\,\%, \SI{3}{\watt}$
+                \item 1 Widerstand $\widerstand{R_{Last}} = \SI{1,2}{\kilo\ohm}, 10\,\%, \SI{3}{\watt}$
+                \item 1 Widerstand $\widerstand{R_1} = \SI{6,7}{\ohm}, 10\,\%$
+                \item 1 Kondensator $\capacity{C_1} = \SI{100}{\mu\farad}, \SI{40}{\volt}$
+                \item 1 Kondensator $\capacity{C_2} = \SI{22}{\mu\farad}, \SI{40}{\volt}$
+                \item 1 Kondensator $\capacity{C_3} = \SI{0,47}{\mu\farad}, \SI{40}{\volt}$
+                \item Brückengleichrichter Typ B80 C 1000/1500
+                \item Spannungsregler IC1, 7805
+            \end{itemize*}
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    %\draw
+                    %(-0.5,4) node[transformer,yscale=1.2] (T) {}
+                    (T.B1) node[anchor=west] {}
+                    (T.B2) node[anchor=west] {}
+                    (T.A1) node[anchor=east] {}
+                    %(0,4.2 -| T.base) node{\SI{220}{\volt}, \SI{50}{\hertz} $\rightarrow$ \SI{16}{\volt}, \SI{50}{\hertz}}
+                    %;
+                    %\ctikzset{label/align = smart}
+                    \draw
+                    (T.B1) to[open, v^=$\spannung{U_1}$] (T.B2)
+                    (1,3) to[Do] (2,4 |-T.B1)
+                    to[Do] (3,3)
+                    (1,3) to[Do] (2,2 |-T.B2)
+                    to[Do] (3,3)
+                    (T.B1) to[short, i_=$\strom{I_1}$] (2,4 |-T.B1)
+                    (T.B2) to[short] (2,2 |-T.B2)
+                    ;
+                    \draw
+                    
+                    %Einmal außen herum
+                   (3,3) to[short] (3.2,3)
+                         to[R, l=$\widerstand{R_1}$] (4.5,3)
+                         to[short] (5.2,3)
+                         %Spannungsregler
+                   (6.7,3) to[short] (7,3)
+                           to[short] (8,3)
+                           to[R, l=$\widerstand{R_{Last}}$] (8,0)
+                           to[short] (3.2,0)
+                           node[rground]{}
+                           to[short, l=-] (1,0)
+                           to[short] (1,3)
+                           
+                          
+                   % Verbindungen in der Mitte
+                   (3.2,3) to[eC, l_= $\capacity{C_1}$, *-*] (3.2,0)
+                   (4.5,3) to[eC, l_= $\capacity{C_2}$, v^=$\spannung{U_2}$, *-*] (4.5,0)
+                   (6,2.5) to[short, -*] (6,0)
+                   (7.2, 3) to[eC, l_= $\capacity{C_3}$, *-*] (7.2,0)
+
+                         
+                         
+                    %Spannungsregeler
+                      (5.2,3.5)   rectangle (6.7,2.5)
+                      (6,3) node [align=center] {In\qquad Out\\Gnd}
+                      
+                         
+                    ;
+                \end{circuitikz}
+            \end{center}
+            
+            \subsection{Messaufgaben}
+            \subsubsection{Messaufgabe 1}
+            \paragraph{Aufgabe:}  Ausgangskennlinie $\spannung{U_3} = f(\widerstand{R_{Last}})$. Messen Sie mit dem Multimeter: $\spannung{U_{2-}}$ und $\spannung{U_{3-}}$. Beobachten Sie mit dem Oszillograph Ausgangsspannung $\spannung{U_{3-}}$.
+            
+            \paragraph{Durchführung:} Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$ einstellen. Messwerte für die verschiedenen Widerstände in die Tabelle 4.1 eintragen.
+            
+            \begin{table}[!hbtp]
+                \caption{Messwertetabelle Spannungsserienstabilisierung}
+                \label{tbl:messergebnisse4.1}
+                \renewcommand{\arraystretch}{1.3}
+                \begin{center}
+                    \begin{tabular}{l|cccc}
+                        $\widerstand{R_{Last}} [\si{\ohm}]$ & 1200 & 470 & 220 & 56 \\ \hline
+                        $\spannung{U_{2-}} [\si{\volt}]$  &  &  &  &\\
+                        $\spannung{U_{3-}} [\si{\volt}]$ &  &  &  & \\
+                        $\spannung{U_{3brss}} [\si{\milli\volt}]$ &  &  &  &  \\
+                        $P_v [\si{\watt}]$ &   &   &   &  \\
+                        Wirkungsgrad in \% &  &  &   &  \\
+                    \end{tabular}
+                \end{center}
+            \end{table}
+            
+            \subsubsection{Messaufgabe 2}
+            \paragraph{Aufgabe:} Spannungsregler - Wirkungsgrad. Lastwiderstand $\widerstand{R_{Last}} = \SI{100}{\ohm}$ Messen Sie mit dem  Multimeter: $\spannung{U_{2-}}$ und $\spannung{U_{3-}}$, Werte notieren.
+            
+            \subsubsection{Messaufgabe 3}
+            \paragraph{Aufgabe:}  Ermitteln Sie die Eingangsspannung U1 bei der die Schaltung für $\widerstand{R_{Last}} = \SI{56}{\ohm}$ noch einwandfrei regelt und geben Sie den Spannungswert an. Beobachten Sie dazu die Ausgangsspannung $\spannung{U_3(t)}$ mit dem Oszillograph.
+            
+            \subsection{Auswertung}
+        	\paragraph{Aufgabe 1: }  Berechnen Sie zu allen Messwerten die Verlustleistung $P_v = P_{ce}$ und den Wirkungsgrad des Spannungsreglers (Eigenverbrauch vernachlässigt). Tragen Sie die Daten in die Tabelle 4.1 ein\\
+            
+           \listoftables
+           \listoffigures
+\end{document}

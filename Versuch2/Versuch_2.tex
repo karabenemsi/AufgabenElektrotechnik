@@ -1,0 +1,723 @@
+\documentclass[a4paper,titlepage,parskip]{scrreprt}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{siunitx}
+\usepackage{nccmath}
+\usepackage{subcaption}
+\sisetup{locale=DE}
+\usepackage[european]{circuitikz}
+
+\newcommand{\spannung}[1]{\textcolor{blue}{#1}}
+\newcommand{\strom}[1]{\textcolor{red}{#1}}
+\newcommand{\widerstand}[1]{\textcolor{violet}{#1}}
+\newcommand{\capacity}[1]{\textcolor{green}{#1}}
+\newcommand{\glaettung}[1]{\textcolor{purple}{#1}}
+\newcommand{\TODO}[1]{\textbf{\textcolor{red}{!!!!TODO: #1 !!!!}}}
+
+\input{./include/customMeter.tex}
+
+
+\begin{document}
+    \input{./include/titlepage.tex}
+
+
+   \tableofcontents
+
+  \chapter{Der belastete Spannungsteiler}
+
+
+    \section{Einfluss der Belastung eines Spannungsteilers auf die Linearität der Ausgangsspannung}
+
+      \paragraph{Messaufbau:}
+          \begin{itemize*}
+            \item 1 Widerstand $\widerstand{R_A} = \SI{100}{\kilo\ohm}$
+            \item 1 Widerstand $\widerstand{R_A} = \SI{1}{\kilo\ohm}$
+            \item 1 Potentiometer $\widerstand{R_P} = \SI{100}{\kilo\ohm}$
+            \item 4 Messgeräte
+          \end{itemize*}
+          \begin{center}
+            \begin{circuitikz}[scale=1.3]
+                \draw
+                (0,3) to[short] (1,3)
+                      to[ammeter, i=$\strom{I_E}$] (3,3)
+                      to[potentiometer, l_=$\widerstand{R_P}$] (3,0)
+                (1,3) to[myvoltmeter, l=$\spannung{U_V}$ ,*-*] (1,0)
+                (0,3) to[open, v=$\spannung{U_V}$] (0,0)
+                (3,0) to[short] (0,0)
+                (3.2,1.5) to[short] (3.7,1.5)
+                          to[short] (3.7,3)
+                          to[short] (4.3,3)
+                          to[ammeter, i=$\strom{I_A}$] (6.5,3)
+                          to[R, l=$\widerstand{R_A}$] (6.5,0)
+                          to[short] (3,0)
+                (4.3,3) to[myvoltmeter, l=$\spannung{U_A}$ ,*-*] (4.3,0)
+                ;
+            \end{circuitikz}
+          \end{center}
+
+      \subsection{Messaufgaben}
+        \subsubsection{Messaufgabe M1}
+          \paragraph{Aufgabe:} Ausgangsspannung $\spannung{U_A}$, Ströme $\strom{I_E}$ und $\strom{I_A}$ bei verschiedenen Potentiometerstellungen
+          messen.
+          \paragraph{Durchführung:}Aufbau der Schaltung. Versorgungsspannung $\spannung{U_V} = \SI{12}{\volt}$ einstellen. Jeweils eine
+          Messreihe für $\widerstand{R_A} = \infty$, $\SI{1}{\kilo\ohm}$ und $\SI{100}{\kilo\ohm}$ aufnehmen.
+          \paragraph{Ergebnisse:}
+            \begin{center}
+              \begin{table}[!hbtp]
+                \caption{Messwertetabelle zur Messaufgabe 2.1.M1}
+                \label{tbl:messergebnisse1.1}
+                \renewcommand{\arraystretch}{1.3}
+                \begin{tabular}{c|ccc|ccc|ccc}
+                  Potenziometerstellung & \multicolumn{3}{c}{\textbf{$\widerstand{R_A} = \infty$}} & \multicolumn{3}{c}{\textbf{$\widerstand{R_A}$ = \SI{100}{\kilo\ohm}}}& \multicolumn{3}{c}{\textbf{$\widerstand{R_A}$ = \SI{1}{\kilo\ohm}}}\\ \hline
+                                & $\strom{I}$ & $\spannung{U_A}$ & $\strom{I_A}$ & $\strom{I}$ & $\spannung{U_A}$ & $\strom{I_A}$ & $\strom{I}$ & $\spannung{U_A}$ & $\strom{I_A}$\\
+                                A & 0,13 & 0 & 0 & 0,13 & 0 & 0 & 0,13 & 0 & 0\\
+                                B & 0,14 & 1,164 & 0 & 0,14 & 1,137 & 20 & 0,15 & 0,125 & 130\\
+                                C & 0,14 & 3,49 & 0 & 0,14 & 2,924 & 40 & 0,19 & 0,173 & 180\\
+                                D & 0,14 & 5,68 & 0 & 0,16 & 4,61 &5 0 & ,25 & 0,237 & 250\\
+                                E & 0,14 & 8,00 & 0 & 0,18 & 6,62 & 70 & 0,339 & 0,376 & 390\\
+                                F & 0,14 & 10,37 & 0 & 0,22 & 9,38 & 100 & 0,89 & 0,863 & 880\\
+                                G & 0,13 & 11,99 & 0 & 0,26 & 11,98 & 130 & 12,02 & 11,74 & 11930\\
+                \end{tabular}
+              \end{table}
+            \end{center}
+        \subsection{Auswertung}
+          \subsubsection{Aufgabe 1:} Stellen Sie die Ausgangsspannung $\spannung{U_A}$ in Abhängigkeit der Potentiometerstellung
+          mit $\widerstand{R_A}$ als Parameter graphisch dar.
+          \begin{figure}[!htbp]
+              \begin{center}
+                  \includegraphics[scale=0.35]{./Kennlinien/1_1_A1.PNG}
+                \end{center}
+                \caption{$\spannung{U_A}$ in Abhängigkeit der Potentiometerstellung }
+                \label{fig:1_1_A1}
+            \end{figure}
+           \pagebreak
+          \subsubsection{Aufgabe 2:}  Für eine elektrische Wegerfassung mit Potentiometer soll die Zuordnung von Potentiometerstellung und Ausgangsspannung möglichst linear sein. Dem Potentiometer ist eine Auswerteelektronik nachgeschaltet. Was ist bei der Auslegung des Eingangswiderstandes für diese Elektronik zu beachten?
+
+          Aus der aufgenommen Kurve \ref{fig:1_1_A1} lässt sich folgendes ableiten: Der Widerstand sollte möglichst hoch sein, damit der Verlauf der Spannung möglichst linear ist.
+
+
+    \chapter{Ersatzspannungsquelle, Leistungsanpassung.}
+
+
+        \section{Ersatzspannungsquelle}
+
+          \paragraph{Messaufbau:}
+            \begin{itemize*}
+                \item 1 Widerstand $\widerstand{R_A} = \SI{100}{\ohm}$
+                \item 1 Widerstand $\widerstand{R_A} = \SI{4,7}{\kilo\ohm}$
+                \item 1 Widerstand $\widerstand{R_A} = \SI{10}{\kilo\ohm}$
+                \item 1 Potentiometer $\widerstand{R_P} = \SI{4,7}{\kilo\ohm}$
+                \item 1 unbekanntes Netzwerk
+            \end{itemize*}
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (0,3) to[short, i=$\strom{I_E}$] (1,3)
+                    (1,0) to[short] (0,0)
+                    (3,3) to[short, i=$\strom{I_A}$] (5,3)
+                          to[potentiometer, l_=$\widerstand{R_P}$, -*] (5,0)
+                          to[short] (6,0)
+                          to[short] (6,1.5)
+                          to[short] (5.2,1.5)
+                    (5,0) to[short] (3,0)
+                    (3,3) to[open, v^=$\spannung{U_A}$] (3,0)
+                    (0,3) to[open, v^=$\spannung{U_V}$] (0,0)
+                    (1,3.2) rectangle (3,-0.2)
+                    (2,1.5) node [align=center] {Unbekanntes\\ Netzwerk}
+                    ;
+                \end{circuitikz}
+            \end{center}
+
+          \subsection{Messaufgaben}
+            \subsubsection{Messaufgabe M1}
+              \paragraph{Aufgabe:} Beschreibung eines unbekannten Netzwerkes als Ersatzspannungsquelle. Dazu
+              Kennlinie der Klemmenspannung $\spannung{U_A} = f(\strom{I_A})$ (mit Leerlaufspannung $\spannung{U_A} = 0$)
+              aufnehmen.
+
+              \paragraph{Durchführung:} Messschaltung aufbauen. Versorgungsspannung $\spannung{U_V} = \SI{12}{\volt}$ einstellen, notfalls
+              während der Messung nachregeln. Laststrom '$\strom{I_A}$ mit dem Lastwiderstand $\widerstand{R_P}$ in
+              ca. \SI{1}{\milli\ampere} Schritten ändern. Strom $\strom{I_E}$ für eine spätere Leistungsberechnung mitmessen.
+              Messwerte protokollieren.
+
+              \paragraph{Ergebnisse:}
+                \begin{center}
+                    \begin{table}[!hbtp]
+                        \caption{Messwertetabelle zur Messaufgabe 2.1.M1}
+                        \label{tbl:messergebnisse2.1}
+                        \renewcommand{\arraystretch}{1.3}
+                         \begin{center}
+                            \begin{tabular}{ccccccc}
+                                $\strom{I_A} [\si{\milli\ampere}]$  &
+                                $\strom{I_E} [\si{\milli\ampere}]$ &
+                                $\spannung{U_A} [\si{\volt}]$ &
+                                $\widerstand{R_A} = \mfrac{\spannung{U_A}}{\strom{I_A}} [\si{\ohm}]$ &
+                                $\widerstand{R_I} = \mfrac{\triangle\spannung{U_A}}{\triangle\strom{I_A}} [\si{\ohm}]$ &
+                                Wirkungsgrad [\%] &% $=\mfrac{\spannung{U_A} \cdot \frac{\strom{I_A}}{1000}}{\SI{12}{\volt} \cdot \frac{\strom{I_E}}{1000}}$ &
+                                P [\si{\milli\watt}] %= $\spannung{U_A} \cdot \strom{I_A}$
+                                \\ \hline
+
+                                1,09 & 5,39 & 5,3 & 4862,4 & - & 9 & 5,78\\
+                                2,09 & 5,87 & 4,68 & 2239,2 & 620,0 & 14 & 9,78\\
+                                3,07 & 6,35 & 4,08 & 1329,0 & 612,2 & 16 & 12,53\\
+                                4,16 & 6,88 & 3,41 & 819,7 & 614,7 & 17 & 14,19\\
+                                5,09 & 7,33 & 2,85 & 559,9 & 602,2 & 16 & 14,51\\
+                                6,19 & 7,85 & 2,19 & 353,8 & 600,0 & 14 & 13,56\\
+                                7,19 & 8,34 & 1,56 & 217,0 & 630,0 & 11 & 11,22\\
+                                8,13 & 8,80 & 0,97 & 119,3 & 627,7 & 7 & 7,89\\
+                                9,16 & 9,30 & 0,35 & 38,2 & 601,9 & 3 & 3,21\\
+                                9,58 & 9,50 & 0,081 & 8,5 & 640,5 & 1 & 0,78\\
+                            \end{tabular}
+                        \end{center}
+                    \end{table}
+                \end{center}
+           \subsubsection{Messaufgabe M2:}
+               \paragraph{Aufgabe:}Belasten Sie das Netzwerk mir $\widerstand{R_A} = \SI{10}{\kilo\ohm}, \SI{4,7}{\kilo\ohm}$ und $\SI{100}{\ohm}$.
+               Protokollieren Sie die Messwerte.
+
+			   \pagebreak
+               \paragraph{Ergebnisse:}
+                   \begin{center}
+                       \begin{table}[!hbtp]
+                           \caption{Messwertetabelle zur Messaufgabe 2.1.M2}
+                           \label{tbl:messergebnisse2.2}
+                           \renewcommand{\arraystretch}{1.3}
+                           \begin{center}
+                               \begin{tabular}{c|cccc}
+                                   $\widerstand{R_A}$&
+                                   $\strom{I_A} [\si{\milli\ampere}]$  &
+                                   $\strom{I_E} [\si{\milli\ampere}]$ &
+                                   $\spannung{U_A} [\si{\volt}]$ &
+                                   $\spannung{U_V} [\si{\volt}]$ \\ \hline
+
+                                   \SI{10}{\kilo\ohm} & 0,57 & 5,14 & 5,63 & 12,0\\
+                                   \SI{4,7}{\kilo\ohm} & 1,13 & 5,41 & 5,29 & 12,0\\
+                                   \SI{100}{\ohm} & 8,48 &8 ,97 & 0,847 & 12,0\\
+
+                               \end{tabular}
+                           \end{center}
+                       \end{table}
+                   \end{center}
+         \subsection{Auswertung}
+           \subsubsection{Aufgabe 1:} Stellen Sie die Kennlinie $\spannung{U_A} = f(\strom{I_A})$ aus Messaufgabe 1 graphisch dar.
+
+               \begin{figure}[!htbp]
+                   \begin{center}
+                   \includegraphics[scale=0.35]{./Kennlinien/2_1_A1.PNG}
+
+                   \caption{Verlauf: Kennlinie $\spannung{U_A} = f(\strom{I_A})$}
+
+                   \label{fig:EG_MC}
+                \end{center}
+            \end{figure}
+
+
+           \subsubsection{Aufgabe 2:} Beschreiben Sie das Netzwerk als Ersatzspannungsquelle. (Ersatzschaltbild grafisch darstellen und mathematische Beschreibung für die Ausgangsspannung $\spannung{U_A}$ und den Innenwiderstand $\widerstand{R_I}$)\\
+           Da die Ströme $\strom{I_E}$ und $\strom{I_A}$ sich unterscheiden muss es sich um einen belasteten Spannungsteiler handeln:
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (0,3) to[short, i=$\strom{I_E}$] (1,3)
+                          to[R, l=$\widerstand{R_{I_1}}$, v=$\spannung{U_I}$] (3,3)
+                    (3,0) to[short] (0,0)
+                    (3,3) to[short, i=$\strom{I_A}$] (5,3)
+                    to[potentiometer, l_=$\widerstand{R_P}$, -*] (5,0)
+                    to[short] (6,0)
+                    to[short] (6,1.5)
+                    to[short] (5.2,1.5)
+                    (5,0) to[short] (3,0)
+                    (3,3) to[R,l_=$\widerstand{R_{I_2}}$, v^=$\spannung{U_A}$, i_=$\strom{I_I}$] (3,0)
+                    (0,3) to[open, v^=$\spannung{U_V}$] (0,0)
+
+                    (1,3.8) rectangle (3.8,-0.5)
+                    %(2,1.5) node [align=center] {Unbekanntes\\ Netzwerk}
+                    ;
+                \end{circuitikz}
+            \end{center}
+        
+            \begin{align*}
+               \widerstand{R_I} &= \widerstand{R_{I_1}} + \widerstand{R_{||}}\\
+               \widerstand{R_{||}} &= \frac{\widerstand{R_{I_2}} \cdot \widerstand{R_P}}{\widerstand{R_{I_2}} + \widerstand{R_P}}\\
+               \widerstand{R_I} &= \widerstand{R_{I_1}} + \frac{\widerstand{R_{I_2}} \cdot \widerstand{R_P}}{\widerstand{R_{I_2}} + \widerstand{R_P}}\\
+            \end{align*}
+
+            \begin{align*}
+                \spannung{U_V} &= \strom{I_E} \cdot (\widerstand{R_{I_1}} + \widerstand{R_{||}})\\
+                \text{Mit: }&  \strom{I_E} = \frac{\spannung{U_A}}{\widerstand{R_{||}}}\\
+                \spannung{U_A} &= \spannung{U_V} \cdot \frac{\widerstand{R_{||}}}{\widerstand{R_{I_1}} + \widerstand{R_{||}}}\\
+                \text{Mit: }& \widerstand{R_{||}} = \frac{\widerstand{R_{I_2}} \cdot \widerstand{R_P}}{\widerstand{R_{I_2}} + \widerstand{R_P}}\\
+                \spannung{U_A} &= \spannung{U_V} \cdot \frac{\widerstand{R_{I_2}} \cdot \widerstand{R_P}}{\widerstand{R_{I_1}} \cdot \widerstand{R_{I_2}} + \widerstand{R_{I_1}} \cdot \widerstand{R_P} + \widerstand{R_{I_2}} \cdot \widerstand{R_P}}
+            \end{align*}
+
+           \subsubsection{Aufgabe 3:} Berechnen Sie aus den Messwerten für alle Lastfälle den Innenwiderstand Ri, des als Ersatzspannungsquelle beschriebenen Netzwerkes.
+           
+           s.h. Tabelle \ref{tbl:messergebnisse2.1}
+           
+           \subsubsection{Aufgabe 4:} Welche und wie viele Messpunkte sind zur messtechnischen Ermittlung der Ersatzspannungsquelle eines beliebigen linearen Netzwerkes notwendig?
+           
+           Die folgenden Messpunkte werden benötigt:
+           \begin{itemize*}
+               \item Versorgungsspannung
+               \item Ausgangsspannung
+               \item Eingangsstrom
+               \item Laststrom
+            \end{itemize*}
+            Aus den ersten beiden kann man auf einen Spannungsteiler schließen. Mit den letzen beiden kann ein Stromteiler bestimmt werden. Mit den Werten aus diesen Punkten kann dann die Ersatzspannungsquelle errechnet werden
+
+           \subsubsection{Aufgabe 5:} Berechnen Sie für das Netzwerk den Wirkungsgrad aus den Messwerten von Aufgabe 1. Tragen Sie diese Werte in die Messwertetabelle ein. Stellen Sie die Lastkurve $P_A$ und den Wirkungsgrad in Abhängigkeit von $\widerstand{R_A}$ und $\strom{I_A}$ graphisch dar.\\
+           Wirkungsgrad $=\mfrac{\spannung{U_A} \cdot \frac{\strom{I_A}}{1000}}{\SI{12}{\volt} \cdot \frac{\strom{I_E}}{1000}}$
+           
+           s.h. Tabelle \ref{tbl:messergebnisse2.1}
+
+             \begin{figure}[!htbp]
+                 \centering
+                 \begin{subfigure}[b]{0.4\textwidth}
+                     \centering
+                     \includegraphics[width=\textwidth]{./Kennlinien/2_1_A5_1.PNG}
+                     %\caption{$P_A$}\label{fig:bild-links}
+                    \end{subfigure}%
+                    \quad
+                    \begin{subfigure}[b]{0.4\textwidth}
+                        \centering
+                        \includegraphics[width=\textwidth]{./Kennlinien/2_1_A5_2.PNG}
+                        %\caption{Das rechte Bild.}\label{fig:bild-rechts}
+                    \end{subfigure}
+                    \begin{subfigure}[b]{0.4\textwidth}
+                        \centering
+                        \includegraphics[width=\textwidth]{./Kennlinien/2_1_A5_3.PNG}
+                        %\caption{Das rechte Bild.}\label{fig:bild-rechts}
+                    \end{subfigure}
+                    \quad
+                    \begin{subfigure}[b]{0.4\textwidth}
+                        \centering
+                        \includegraphics[width=\textwidth]{./Kennlinien/2_1_A5_4.PNG}
+                        %\caption{Das rechte Bild.}\label{fig:bild-rechts}
+                    \end{subfigure}
+                    \caption{Abhängigkeit von $P_A$}\label{fig:beide-Bilder}
+                \end{figure}
+
+           \pagebreak
+           \subsubsection{Aufgabe 6:} Ermitteln Sie aus der Lastkurve den Punkt für Leistungsanpassung (Übertragung der größten Nutzleistung, nachrichtentechnische Anpassung) Wie groß ist dabei der Wirkungsgrad? Wie groß ist das Verhältnis $\frac{\widerstand{R_I}}{\widerstand{R_A}}$?\\
+           $\widerstand{R_I}$: Innenwiderstand des als Ersatzspannungsquelle beschriebenen Netzwerkes
+           
+           Graphisch lässt sich folgendes ableiten:\\
+           Die größte Nutzleistung liegt vor, wenn der Widerstand $\widerstand{R_A} =  \SI{600}{\ohm}$ beträgt und der Strom $\strom{I_A} = \SI{7,33}{\milli\ampere}$. Bei dieser Einstellung liegt der Wirkungsgrad bei 16\,\% und $\frac{\widerstand{R_I}}{\widerstand{R_A}} = 1,07$
+                      
+
+           \subsubsection{Aufgabe 7:} Vergleichen Sie den messtechnisch gewonnenen Wert für die Leistungsanpassung mit dem theoretischen? Stellen Sie dazu eine Gleichung für die Nutzleistung $P_A$ in Abhängigkeit von $\widerstand{R_P}$ auf. Bestimmen Sie daraus das Maximum.
+           
+           \begin{align*}
+               P_A  &= \spannung{U_A} \cdot \strom{I_A}\\
+               &= \spannung{U_A}^2 \cdot \frac{1}{\widerstand{R_P}}\\
+               &= \left(\spannung{U_V} \cdot \frac{\widerstand{R_{||}}}{\widerstand{R_{I_1}} + \widerstand{R_{||}}}\right)^2 \cdot \frac{1}{\widerstand{R_P}}\\
+               &= \spannung{U_V}^2 \cdot \frac{\widerstand{R_{||}}^2}{\left(\widerstand{R_{I_1}} + \widerstand{R_{||}}\right)^2} \cdot \frac{1}{\widerstand{R_P}}\\
+               &= \spannung{U_V}^2 \cdot \frac{\widerstand{R_{||}}^2}{\widerstand{R_{I_1}}^2 + \widerstand{R_{||}}^2 + 2 \cdot \widerstand{R_{I_1}}\cdot \widerstand{R_{||}}} \cdot \frac{1}{\widerstand{R_P}}\\
+           \end{align*}
+           Ohne Kenntnis von gewünschtem $\spannung{U_A}$ oder den Widerständen $\widerstand{R_{I_1}}$ und $\widerstand{R_{I_2}}$ lässt es sich nicht berechnen. Theoretisch sollte die Größte Leistungsanpassung bestehen, wenn $\frac{\widerstand{R_I}}{\widerstand{R_A}}~=~\frac{1}{1}$
+
+
+    \chapter{Nichtlineare Bauelemente}
+
+
+        \section{Strom- Spannung- Kennlinie einer Glühbirne}
+          \paragraph{Messaufbau:}
+            \begin{itemize*}
+                \item 1 Glühbirne (\SI{12}{\volt}, \SI{3}{\watt}) mit Fassung
+            \end{itemize*}
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (0,2) to[ammeter, i=$\strom{I}$] (2,2)
+                          to[short] (4,2)
+                          to[lamp] (4,0)
+                          to[short] (0,0)
+                     (2,2) to[myvoltmeter, l=$\spannung{U_V}$, *-*] (2,0)
+                    ;
+                \end{circuitikz}
+            \end{center}
+
+          \subsection{Messaufgaben}
+            \subsubsection{Messaufgabe M1}
+              \paragraph{Aufgabe:} Nehmen Sie die Strom-Spannungs-Kennlinie $\strom{I} = f(\spannung{U_V})$ einer Glühbirne auf.
+              \paragraph{Durchführung:} Messschaltung aufbauen. Die Spannung \spannung{U} am Bauelement einstellen. Ändern Sie
+              dazu die Versorgungsspannung $\spannung{U}$ in \SI{1}{\volt} Schritten von ca. \SI{0}{\volt} bis \SI{12}{\volt}.
+              Messwertetabelle für $\spannung{U}$, $\strom{I}$ und $\widerstand{R_A} = \mfrac{\spannung{U}}{\strom{I}}$ anlegen.
+			  \pagebreak              
+              \paragraph{Ergebnisse:}
+                   \begin{center}
+                        \begin{table}[!hbtp]
+                            \caption{Messwertetabelle zur Messaufgabe 3.1.M1}
+                            \label{tbl:messergebnisse3.1}
+                            \renewcommand{\arraystretch}{1.3}
+                            \begin{center}
+                                \begin{tabular}{c|cc}
+                                    $\spannung{U} [\si{\volt}]$  &
+                                    $\strom{I} [\si{\milli\ampere}]$ &
+                                    $\widerstand{R_A} = \mfrac{\spannung{U}}{\strom{I}} [\si{\ohm}]$\\ \hline
+
+                                    0 & 0 & 0\\
+                                    1 & 63,4 & 15,77\\
+                                    2 & 83,1 & 24,07\\
+                                    3 & 99,5 & 30,15\\
+                                    4 &115,3 & 34,69\\
+                                    5 & 130,0 & 38,46\\
+                                    6 & 143,8 & 41,72\\
+                                    7 & 156,9 & 44,61\\
+                                    8 & 169,1 & 47,31\\
+                                    9 & 181,0 & 49,72\\
+                                    10 & 192,3 & 52,00\\
+                                    11 & 203,3 & 54,11\\
+                                    12 & 213,9 & 56,10\\
+                                \end{tabular}
+                            \end{center}
+                        \end{table}
+                    \end{center}
+		 \pagebreak
+         \subsection{Auswertung}
+           \subsubsection{Aufgabe 1} Zeichnen Sie $\spannung{U} = f (\strom{I})$
+
+             \begin{figure}[!htbp]
+                 \begin{center}
+                     \includegraphics[scale=0.4]{./Kennlinien/3_1_A1.PNG}
+
+                     \caption{$\spannung{U} = f(\strom{I})$}
+
+                     %\label{fig:EG_MC}
+                    \end{center}
+                \end{figure}
+
+
+           \subsubsection{Aufgabe 2} Führen Sie eine Näherung durch, in dem Sie den Strom/ Spannungsverlauf der Glühbirne durch 2 lineare Geradenstücke ersetzen. Beschreiben Sie damit das elektrische Verhalten der Glühbirne (Ermittlung der Widerstände für diese 2 Bereiche). Welche Widerstandsarten können Sie hieraus ableiten? Begründen Sie es.
+          
+            
+           Bei ca. \SI{0,9}{\volt}  ändert sich der Verlauf der Linien. Der Widerstand der Glühbirne nimmt kontinuierlich zu.\\
+           Bis ca. \SI{0,9}{\volt} besitzt die Glühbirne einen Widerstand von ca. \SI{15}{\ohm}. Mit steigender Spannung steigt auch der Widerstand und nähert sich bei \SI{12}{\volt} \SI{57}{\ohm} an.
+           
+           Daraus lassen sich zwei Arten von Widerständen ableiten: Lineare (ohm'sche) Widerstände und nichtlineare Widerstände. Im Fall der Glühbirne steigt der Widerstand, da der Draht zu glühen anfängt. Der Widerstand ist von der Temperatur abhängig, je größer die Temperatur desto größer der Widerstand.
+
+
+        \section{Kennlinie einer Z-Diode (Z - Diode in Durchlassrichtung)}
+          \paragraph{Messaufbau:}
+            \begin{itemize*}
+                \item 1 Widerstand $\widerstand{R} = \SI{470}{\ohm}, \SI{2}{\watt}$
+                \item 1 Z-Diode, Typ ZPD6V2 oder ZPD5V2
+            \end{itemize*}
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (0,2) to[R, l=$\widerstand{R}$] (1,2)
+                    to[ammeter, i=$\strom{I}$] (3,2)
+                    to[short] (5,2)
+                    (5,2) to[zDo, v=$\spannung{U_D}$] (5,0)
+                    (5,0)to[short] (0,0)
+                    (3,2) to[myvoltmeter, l=$\spannung{U_V}$, *-*] (3,0)
+                    ;
+                \end{circuitikz}
+            \end{center}
+
+          \subsection{Messaufgaben}
+            \subsubsection{Messaufgabe M1}
+              \paragraph{Aufgabe:} Nehmen Sie die Kennlinie der Z - Diode $\spannung{U_D} = f(\strom{I_D})$ in Durchlassrichtung auf
+              \paragraph{Durchführung:} Messschaltung aufbauen. Die Versorgungsspannung $\spannung{U_V} = \SI{0}{\volt}$ einstellen. Mit $\spannung{U_V}$ die Diodenspannung $\spannung{U_D}$ schrittweise erhöhen ( im Durchlassbereich \SI{0,05}{\volt} Schritte) bis der Diodenstrom $\strom{I_D} = \SI{40}{\milli\ampere}$ beträgt. Messwertetabelle für $\spannung{U_D}$ , $\strom{I_D}$ und $\widerstand{R_D} = \mfrac{\spannung{U_D}}{\strom{I_D}}$ anlegen oder gegebene benutzen.
+			  \pagebreak              
+              \paragraph{Ergebnisse:}
+                \begin{center}
+                    \begin{table}[!hbtp]
+                        \caption{Messwertetabelle zur Messaufgabe 3.2.M1}
+                        \label{tbl:messergebnisse3.2}
+                        \renewcommand{\arraystretch}{1.3}
+                        \begin{center}
+
+                        \begin{tabular}{cccc}
+                            $\spannung{U_V} [\si{\volt}]$ &
+                            $\spannung{U_D}[\si{\volt}]$ &
+                            $\strom{I_D} [\si{\milli\ampere}]$ &
+                            $\widerstand{R_D} = \mfrac{\spannung{U_D}}{\strom{I_D}} [\si{\ohm}]$ \\ \hline
+
+                            0 & 0 & 0 & $\infty$\\
+                            0,05 & 0,05 & 0 & $\infty$\\
+                            0,1 & 0,1 & 0 & $\infty$\\
+                            0,15 & 0,15 & 0 & $\infty$\\
+                            0,5 & 0,5 & 0 & $\infty$\\
+                            0,55 & 0,55 & 0,01 & 55000\\
+                            0,61 & 0,6 & 0,02 & 30000\\
+                            0,69 & 0,65 & 0,09 & 7222,22\\
+                            0,88 & 0,7 & 0,37 & 1891,89\\
+                            1,67 & 0,75 & 1,9 & 394,74\\
+                            5,62 & 0,8 & 9,93 & 80,56\\
+                            21,77 & 0,85 & 43,2 & 19,68\\
+                        \end{tabular}
+                    \end{center}
+                    \end{table}
+                \end{center}
+		 \pagebreak         
+         \subsection{Auswertung}
+             \subsubsection{Aufgabe 1} Stellen Sie die Kennlinie graphisch als Funktion $\strom{I} = f(\spannung{U_D})$ dar
+                         \begin{figure}[!htbp]
+                             \begin{center}
+                                 \includegraphics[scale=0.4]{./Kennlinien/3_2_A1.PNG}
+
+                                 \caption{$\strom{I} = f(\spannung{U_D})$}
+
+                                 %\label{fig:EG_MC}
+                                \end{center}
+                            \end{figure}
+             \subsubsection{Aufgabe 2} Nähern Sie die Kennlinie durch eine lineare Gerade an. Beschreiben Sie diesen Zusammenhang mathematisch als Funktion $\strom{I_D} = a + m \cdot \spannung{U_D}$. Was bedeutet die Konstante $a$ und $m$ ? An welchem Punkt schneiden sich Näherungsgerade und X-Achse, was beschreibt dieser Punkt?
+             
+Die Kennlinie lässt sich durch die Gerade $\strom{I_D} = -500 + 640 \cdot \spannung{U_D}$ annähern. Der  Schnittpunkt mit der x-Achse liegt bei $\spannung{U_D} = \SI{0,78}{\volt}$ und beschreibt die Schwellenspannung der Diode, ab welcher es einen Stromfluss gibt. Der Wert $m = 640$ ist vom Diodentyp abhängig und nähert die Steigung des Diodenstroms abhängig von der Spannung an. Der Wert $a = 500$ ergibt sich aus Schwellenspannung und m.
+
+
+        \section{Kennlinie einer Z-Diode (Z - Diode in Sperrrichtung)}
+          \paragraph{Messaufbau:}
+            \begin{itemize*}
+                \item 1 Widerstand $\widerstand{R} = \SI{470}{\ohm}, \SI{2}{\watt}$
+                \item 1 Z-Diode, Typ ZPD6V2 oder ZPD5V2
+            \end{itemize*}
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (0,2) to[R, l=$\widerstand{R}$] (1,2)
+                    to[ammeter, i=$\strom{I}$] (3,2)
+                    to[short] (5,2)
+                    (5,0) to[zDo, v=$\spannung{U_D}$] (5,2)
+                    (5,0)to[short] (0,0)
+                    (3,2) to[myvoltmeter, l=$\spannung{U_V}$, *-*] (3,0)
+                    ;
+                \end{circuitikz}
+            \end{center}
+
+          \subsection{Messaufgaben}
+            \subsubsection{Messaufgabe M1}
+              \paragraph{Aufgabe:} Nehmen Sie die Kennlinie der Z - Diode $\spannung{U_D} = f(\strom{I_D})$ in Sperrrichtung auf
+              \paragraph{Durchführung:}  Messschaltung aufbauen. Die Versorgungsspannung $\spannung{U_V} = \SI{0}{\volt}$ einstellen. Mit $\spannung{U_V}$ die Diodenspannung $\spannung{U_D}$ schrittweise erhöhen ( im Sperrbereich \SI{0,5}{\volt} Schritte) bis der Diodenstrom $\strom{I_D} = \SI{40}{\milli\ampere}$ beträgt. Messwerte für $\spannung{U_D}$ , $\strom{I_D}$ und $\widerstand{R_D} = \mfrac{\spannung{U_D}}{\strom{I_D}}$ protokollieren.
+			  \pagebreak              
+              \paragraph{Ergebnisse:}
+                  \begin{center}
+                      \begin{table}[!hbtp]
+                          \caption{Messwertetabelle zur Messaufgabe 3.3.M1}
+                          \label{tbl:messergebnisse3.3}
+                          \renewcommand{\arraystretch}{1.3}
+                          \begin{center}
+
+                              \begin{tabular}{cccc}
+                                  $\spannung{U_V} [\si{\volt}]$ &
+                                  $\spannung{U_D}[\si{\volt}]$ &
+                                  $\strom{I_D} [\si{\milli\ampere}]$ &
+                                  $\widerstand{R_D} = \mfrac{\spannung{U_D}}{\strom{I_D}} [\si{\ohm}]$ \\ \hline
+
+                                  0 & 0 & 0 & $\infty$\\
+                                  0,5 & 0,5 & 0 & $\infty$\\
+                                  1 & 1 & 0 & $\infty$\\
+                                  5 & 5 & 0 & $\infty$\\
+                                  5,5 & 5,5 & 0,01 & 550000\\
+                                  6 & 6 & 0,04 & 150000\\
+                                  25,8 & 6,41 & 40 & 160,25\\
+                              \end{tabular}
+                          \end{center}
+                      \end{table}
+                  \end{center}
+
+         \subsection{Auswertung}
+            \subsubsection{Aufgabe 1:} Tragen Sie diesen Kennlinienteil in die graphische Darstellung aus Übung 3.2 ein. Beachten Sie dabei die Polarität der Diodenspannung und des Diodenstromes.
+            	\begin{figure}[!htbp]
+                	\begin{center}
+                    	\includegraphics[scale=0.4]{./Kennlinien/3_3_A1.PNG}
+
+                        	\caption{$\strom{I_D} = f(\spannung{U_D})$}
+
+                       		%\label{fig:EG_MC}
+                  	\end{center}
+              	\end{figure}
+
+           \subsubsection{Aufgabe 2:} Nähern Sie diesen Kennlinienverlauf durch eine lineare Gerade an. Beschreiben Sie diesen Zusammenhang mathematisch als Funktion $\strom{I_D} = a + m \cdot \spannung{U_D}$. Was beschreiben die Konstanten $a$ und $m$ ? An welchem Punkt schneiden sich Näherungsgerade und X-Achse?
+           
+Die Kennlinie lässt sich durch die Gerade $\strom{I_D} = 1245 + 200 \cdot \spannung{U_D}$ annähern. Der  Schnittpunkt mit der x-Achse liegt bei $\spannung{U_D} = \SI{-6,225}{\volt}$ und beschreibt die Schwellenspannung der Diode in Sperrrichtung, ab welcher der Diodenstrom schlagartig zunimmt. Der Wert für a wird wieder aus den anderen beiden Werten berechnet.
+
+           \subsubsection{Aufgabe 3:} Interpretieren Sie die gesamte Kennlinie.
+           
+           An der Kennlinie lässt sich erkennen, dass die Z-Diode sowohl in Sperrrichtung(3.3), als auch in Durchlassrichtung(3.2) jeweils eine Schwellenspannung besitzt, bis zu deren Erreichen nur ein minimaler, nicht messbarer Strom fließt. Bis zu diesen Schwellenwerten wirkt die Diode als sehr großer Widerstand. Jenseits der Schwellenwerte steigt der Strom schlagartig an.
+
+
+    \chapter{Zusammenschaltung linearer und nichtlinearer Netzwerke}
+
+
+        \section{Belastung eines Festspannungsteilers mit einer Z - Diode}
+          \paragraph{Messaufbau:}
+            \begin{itemize*}
+              \item 1 Widerstand $\widerstand{R_1} = \SI{470}{\ohm}, \SI{2}{\watt}$
+              \item 1 Widerstand $\widerstand{R_2} = \SI{1}{\kilo\ohm}$
+              \item 1 Widerstand $\widerstand{R_A} = \SI{100}{\ohm}$
+              \item 1 Widerstand $\widerstand{R_A} = \SI{470}{\ohm}$
+              \item 1 Widerstand $\widerstand{R_A} = \SI{1}{\kilo\ohm}$
+              \item 1 Widerstand $\widerstand{R_A} = \SI{2}{\kilo\ohm}$
+              \item 1 Z-Diode, Typ ZPD6V2 oder ZPD5V2
+            \end{itemize*}
+            \begin{center}
+              \begin{circuitikz}[scale=1.3]
+                  \draw
+                     (0,2) to[R, l=$\widerstand{R_1}$, i=$\strom{I_E}$] (2,2)
+                           to[R, l=$\widerstand{R_2}$] (2,0)
+                           to[short] (0,0)
+                     (0,2) to[open, v=$\spannung{U_V}$] (0,0)
+                  ;
+                  \draw [dash pattern=on 4pt off 4pt] (2,2)--(4,2);
+                  \draw [dash pattern=on 4pt off 4pt] (4,0)--(2,0);
+                  \draw [dash pattern=on 2pt off 2pt] (4,2)--(6,2);
+                  \draw [dash pattern=on 2pt off 2pt] (6,0)--(4,0);
+                  \draw
+                      (4,0) to[zDo, v=$\spannung{U_2}$] (4,2)
+                      (6,2) to[R, l=$\widerstand{R_A}$] (6,0)
+                      (4,2) to[open, i=$\strom{I_A}$] (6,2)
+
+
+                  ;
+              \end{circuitikz}
+            \end{center}
+
+          \subsection{Messaufgaben}
+              \subsubsection{Messaufgabe M1}
+                  \paragraph{Aufgabe:} Kennlinie $\spannung{U_2}= f(\strom{I_A})$ des Spannungsteilers $\widerstand{R_1}$ ,$\widerstand{R_2}$ messtechnisch nach dem Verfahren der Ersatzspannungsquelle ermitteln.
+                  \paragraph{Durchführung:} Messschaltung zunächst nur mit $\widerstand{R_1}$ und $\widerstand{R_2}$ aufbauen. Versorgungsspannung
+                  $\spannung{U_V} = \SI{12}{\volt}$ einstellen. Ausgangskennlinie $\spannung{U_2}= f(\strom{I_A})$ ermitteln und notieren.
+
+                  \paragraph{Ergebnisse:}
+                  \begin{align*}
+                      \spannung{U_2} &= \SI{8,07}{\volt}\\
+                      \strom{I_A} &= \SI{8,18}{\volt}
+                  \end{align*}
+                  Damit ergibt sich die Funktion:
+                  \begin{align*}
+                      \strom{I_A} &=\frac{\spannung{U_V}}{\widerstand{R_1} + \widerstand{R_2}}\\
+                                     &=\frac{\spannung{U_V}}{\SI{1470}{\ohm}}
+                  \end{align*}
+                  Außerdem gilt:
+                  \begin{align*}
+                  	  \spannung{U_2} &=\spannung{U_V} \cdot \frac{\widerstand{R_2}}{\widerstand{R_1} + \widerstand{R_2}}
+                  \end{align*}
+              \subsubsection{Messaufgabe M2}
+                  \paragraph{Aufgabe:}Spannungsteiler mit Z-Diode belasten. Spannung $\spannung{U_2}$, Strom $\strom{I_E}$ und $\strom{I_A}$ messen und aufschreiben.
+                  \paragraph{Ergebnisse:}
+                  \begin{align*}
+                      \spannung{U_2} &= \SI{6,31}{\volt}\\
+                          \strom{I_E} &= \SI{12,01}{\milli\ampere}\\
+                          \strom{I_A} &= \SI{5,53}{\milli\ampere}
+                  \end{align*}
+
+            \subsubsection{Messaufgabe M3}
+              \paragraph{Aufgabe:} Strom- Spannungs- Kennlinie $\spannung{U_2}= f(\strom{I_A})$ der Gesamtschaltung (Spannungsteiler mit Z-Diode) aufnehmen. Dazu Arbeitspunkte für $\widerstand{R_A} = \SI{100}{\ohm}, \SI{470}{\ohm}, \SI{1}{\kilo\ohm}$ und $\SI{2}{\kilo\ohm}$ messen.
+			  \pagebreak              
+              \paragraph{Ergebnisse:}
+              \begin{center}
+                  \begin{table}[!hbtp]
+                      \caption{Messwertetabelle zur Messaufgabe 4.1.M3}
+                      \label{tbl:messergebnisse4.1}
+                      \renewcommand{\arraystretch}{1.3}
+                      \begin{center}
+                          \begin{tabular}{c|ccc}
+                              $\widerstand{R_A} [\si{\ohm}]$&
+                              $\strom{I_A} [\si{\milli\ampere}]$&
+                              $\strom{I_E} [\si{\milli\ampere}]$&
+                              $\spannung{U_2} [\si{\volt}]$\\ \hline
+
+                              100 & 19,1 & 21,23 & 2,03\\
+                              470 & 10,35 & 15,29 & 4,82\\
+                              1000 & 6,17 & 12,49 & 6,12\\
+                              2000 & 3,13 & 12,11 & 6,30\\
+                          \end{tabular}
+                      \end{center}
+                  \end{table}
+                  \end{center}
+
+          \subsection{Auswertung}
+            \subsubsection{Aufgabe 1:} Kennlinie $\spannung{U_2} = f(\strom{I_A})$ aus 4.1.M1 graphisch darstellen.
+            	\begin{figure}[!htbp]
+            		\begin{center}
+                  		\includegraphics[scale=0.4]{./Kennlinien/4_1_A1.PNG}
+
+                     		\caption{$\spannung{U_2} = f(\strom{I_A})$}
+
+                           	%\label{fig:EG_MC}
+             		\end{center}
+        		\end{figure}
+			\pagebreak
+			\subsubsection{Aufgabe 2:} Kennlinie der Z-Diode aus Übung 3.3 in obige Kennlinie einzeichnen. Arbeitspunkt graphisch ermitteln. (Durchlass / Sperrrichtung angeben)
+            
+                Arbeitspunkt Durchlassrichtung: \SI{0,8}{\volt}\\
+                Arbeitspunkt Sperrrichtung: \SI{6,2}[-]{\volt}
+                
+                s.h. Abbildung \ref{fig:4_1_A2}
+				\begin{figure}[!htbp]
+                  	\begin{center}
+                      	\includegraphics[scale=0.4]{./Kennlinien/4_1_A2.PNG}
+
+                       		\caption{$\strom{I} = f(\spannung{U_D})$}
+
+                           	\label{fig:4_1_A2}
+              		\end{center}
+             	\end{figure}
+			\subsubsection{Aufgabe 3:} Zeichnen Sie die Kennlinie zur Messaufgabe 3.
+                s.h. Abbildung \ref{fig:4_1_A3}
+				\begin{figure}[!htbp]
+                  	\begin{center}
+                      	\includegraphics[scale=0.4]{./Kennlinien/4_1_A3.PNG}
+
+                       		\caption{$\spannung{U_2} = f(\strom{I_A})$}
+
+                           	\label{fig:4_1_A3}
+              		\end{center}
+             	\end{figure}
+			\pagebreak			
+			\subsubsection{Aufgabe 4:} Was bewirkt die Z - Diode?
+            
+            In Durchlassrichtung verhält sich die Z-Diode wie eine normale Diode, in Sperrrichtung leitet sie bei Erreichen der Durchbruchspannung. In dieser Schaltung sorgt die Z-Diode dafür, dass bei erreichen der Durchbruchsspannung der Storm $\strom{I_A}$ nachlässt.
+
+			\subsubsection{Aufgabe 5:} Die obige Schaltung soll zur Spannungskonstanthaltung eines Verbrauchers $\widerstand{R_L} = \SI{470}{\ohm}$, bei der die Ausgangsspannung innerhalb des Bereiches $6,2 +/- 10\%$ liegen darf, eingesetzt werden. Zeichnen Sie dafür die Schaltung, berechnen Sie den Vorwiderstand $\widerstand{R_V}$ (Last bleibt konstant) und geben Sie den zulässigen Lastbereich an. (graphische, farbige Lösung).
+            
+            \begin{center}
+                \begin{circuitikz}[scale=1.3]
+                    \draw
+                    (0,2) to[R, l=$\widerstand{R_V}$] (2,2)
+                    to[R, l=$\widerstand{R_2}$] (2,0)
+                    to[short] (0,0)
+                    (0,2) to[open, v=$\spannung{U_V}$] (0,0)
+                    (2,2) to[short] (4,2)
+                    to[short] (4,2)
+                    %(6,0) to[short] (4,0)
+                    (4,0) to[short] (2,0)
+                    %(4,0) to[zDo, v=$\spannung{U_2}$] (4,2)
+                    (4,2) to[R, l=$\widerstand{R_L}$, v=$\spannung{U_A}$] (4,0)
+                    ;
+                \end{circuitikz}
+            \end{center}
+        
+             \begin{itemize*}
+                \item 1 Widerstand $\widerstand{R_V} = \SI{300}{\ohm}, \SI{2}{\watt}$
+                \item 1 Widerstand $\widerstand{R_2} = \SI{1}{\kilo\ohm}$
+                \item 1 Widerstand $\widerstand{R_L} = \SI{470}{\ohm}$
+            \end{itemize*}
+        
+        	\begin{figure}[!htbp]
+            \begin{center}
+                \includegraphics[scale=0.6]{./Kennlinien/4_1_A5.PNG}
+                
+                \caption{$\spannung{U_A} = f(\widerstand{R_L})$}
+                
+                \label{fig:4_1_A3}
+            \end{center}
+        \end{figure}
+        
+        Damit die Toleranz von $10\%$ eingehalten wird darf der Lastwiderstand zwischen \SI{353}{\ohm} und \SI{652}{\ohm} gewählt werden.
+        
+        
+        
+
+    \listoftables
+    \listoffigures
+\end{document}
