@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,titlepage]{scrreprt}
+\documentclass[11pt,a4paper,titlepage,parskip=half]{scrreprt}
 
 \input{../include/packages.tex}
 \input{../include/layout.tex}
@@ -73,23 +73,25 @@
                 \paragraph{Aufgabe:} Zeichen Sie die Spannungsverläufe auf
             \subsubsection{Messaufgabe 3}
 				\paragraph{Aufgabe:} Messen Sie mit dem Oszillograph und Multimeter
-					\begin{table}[!hbtp]
+					\begin{table}[H]
 						\caption{Messergebnisse Einweggleichrichtung ohne Kondensator}
 						\label{tbl:messergebnisse1.1}
-						\renewcommand{\arraystretch}{1.3}
+						\renewcommand{\arraystretch}{1.6}
+                        \begin{center}
 						\begin{tabular}{ll|l}
 							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\ 
                             \multicolumn{3}{l}{Oszillograph:}\\\hline
-							Frequenz der Eingangsspannung & $f$ & \\
-							Brummspannungsfrequenz & $f_{br}$ &\\
-							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\
-							Scheitelwert & \spannung{$U_{2_{max}}$} &\\
-							Stromflusswinkel &  $\alpha [ \degree]$& \\
-							Brummspannung &  \spannung{$U_{brmax}$} &\\
+							Frequenz der Eingangsspannung & $f$ & \\\hline
+							Brummspannungsfrequenz & $f_{br}$ &\\\hline
+							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\\hline
+							Scheitelwert & \spannung{$U_{2_{max}}$} &\\\hline
+							Stromflusswinkel &  $\alpha [ \degree]$& \\\hline
+							Brummspannung &  \spannung{$U_{brmax}$} &\\\hline
                                                         \multicolumn{3}{l}{Multimeter:}\\\hline
-							Effektivwert & \spannung{$U_{1}$} &\\% \
+							Effektivwert & \spannung{$U_{1}$} &\\\hline
 							Gleichspannung & \spannung{$U_{2-}$} & \\
 						\end{tabular}
+                    \end{center}
 					\end{table}
 		\subsection{Auswertung}
 			\paragraph{Aufgabe 1:} Berechnen Sie aus den Messwerten das Verhältnis $\frac{\spannung{U_1}}{\spannung{U_{2-}}}$. Geben Sie den gemessenen und den theoretischen Wert an (mit Herleitung).
@@ -141,23 +143,25 @@
 
 				\subsubsection{Messaufgabe 2}
 					\paragraph{Aufgabe:} Messen sie mit dem Oszillograph und Multimeter
-					\begin{table}[!hbtp]
+					\begin{table}[H]
 						\caption{Messergebnisse Einweggleichrichtung mit Kondensator}
 						\label{tbl:messergebnisse1.2}
-						\renewcommand{\arraystretch}{1.3}
+						\renewcommand{\arraystretch}{1.6}
+                        \begin{center}
 						\begin{tabular}{ll|l}
 							\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\
                                                         \multicolumn{3}{l}{Oszillograph:}\\\hline
-							Frequenz der Eingangsspannung & $f$ & \\
-							Brummspannungsfrequenz & $f_{br}$ &\\
-							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\
-							Scheitelwert & \spannung{$U_{2_{max}}$} &\\
-							Stromflusswinkel &  $\alpha [ \degree]$&\\
-							Brummspannung &  \spannung{$U_{brmax}$} &\\
+							Frequenz der Eingangsspannung & $f$ & \\\hline
+							Brummspannungsfrequenz & $f_{br}$ &\\\hline
+							Scheitelwerte & \spannung{$U_{1_{max}}$} &\\\hline
+							Scheitelwert & \spannung{$U_{2_{max}}$} &\\\hline
+							Stromflusswinkel &  $\alpha [ \degree]$&\\\hline
+							Brummspannung &  \spannung{$U_{brmax}$} &\\\hline
                             \multicolumn{3}{l}{Multimeter:}\\\hline
-							Effektivwert & \spannung{$U_{1}$} &\\
+							Effektivwert & \spannung{$U_{1}$} &\\\hline
 							Gleichspannung & \spannung{$U_{2-}$} &\\
 						\end{tabular}
+                    \end{center}
 					\end{table}
 			\subsection{Auswertung}
 				\paragraph{Aufgabe 1:} Bestätigen Sie die Näherung $\spannung{U_2} \approx  \sqrt{2} \cdot (\spannung{U_1} - 0,65) \cdot \cos(\frac{a}{2})$				
@@ -218,23 +222,25 @@
 			
 			\subsubsection{Messaufgabe 2}
 			\paragraph{Aufgabe:} Messen sie mit dem Oszillograph und Multimeter
-			\begin{table}[!hbtp]
+			\begin{table}[H]
 				\caption{Messergebnisse Brückengleichrichtung ohne Glättungskondensator}
 				\label{tbl:messergebnisse2.1}
-				\renewcommand{\arraystretch}{1.3}
+				\renewcommand{\arraystretch}{1.6}
+                \begin{center}
 				\begin{tabular}{ll|l}
 					\multicolumn{2}{l}{\textbf{Messgröße}} & \textbf{Messergebnis}\\
                                                 \multicolumn{3}{l}{Oszillograph:}\\\hline
-					Frequenz der Eingangsspannung & $f$ & \\
-					Brummspannungsfrequenz & $f_{br}$ & \\
-					Scheitelwerte & \spannung{$U_{1_{max}}$} & \\
-					Scheitelwert & \spannung{$U_{2_{max}}$} &\\
-					Stromflusswinkel &  $\alpha [ \degree]$& \\
-					Brummspannung &  \spannung{$U_{brmax}$} &\\
+					Frequenz der Eingangsspannung & $f$ & \\\hline
+					Brummspannungsfrequenz & $f_{br}$ & \\\hline
+					Scheitelwerte & \spannung{$U_{1_{max}}$} & \\\hline
+					Scheitelwert & \spannung{$U_{2_{max}}$} &\\\hline
+					Stromflusswinkel &  $\alpha [ \degree]$& \\\hline
+					Brummspannung &  \spannung{$U_{brmax}$} &\\\hline
                                                 \multicolumn{3}{l}{Multimeter:}\\\hline
-					Effektivwert & \spannung{$U_{1}$} &\\
+					Effektivwert & \spannung{$U_{1}$} &\\\hline
 					Gleichspannung & \spannung{$U_{2-}$} & \\
 				\end{tabular}
+            \end{center}
 			\end{table}
         
 			\subsection{Auswertung}
@@ -298,20 +304,20 @@
 			\subsubsection{Messaufgabe 2}
 			\paragraph{Aufgabe:}  Protokollieren Sie die Werte für verschiedene Größen des Kondensators $\capacity{C_1}$ in u.a. Tabelle. (Setzen Sie abwechseln die verschiedenen Kondensatoren in die Schaltung ein). 
             
-    			\begin{table}[!hbtp]
+    			\begin{table}[H]
     				\caption{Messwertetabelle Brückengleichrichtung mit Glättungskondensator}
     				\label{tbl:messergebnisse2.2}
-    				\renewcommand{\arraystretch}{1.3}
+    				\renewcommand{\arraystretch}{1.6}
                     \begin{center}
     				\begin{tabular}{l|c|c|c|c}
     					$\capacity{C_1}$ [\si{\mu\farad}] & \SI{33}{\mu\farad} &\SI{100}{\mu\farad} &\SI{220}{\mu\farad} &\SI{1000}{\mu\farad}\\ \hline
-    					$f_{Eingang} [\si{\hertz}]$  &  &  &  & \\
-    					$f_{br} [\si{\hertz}]$ &  &  &  & \\
+    					$f_{Eingang} [\si{\hertz}]$  &  &  &  & \\\hline
+    					$f_{br} [\si{\hertz}]$ &  &  &  & \\\hline
     					$\spannung{U_{brss}} [\si{\volt}]$ &  &  &  &   \\\hline
-    					$\mfrac{\spannung{U_1}}{\spannung{U_2}}$ &  &  &  & \\
-    					W ($10^{-2}$) & &  &  &  \\
-    					$\spannung{U_1} [\si{\volt}]$ &  &  &  & \\
-                        $\spannung{U_2} [\si{\volt}]$ &  &  &  & \\
+    					$\mfrac{\spannung{U_1}}{\spannung{U_2}}$ &  &  &  & \\\hline
+    					W ($10^{-2}$) & &  &  &  \\\hline
+    					$\spannung{U_1} [\si{\volt}]$ &  &  &  & \\\hline
+                        $\spannung{U_2} [\si{\volt}]$ &  &  &  & \\\hline
                         G &	 &  &  & 
     				\end{tabular}
                 \end{center}
@@ -446,17 +452,17 @@
             
             \paragraph{Durchführung:} Schaltung aufbauen. $\spannung{U_1} = \SI{16}{\volt}$ einstellen. Messwerte für die verschiedenen Widerstände in die Tabelle 4.1 eintragen.
             
-            \begin{table}[!hbtp]
+            \begin{table}[H]
                 \caption{Messwertetabelle Spannungsserienstabilisierung}
                 \label{tbl:messergebnisse4.1}
-                \renewcommand{\arraystretch}{1.3}
+                \renewcommand{\arraystretch}{1.6}
                 \begin{center}
-                    \begin{tabular}{l|cccc}
+                    \begin{tabular}{l|c|c|c|c}
                         $\widerstand{R_{Last}} [\si{\ohm}]$ & 1200 & 470 & 220 & 56 \\ \hline
-                        $\spannung{U_{2-}} [\si{\volt}]$  &  &  &  &\\
-                        $\spannung{U_{3-}} [\si{\volt}]$ &  &  &  & \\
-                        $\spannung{U_{3brss}} [\si{\milli\volt}]$ &  &  &  &  \\
-                        $P_v [\si{\watt}]$ &   &   &   &  \\
+                        $\spannung{U_{2-}} [\si{\volt}]$  & \qquad\qquad\qquad  & \qquad\qquad\qquad & \qquad\qquad\qquad &\qquad\qquad\qquad\\\hline
+                        $\spannung{U_{3-}} [\si{\volt}]$ &  &  &  & \\\hline
+                        $\spannung{U_{3brss}} [\si{\milli\volt}]$ &  &  &  &  \\\hline
+                        $P_v [\si{\watt}]$ &   &   &   &  \\\hline
                         Wirkungsgrad in \% &  &  &   &  \\
                     \end{tabular}
                 \end{center}

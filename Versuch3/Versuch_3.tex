@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,titlepage]{scrreprt}
+\documentclass[11pt,a4paper,titlepage,parskip=half]{scrreprt}
 
 \input{../include/packages.tex}
 \input{../include/layout.tex}
@@ -33,6 +33,7 @@
                 (1,1) to[short] (2,1)
                       to[myvoltmeter, l=B1020, v=\spannung{U}] (2,0)
                       to[short] (1,0)
+                (0,0) to[open, v=$\spannung{U_V}$] (0,1)
                 ;
             \end{circuitikz}
           \end{center}
@@ -44,13 +45,13 @@
             \paragraph{Durchführung:} Schaltung aufbauen. Die Spannung $\spannung{U}$ durch Einstellung der Versorgungsspannung $\spannung{U_V}$ in Schritten von z.B. \SI{1}{\volt} erhöhen und die Messwerte $\spannung{U}$ und $\strom{I}$ protokollieren. 
           \paragraph{Ergebnisse:}
                  \begin{center}
-                    \begin{table}[!hbtp]
+                    \begin{table}[H]
                         \caption{Messwertetabelle zur Messaufgabe 1.1.M1}
                         \label{tbl:messergebnisse1.1}
-                        \renewcommand{\arraystretch}{1.3}
+                        \renewcommand{\arraystretch}{1.6}
                         \begin{center}
-                            \begin{tabular}{ccc|ccc}
-                                \multicolumn{3}{c}{\SI{47}{\ohm}} & \multicolumn{3}{c}{\SI{1}{\kilo\ohm}} \\ 
+                            \begin{tabular}{c|c|c|c|c|c}
+                                \multicolumn{3}{c|}{\SI{47}{\ohm}} & \multicolumn{3}{c}{\SI{1}{\kilo\ohm}} \\ 
                                 $\spannung{U}$ [\si{\volt}] &
                                 $\strom{I}$ [\si{\milli\ampere}] &
                                 $\frac{\spannung{U}}{\strom{I}}$ $\left[\frac{\si{\volt}}{\si{\ampere}}\right]$&
@@ -58,16 +59,16 @@
                                 $\strom{I}$ [\si{\milli\ampere}] &
                                 $\frac{\spannung{U}}{\strom{I}}$ $\left[\frac{\si{\volt}}{\si{\ampere}}\right]$ \\ \hline
                                 
-                                1 & 21 & 47,6 & 1 & 1 & 1000\\
-                                2 & 41 & 48,8 & 2 & 2 & 1000\\
-                                3 & 65 & 46,0 & 3 & 3 & 1000\\
-                                4 & 83 & 48,2 & 4 & 4 & 1000\\
-                                5 & 104 & 48,1 & 5 & 5 & 1000\\
-                                6 & 125 & 48,0 & 6 & 6 & 1000\\
-                                7 & 145 & 48,3 & 7 & 7 & 1000\\
-                                8 & 165 & 48,5 & 8 & 8 & 1000\\
-                                9 & 188 & 47,9 & 9 & 9 & 1000\\
-                                10 & 207 & 48,3 & 10 & 10 & 1000\\
+                                \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad\\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\\hline
+                                 &  &  &  &  & \\
                             \end{tabular}
                         \end{center}
                     \end{table}
@@ -75,22 +76,7 @@
         \subsection{Auswertung}
           \subsubsection{Aufgabe 1:} Stellen Sie die Messreihen für $\strom{I} = f(\spannung{U})$ und $\widerstand{R} = konstant$  aus Messaufgabe 1 graphisch dar. Ermitteln Sie daraus für jeweils 2 Kurvenpunkte den Proportionalitätsfaktor $m$. Geben Sie die Funktionsverläufe in der Form von $\strom{I} = m \cdot \spannung{U}$ an.
             
-            \begin{equation*}
-            	m = \frac{\Delta \strom{I}}{\Delta \spannung{U}} = \frac{\SI{42}{\milli\ampere}}{\SI{2}{\volt}} = 0,021
-            \end{equation*}
-            Daraus folgt:
-            \begin{equation*}
-            	\strom{I} = 0,021 \cdot \spannung{U}
-            \end{equation*}
-            
-            
-            \begin{equation*}
-            	m = \frac{\Delta \strom{I}}{\Delta \spannung{U}} = \frac{\SI{2}{\milli\ampere}}{\SI{2}{\volt}} = 0,001
-            \end{equation*}
-            Daraus folgt:
-            \begin{equation*}
-            	\strom{I} = 0,001 \cdot \spannung{U}
-            \end{equation*}
+          
           
           \subsubsection{Aufgabe 2:} Wie ist der Proportionalitätsfaktor zu interpretieren ? 
           
@@ -100,39 +86,13 @@
         \section{Rechenaufgaben und Erklärungen}
            
            \subsection{Aufgabe 1:} Wie groß ist der Innenwiderstand eines Voltmeters, wenn in das Voltmeter ein Strom von $\strom{I_V} = \SI{1}{\micro\ampere}$ fließt und ein Wert von \SI{1}{\volt} angezeigt wird?
-           \begin{align*}
-               \widerstand{R_I} &= \frac{\spannung{U}}{\strom{I}} = \frac{\SI{1}{\volt}}{\SI{1}{\micro\ampere}} = 
-               &= \SI{1}{\mega\ohm}
-           \end{align*}
+            \TODO{Zeichnungen und Erklärungen}
            \subsection{Aufgabe 2:} Wie groß ist der Innenwiderstand eines Amperemeters, wenn über dem Amperemeter eine Spannung von $\spannung{U_A} = \SI{100}{\milli\volt}$ abfällt und ein Wert von \SI{50}{\milli\ampere} angezeigt wird?
-           \begin{align*}
-           \widerstand{R_I} &= \frac{\spannung{U}}{\strom{I}} = \frac{\SI{100}{\milli\volt}}{\SI{50}{\milli\ampere}} = 
-           &= \SI{2}{\ohm}
-           \end{align*}
+           \TODO{Zeichnungen und Erklärungen}
            \subsection{Aufgabe 3:}  Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{100}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$ . Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,95}{\volt}$ und $\strom{I_A} = \SI{500}{\micro\ampere}$.  Berechnen Sie $\strom{I_L}$, $\widerstand{R_L}$ und $\spannung{U_0}$.
-           \begin{align*}
-               \strom{I_V} &= \frac{\spannung{U_L}}{\widerstand{R_{iV}}} = \frac{\SI{4,95}{\volt}}{\SI{1}{\mega\ohm}} = \SI{4,95}{\micro\ampere}\\
-               \strom{I_L} &= \strom{I_A} - \strom{I_V} = \SI{500}{\micro\ampere} - \SI{4,95}{\micro\ampere} = \SI{495,05}{\micro\ampere}\\
-               \widerstand{R_L} &= \frac{\spannung{U_L}}{\strom{I_L}} = \frac{\SI{4,95}{\volt}}{\SI{495,05}{\micro\ampere}} = \SI{9998,99}{\ohm}\\
-               \spannung{U_0} &= \widerstand{R_{ges}} \cdot \strom{I_A} = \left(\widerstand{R_i} + \widerstand{R_{iA}} + \frac{\widerstand{R_{iV}} \cdot \widerstand{R_L}}{\widerstand{R_{iV}} + \widerstand{R_L}}\right) \cdot \strom{I_A}\\
-               &= \SI{10001}{\ohm} \cdot \SI{500}{\micro\ampere} = \SI{5}{\volt}
-           \end{align*}
-           \subsection{Aufgabe 4:}Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{1}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$. Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,8}{\volt}$ und $\strom{I_L} = \SI{100}{\micro\ampere}$.
-           \begin{equation*}
-           		\spannung{U_A} = \widerstand{R_{iA}} * \strom{I_L} = \SI{1}{\ohm} \cdot \SI{100}{\milli\ampere} = \SI{0,1}{\volt}
-           \end{equation*}
-           \begin{equation*}
-           		\spannung{U_L} = \spannung{U_V} - \spannung{U_A} = \SI{4,8}{\volt} - \SI{0,1}{\volt} = \SI{4,7}{\volt} 
-           \end{equation*}
-           \begin{equation*}
-           		\widerstand{R_L} = \frac{\spannung{U_L}}{\strom{I_L}} = \frac{\SI{4,7}{\volt}}{\SI{100}{\milli\ampere}} = \SI{47}{\ohm}
-           \end{equation*}
-           \begin{equation*}
-           		\strom{I_V} = \frac{\spannung{U_V}}{\widerstand{R_{iV}}} = \frac{\SI{4,8}{\volt}}{\SI{1}{\mega\ohm}} = \SI{4,8}{\micro\ampere}
-           \end{equation*}
-		   \begin{equation*}
-		   		\spannung{U_0} = \spannung{U_L} + \widerstand{R_i} \cdot (\strom{I_L} + \strom{I_V}) = \SI{4,7}{\volt} + \SI{1}{\ohm} \cdot (\SI{100}{\milli\ampere} + \SI{4,8}{\micro\ampere}) = \SI{4,8000048}{\volt}
-		   \end{equation*}
+          \TODO{Zeichnungen und Erklärungen}
+           \subsection{Aufgabe 4:}Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{1}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$. Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,8}{\volt}$ und $\strom{I_L} = \SI{100}{\micro\ampere}$. Berechnen Sie  $\strom{U_L}$, $\widerstand{R_L}$ und $\spannung{U_0}$.
+
 		   
        \section{Spannungsrichtiges Messen bei Strom- Spannungs- Messung}
        
@@ -170,20 +130,19 @@
             \subsubsection{Messaufgabe M1}
             \paragraph{Aufgabe:} Messen und protokollieren Sie die Spannungswerte $\spannung{U_{X1}}$ und $\spannung{U_{X2}}$, sowie die Stromwerte $\strom{I_{X1}}$ und $\strom{I_{X2}}$ bei Spannungsmessung an den Messpunkten $X1$ und $X2$. 
         
-            \paragraph{Durchführung:} Messschaltung aufbauen. Betriebsspannung $\spannung{U_V} = \SI{6}{\volt}$ einstellen
-            \pagebreak
+            \paragraph{Durchführung:} Messschaltung aufbauen. Betriebsspannung $\spannung{U_V} = \SI{6}{\volt}$ einstellen.
             \paragraph{Ergebnisse:}
                  \begin{center}
-                    \begin{table}[!hbtp]
+                    \begin{table}[H]
                         \caption{Messwertetabelle zur Messaufgabe 2.2.M1}
                         \label{tbl:messergebnisse2.1}
-                        \renewcommand{\arraystretch}{1.3}
+                        \renewcommand{\arraystretch}{1.6}
                         \begin{center}
                             \begin{tabular}{c|c}
-                                $\spannung{U_{X1}} [\si{\volt}]$ & 4,09\\
-                                $\spannung{U_{X2}} [\si{\volt}]$ & 3,92\\ \hline
-                                $\strom{I_{X1}} [\si{\milli\ampere}]$ & 39,5\\
-                                $\strom{I_{X2}} [\si{\milli\ampere}]$ & 39,2
+                                $\spannung{U_{X1}} [\si{\volt}]$ & \qquad\qquad\qquad\\\hline
+                                $\spannung{U_{X2}} [\si{\volt}]$ & \qquad\qquad\qquad\\ \hline
+                                $\strom{I_{X1}} [\si{\milli\ampere}]$ & \qquad\qquad\qquad\\\hline
+                                $\strom{I_{X2}} [\si{\milli\ampere}]$ & \qquad\qquad\qquad
                             \end{tabular}
                         \end{center}
                     \end{table}
@@ -192,17 +151,14 @@
         \subsection{Auswertung}
             \subsubsection{Aufgabe 1:}  An welchem Messpunkt wird bezogen auf den Widerstand $\widerstand{R_2}$ spannungsrichtig gemessen?
             
-            Am Messpunkt $X2$ wird spannungsrichtig gemessen, da dann der Innenwiderstand des Strommessgeräts nicht mitgemessen wird. Am Messpunkt $X2$ wird nur der Widerstand $\widerstand{R_2}$ gemessen.
+     
             
             
             \subsubsection{Aufgabe 2:} Berechnen Sie den Innenwiderstand $\widerstand{R_I}$ des Multimeters M2-H im Strommessbereich \SI{60}{\milli\ampere} anhand der Messwerte.
             
-            \begin{align*}
-                \widerstand{R_I} &= \frac{\triangle \spannung{U}}{\triangle \strom{I}}\\
-                &= \frac{\spannung{U_{X1}} - \spannung{U_{X2}}}{\strom{I_{X1}} - \strom{I_{X2}}}
-                = \frac{\SI{4,09}{\volt} - \SI{3,92}{\volt}}{\SI{39,5}{\milli\ampere} - \SI{39,2}{\milli\ampere}}\\
-                &= \SI{566,66}{\ohm}
-            \end{align*}
+            \TODO{Zeichnung}
+            
+    
         \section{Stromrichtiges Messen bei gleichzeitiger Strom- Spannungs- Messung}
        
              \paragraph{Messaufbau:}
@@ -243,16 +199,16 @@
                     \pagebreak
                     \paragraph{Ergebnisse:}
                         \begin{center}
-                            \begin{table}[!hbtp]
+                            \begin{table}[H]
                                 \caption{Messwertetabelle zur Messaufgabe 2.3.M1}
                                 \label{tbl:messergebnisse2.2}
-                                \renewcommand{\arraystretch}{1.3}
+                                \renewcommand{\arraystretch}{1.6}
                                 \begin{center}
                                     \begin{tabular}{c|c}
-                                        $\spannung{U_{X1}} [\si{\volt}]$ & 4,4\\
-                                        $\spannung{U_{X2}} [\si{\volt}]$ & 4,4\\ \hline
-                                        $\strom{I_{X1}} [\si{\milli\ampere}]$ & 0,14\\
-                                        $\strom{I_{X2}} [\si{\milli\ampere}]$ & 0,16
+                                        $\spannung{U_{X1}} [\si{\volt}]$ & \qquad\qquad\qquad\\\hline
+                                        $\spannung{U_{X2}} [\si{\volt}]$ & \\ \hline
+                                        $\strom{I_{X1}} [\si{\milli\ampere}]$ & \\\hline
+                                        $\strom{I_{X2}} [\si{\milli\ampere}]$ & 
                                     \end{tabular}
                                 \end{center}
                             \end{table}
@@ -261,18 +217,15 @@
                 
             \subsection{Auswertung}
                 \subsubsection{Aufgabe 1:}  An welchem Messpunkt wird bezogen auf den Widerstand $\widerstand{R_2}$ stromrichtig gemessen?
-                
-                Am Messpunkt $X1$ wird stromrichtig gemessen, da dann der Innenwiderstand des Spannungsmessgeräts nicht mitgemessen wird. Am Messpunkt $X1$ wird nur der Widerstand $\widerstand{R_2}$ gemessen.
-                
+                                
                 
                 \subsubsection{Aufgabe 2:} Berechnen Sie den Innenwiderstand $\widerstand{R_{UI}}$ des Multimeters M2-H anhand der Messwerte.
                 
-                \begin{align*}
-                \spannung{U_X} &= \SI{4,4}{\volt}\\
-                \strom{I_{X1}} &= \SI{0,14}{\milli\ampere}\\
-                \strom{I_{X2}} &= \SI{0,16}{\milli\ampere}\\
-                \widerstand{R_{UI}} &= \frac{\spannung{U}}{\strom{I_{X2}} - \strom{I_{X1}}} = \SI{2,2}{\kilo\ohm}
-                \end{align*}
+                $\spannung{U_X}=$ \qquad\qquad\qquad $\strom{I_{X1}}=$ \qquad\qquad\qquad $\strom{I_{X2}}=$
+                
+                
+                \TODO{Zeichnung}
+   
         \section{Einfluss des Messgeräteinnenwiederstandes auf die Messgenauigkeit}
             \paragraph{Messaufbau:}
             \begin{itemize*}
@@ -284,14 +237,14 @@
                 \begin{circuitikz}[scale=1]
                     \draw
                     (0,3) to[R, l=$\widerstand{R_1}$, o-] (3,3)
-                          to[R, l=$\widerstand{R_2}$, v=$\spannung{U_2}$, *-*] (3,0)
-                          to[short, -o] (0,0)
-                    (3,3) to[short] (5,3)
-                          to[R, l=$\widerstand{R_I}$] (5,1.5)
-                          to[myvoltmeter] (5,0)
+                          to[R, l=$\widerstand{R_2}$, v=$\spannung{U_2}$] (3,0)
+                          to[short , -o] (0,0)
+    %                (3,3) to[short] (5,3)
+   %                       to[R, l=$\widerstand{R_I}$] (5,1.5)
+  %                        to[myvoltmeter] (5,0)
                           to[short] (3,0)
-                    (4,3.5) rectangle (6,-0.5)
-                    (6.7,1.5) node {M2-H}
+%                    (4,3.5) rectangle (6,-0.5)
+ %                   (6.7,1.5) node {M2-H}
                     
                     (0,0) to[open, v=$\spannung{U_V}$] (0,3)
                     ;
@@ -300,62 +253,25 @@
             
             \subsection{Messaufgaben}
             \subsubsection{Messaufgabe M1}
-            \paragraph{Aufgabe:} Zeichnen Sie eine Messschaltung nach zur Spannungsmessung an $\widerstand{R_2}$.   Stellen Sie den Spannungsmesser in seinem Ersatzschaltbild dar. Verwenden Sie dazu die Werte aus Übung 2.3 für das Messgerät M2- H. Messen Sie  die Spannung an $\widerstand{R_2}$ 
+            \paragraph{Aufgabe:} Zeichnen Sie eine Messschaltung nach obiger Schaltung zur Spannungsmessung an $\widerstand{R_2}$.   Stellen Sie den Spannungsmesser in seinem Ersatzschaltbild dar. Verwenden Sie dazu die Werte aus Übung 2.3 für das Messgerät M2- H. Messen Sie  die Spannung an $\widerstand{R_2}$ 
             \paragraph{Durchführung:} Messschaltung aufbauen. Betriebsspannung $\spannung{U_V} = \SI{6}{\volt}$ einstellen
             \paragraph{Ergebnisse:}
                 \begin{align*}
-                    \spannung{U_2} = \SI{1,9}{\volt}
+                    \spannung{U_2} = 
                 \end{align*}
            
             
             \subsection{Auswertung}
             \subsubsection{Aufgabe 1:}  Erläutern Sie die Ergebnisse aus Messaufgabe 1. Berechnen Sie daraus den Innenwiderstand des Multimeters M2-H im verwendeten Messbereich.
-                Spannung an $\widerstand{R_1}$:
-                \begin{align*}
-                    \spannung{U_1} &= \spannung{U_V} - \spannung{U_2}\\
-                    \spannung{U_1} &= \SI{6}{\volt} - \SI{1,9}{\volt} = \SI{4,1}{\volt}
-                \end{align*}
-                Strom $\strom{I}$ der gesamten Schaltung:
-                \begin{align*}
-                    \strom{I} &= \frac{\spannung{U_1}}{\widerstand{R_1}}\\
-                    \strom{I} &= \frac{\SI{4,1}{\volt}}{\SI{100}{\kilo\ohm}} = \SI{41}{\micro\ampere}                    
-                \end{align*}
-                Ersatzwiderstand für $\widerstand{R_2}$ und $\widerstand{R_I}$
-                \begin{align*}
-                    \widerstand{R_{2I}} &= \frac{\spannung{U_2}}{\strom{I}}\\
-                    \widerstand{R_{2I}} &= \frac{\SI{1,9}{\volt}}{\SI{41}{\micro\ampere}} = \SI{46,341}{\kilo\ohm}
-                \end{align*}
-                Innenwiderstand des Messgerätes:
-                \begin{align*}
-                    \frac{1}{\widerstand{R_{2I}}} &= \frac{1}{\widerstand{R_I}} + \frac{1}{\widerstand{R_2}}\\
-                    \frac{1}{\widerstand{R_I}} &= \frac{1}{\widerstand{R_{2I}}} - \frac{1}{\widerstand{R_2}} = \frac{1}{\SI{46,341}{\kilo\ohm}} - \frac{1}{\SI{100}{\kilo\ohm}}\\
-                    \implies \widerstand{R_I} &= \SI{86,36}{\kilo\ohm} 
-                \end{align*}
+               
             \subsubsection{Aufgabe 2:}  Wie beeinflusst der Innenwiderstand des Spannung- Messgerätes das Messergebnis?
             
-                Da der Innenwiderstand parallel zum Messwiederstand geschaltet wird verringert sich der Gesamtwiederstand dieser beiden sich auf einen geringeren Wert, als der kleinste Widerstand. Dies verringert die anliegende Spannung. Um diesem Verhalten entgegen zu wirken sollte der Innenwiederstand des Gerätes möglichst groß sein, wenn möglich gegen Unendlich gehen.
-                
+               
             \subsubsection{Aufgabe 3:} Zeichnen Sie eine Messschaltung zur Strommessung des Stromes durch $\widerstand{R_2}$ (ohne Spannungsmessung). Stellen Sie den Strommesser in seinem Ersatzschaltbild dar. Verwenden Sie dazu die Werte aus Übung 2.3. für das Messgerät M2-H.
-             \begin{center}
-                \begin{circuitikz}[scale=1]
-                    \draw
-                    (0,3) to[R, l=$\widerstand{R_1}$, i=$\strom{I}$,  o-] (3,3)
-                    (3,3) to[short] (5,3)
-                          to[R, l=$\widerstand{R_I}$] (5,1.5)
-                          to[myvoltmeter, i=$\strom{I}$] (5,0)
-                          to[short] (3,0)
-                          to[R, l=$\widerstand{R_2}$, i=$\strom{I}$, -o] (0,0)
-                    (4,3.5) rectangle (6,-0.5)
-                    (6.7,1.5) node {M2-H}
-                    
-                    (0,0) to[open, v=$\spannung{U_V}$] (0,3)
-                    ;
-                \end{circuitikz}
-            \end{center}
+             \
             \subsubsection{Aufgabe 4:} Wie beeinflusst der Innenwiderstand des Strom- Messgerätes die Messung?
             
-             Durch den zusätzlichen Widerstand vergrößert sich der Gesamtwiderstand der Schaltung, wodurch auch der Gesamtstrom verändert wird. Er verringert sich. Um entgegen zu wirken sollte der Innenwiederstand in diesem Fall sehr klein sein.
-            
+             
         \section{Kurvenformfehler bei Messgeräten}
         
             \paragraph{Messaufbau:}
@@ -398,11 +314,10 @@
             \paragraph{Aufgabe:} Messen Sie die unten angegebenen Spannungssignale $\spannung{U(t)}$ mit einem analogen und digitalen Messgerät jeweils im Gleich- und Wechselspannungsmessbereich.
             \paragraph{Durchführung:} Messchaltung aufbauen. Versorgungsspannung $\spannung{U(t)}$ mit dem Netzteil (Kurve 1) bzw. dem Frequenzgenerator (Kurve 2 bis 4) einstellen. Messwerte in Tabelle eintragen.\\
             Beachte: Nur immer mit  einem   Messgerät gleichzeitig messen.\\
-            
-			\pagebreak			
+            			
 			Kurvenformen für U(t):            
             \begin{center}
-                \begin{table}[!hbtp]
+                \begin{table}[H]
                     \caption{Spannungskurven für Messaufgabe 2.5 M1}
                     \label{tbl:kurven2.1}
                     \renewcommand{\arraystretch}{1.3}
@@ -424,17 +339,17 @@
             ($U_{ss}$, $U_{pp}$ = U Spitze/Spitze oder 2 * Û) 
             \paragraph{Ergebnisse:}
             \begin{center}
-                \begin{table}[!hbtp]
+                \begin{table}[H]
                     \caption{Messwertetabelle zur Messaufgabe 2.3.M1}
                     \label{tbl:messergebnisse2.2}
-                    \renewcommand{\arraystretch}{1.3}
+                    \renewcommand{\arraystretch}{1.6}
                     \begin{center}
-                        \begin{tabular}{c|cc|cccc}
+                        \begin{tabular}{c|cc|c|c|c|c}
                             Messgerät & Messprinzip & Messbereich & Gleichspannung & Sinuskurve & Dreieck & Rechteck\\ \hline
-                            M2-H & Drehspul & 6\,V\textdirectcurrent & 5,9 & 0 & 0 & 0\\
-                            M2-H & Drehspul & 6\,V$\sim$ & 0 & 2,7 & 2,1 & 4,3\\
-                            B1020 & Digital & 6\,V\textdirectcurrent & 5,9 & 0 & 0 & 0\\
-                            B1020 & Digital & 6\,V$\sim$ & 0 & 2,74 & 2,15 & 4,3\\
+                            M2-H & Drehspul & 6\,V\textdirectcurrent &  &  &  & \\\hline
+                            M2-H & Drehspul & 6\,V$\sim$ &  &  &  & \\\hline
+                            B1020 & Digital & 6\,V\textdirectcurrent & &  &  & \\\hline
+                            B1020 & Digital & 6\,V$\sim$ &  &  &  & \\
                             
                         \end{tabular}
                     \end{center}
@@ -443,69 +358,29 @@
             
             \subsection{Auswertung}
             \subsubsection{Aufgabe 1:} Wie kommt der Formfaktor F für Sinusgrößen zustande (math. Herleitung) 
-            \begin{equation*}
-            	F = \frac{\spannung{U_{eff}}}{\spannung{U_{glr}}} = \frac{\frac{1}{\sqrt{2}}\hat{U}}{\frac{2}{\pi}\hat{U}} = \frac{\pi}{\sqrt{8}} \approx 1,11
-            \end{equation*}
+    
             
             \subsubsection{Aufgabe 2:} Was messen Sie mit den Multimetern im Gleichspannungsbereich, was im   Wechselspannungsbereich? Warum? 
 
-			Im Wechselspannungsbereich des Multimeters messen wir den Effektivwert, während wir im Gleichspannungsbereich den arithmetischen Mittelwert der Spannung messen.
-            
+		
             \subsubsection{Aufgabe 3:} Wie kommen die Anzeigewerte für Dreieck- und Rechteckspannung zustande ?   (Rechnung)\\
             
-            Dreieckspannung:
-            \begin{equation*}
-            	\spannung{U_{eff}} = \frac{\spannung{\hat{U}}}{\sqrt{3}}
-            \end{equation*}
-            Rechteckspannung:
-            \begin{equation*}
-            	\spannung{U_{eff}} = \frac{\spannung{\hat{U}}}{1} = \spannung{\hat{U}}
-            \end{equation*}
-            \subsubsection{Aufgabe 4:} Berechnen Sie aus den Anzeigewerten die tatsächlichen Effektivwerte für die   obige Dreieck- und Rechteckspannung. Geben Sie die Umrechnungsfaktoren an.\\
+            \subsubsection{Aufgabe 4:} Berechnen Sie aus den Anzeigewerten die tatsächlichen Effektivwerte für die   obige Dreieck- und Rechteckspannung. Geben Sie die Umrechnungsfaktoren an.
             
-            Dreieckspannung:
-            \begin{equation*}
-            	\spannung{U_{eff}} = \frac{\spannung{\hat{U}}}{\sqrt{3}} = \frac{\SI{4}{\volt}}{\sqrt{3}} \approx 2,3
-            \end{equation*}
-            Rechteckspannung:
-            \begin{equation*}
-            	\spannung{U_{eff}} = \frac{\spannung{\hat{U}}}{1} = \spannung{\hat{U}} = \SI{4}{\volt}
-            \end{equation*}                      
-                
     \chapter{Kennwerte harmonischer Wechselgrößen}
      
         \section{Rechenaufgaben}
             \subsection{Aufgabe 1:}
                  Eine sinusförmige Spannung $\spannung{U(t)}$ mit $f_1 = \SI{50}{\hertz}$ hat den Scheitelwert $\hat{U} = \SI{10}{\volt}$
                  
-                 a) Beschreiben Sie die Funktion $\spannung{U(t)}$\\
-                 b) Wie groß ist  $\spannung{U(t)}$ bei $t_1 = \SI{2}{\milli\second}$ nach dem Nulldurchgang?\\
-                 c) Skizzieren Sie das einseitige Spektrum $\spannung{U(f)}$\\
+                 a) Beschreiben Sie die Funktion $\spannung{U(t)}$
+                 
+                 b) Wie groß ist  $\spannung{U(t)}$ bei $t_1 = \SI{2}{\milli\second}$ nach dem Nulldurchgang?
+                 
+                 c) Skizzieren Sie das einseitige Spektrum $\spannung{U(f)}$
+                 
                  d)Wie groß wäre die Phase $\varphi$, wenn der Nulldurchgang bei $t_2 = \SI{5}{\milli\second}$ ist, wie lautet dann $\spannung{U(t)}$? 
-                
-                a)
-                \begin{align*}
-                    U(t) = \hat{U} \cdot \sin\left(2\pi \cdot \SI{50}{\hertz} \cdot t + \varphi \right)
-                \end{align*}
-                b)
-                 \begin{align*}
-                    U(t) &= \SI{10}{\volt} \cdot \sin\left(2\pi \cdot \SI{50}{\hertz} \cdot \SI{2}{\milli\second} + 0 \right)\\
-                    &= \SI{5,8779}{\volt}
-                \end{align*}
-                \pagebreak
-                
-                
-                c)
-                \begin{align*}
-                    \underline{X} = f
-                \end{align*}
-                                    
-               d)
-                \begin{align*}
-                     U(t) &= \SI{10}{\volt} \cdot \sin\left(2\pi \cdot \SI{50}{\hertz} \cdot \SI{5}{\milli\second} + \varphi \right)\\
-                     0 &= \SI{10}{\volt} \cdot \sin\left(2\pi \cdot \SI{50}{\hertz} \cdot \SI{5}{\milli\second} + \varphi \right)\\
-                     \varphi &=  \frac12\pi
-                \end{align*}
+               
                 
         \section{Speisung eines ohmschen Verbrauchers mit einer Sinusspannung}
             \paragraph{Messaufbau:}
@@ -538,28 +413,31 @@
             
             \subsection{Messaufgaben}
                 \subsubsection{Messaufgabe M1}
-                    \paragraph{Aufgabe:} Messen Sie mit dem Multimeter $\spannung{U}$, $\strom{I}$ und $\spannung{U_m}$\\
+                    \paragraph{Aufgabe:} Messen Sie mit dem Multimeter:\\
+                     $\spannung{U}=$\\
+                      $\strom{I}=$\\
+                      $\spannung{U_m}=$\\
                      Messen Sie mit dem Oszillograph den Phasenwinkel $\varphi(\spannung{u},\strom{I})$ für 10 Augenblickwerte für $\spannung{U(t)}$ und $\strom{I(t)}$ = $\frac{\spannung{U_m(t)}}{\widerstand{R}}$
                     \paragraph{Durchführung:} Schaltung aufbauen. Die Speisespannung $\spannung{U(t)}$ am Frequenzgenerator einstellen: Spannung $U_{SS} = \SI{8}{\volt}$, Periodendauer  $T = \SI{10}{\milli\second}$ 
                     \paragraph{Ergebnisse:}
                         \begin{center}
-                            \begin{table}[!hbtp]
+                            \begin{table}[H]
                                 \caption{Messwertetabelle zur Messaufgabe 3.2.M1}
                                 \label{tbl:messergebnisse3.1}
-                                \renewcommand{\arraystretch}{1.3}
+                                \renewcommand{\arraystretch}{1.6}
                                 \begin{center}
-                                    \begin{tabular}{c|cccc}
+                                    \begin{tabular}{c|c|c|c|c}
   										 $t \quad [\si{\milli\second}]$ & $\spannung{U(t)}\quad  [\si{\volt}]$ & $\spannung{U_m} \quad [\si{\milli\volt}]$ & $\strom{I(t)} = \frac{\spannung{U_m}}{\widerstand{R_m}}  \quad[\si{\milli\ampere}]$ & $P(t) \quad [\si{\milli\watt}]$\\ \hline
-   										0 & 2,61 & 300 & 3  & 7,83\\
-   										2 & 3,28 & 350 & 3,5 & 11,48\\
-   										4 & -0,65 & -22 & -0,22& 0,14\\
-   										6 & -3,85 & -295 & -2,95 & 11,36\\
-  										8 & -1,88 & -94 & -0,94 & 1,77\\
-   										10 & 2,61 & 305 & 3,05 & 7,96\\
-   										12 & 3,30 & -25 & -0,25 & -0,83\\
-   										14 & -0,675 & -259 & -2,59 & 1,75\\
-   										16 & -3,85 & -72,5 & -0,725 & 2,79\\
-   										18 & -1,6 & 295 & 2,95 & -4,72\\
+   										 \qquad\qquad\qquad& \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad  & \qquad\qquad\qquad\\\hline
+   										 &  &  &  & \\\hline
+   										 &  &  &  & \\\hline
+   										 &  &  &  & \\\hline
+  										 &  &  &  & \\\hline
+   										 &  &  &  & \\\hline
+   										 &  &  &  & \\\hline
+   										 &  &  &  & \\\hline
+   										 &  &  &  & \\\hline
+   										 &  &  &  & \\
 									\end{tabular}
                                 \end{center}
                             \end{table}
@@ -568,35 +446,13 @@
             
             \subsection{Auswertung}
                 \subsubsection{Aufgabe 1:}  Berechnen Sie zu den einzelnen Punkten die momentane Leistung $P(t) = \spannung{U(t)} \cdot \strom{I(t)}$ 
-                    
-                    s.h. Messwertetabelle zur Messaufgabe 3.2.M1
-                    \pagebreak
+
                 \subsubsection{Aufgabe 2:}   Stellen Sie $\spannung{U(t)}$, $\strom{I(t)}$ und $P(t)$ graphisch dar.(In einer Zeichnung, verschieden farbig)
                 
-                
                 \subsubsection{Aufgabe 3:}  Was messen Sie mit den Strom- und Spannungsmessern im Wechselstrombereich ? Welche Leistung können Sie daraus berechnen. (Multimeter benutzen)
-                \begin{align*}
-                \spannung{U_{eff}} &= \SI{2,76}{\volt}\\
-                \spannung{U_{Meff}} &= \SI{281}{\milli\volt}\\
-                \strom{I_{eff}} &= \frac{\spannung{U_{Meff}}}{\widerstand{R_m}} = \SI{2,8}{\milli\ampere}\\
-                P_{eff} &=  \spannung{U_{eff}} \cdot \strom{I_{eff}} = \SI{7,75}{\milli\watt}
-                \end{align*}
-     			\pagebreak
+               
                 \subsubsection{Aufgabe 4:}   Erläutern Sie die Begriffe Schein-, Blind- und Wirkleistung.   P=?; Q=?; S=?
-                     \begin{description}
-                         \item[Scheinleistung $S$:] Als Scheinleistung bezeichnet man die gesamte Leistung, die im Netzwerk zur Verfügung steht, allerdings nicht komplett umgesetzt wird.
-                         \begin{equation*}
-                         S^2= P^2 + Q^2
-                         \end{equation*}
-                         \item[Blindleistung $Q$:] Leistung, die im Netzwerk zur Verfügung steht, vom Verbraucher/Widerstand allerdings nicht umgesetzt wird (also nicht zur Wirkleistung zählt).
-                         \begin{equation*}
-                         Q^2 =S^2-P^2
-                         \end{equation*}
-                         \item[Wirkleistung $P$:] Leistung, die vom Verbraucher tatsächlich umgesetzt wird.
-                         \begin{equation*}
-                         P = U \cdot I
-                         \end{equation*}
-                     \end{description}
+      
                          
                          
                 
@@ -624,7 +480,14 @@
             
             \subsection{Messaufgaben}
                 \subsubsection{Messaufgabe M1}
-                   \paragraph{Aufgabe:} Messen Sie mit dem Multimeter $\spannung{U}$, $\strom{I}$ und $\spannung{U_m}$\\
+                   \paragraph{Aufgabe:} Messen Sie mit dem Multimeter:
+                   
+                   $\spannung{U}=$
+                   
+                   $\strom{I}=$
+                   
+                   $\spannung{U_m}=$
+                   
                    Messen Sie mit dem Oszillograph den Phasenwinkel $\varphi(\spannung{u},\strom{I})$ für 10 Augenblickwerte für $\spannung{U(t)}$ und $\strom{I(t)}$ = $\frac{\spannung{U_m(t)}}{\widerstand{R}}$
                    \paragraph{Durchführung:} Schaltung aufbauen. Die Speisespannung $\spannung{U(t)}$ am Frequenzgenerator einstellen: Spannung $U_{SS} = \SI{8}{\volt}$, Periodendauer  $T = \SI{10}{\milli\second}$ 
                    \paragraph{Ergebnisse:}
@@ -632,20 +495,20 @@
                        \begin{table}[!hbtp]
                            \caption{Messwertetabelle zur Messaufgabe 3.3.M1}
                            \label{tbl:messergebnisse3.1}
-                           \renewcommand{\arraystretch}{1.3}
+                           \renewcommand{\arraystretch}{1.6}
                            \begin{center}
-                               \begin{tabular}{c|ccccc}
+                               \begin{tabular}{c|c|c|c|c|c}
 									$t [\si{\milli\second}]$ & $\spannung{U(t)} [\si{\volt}]$ & $\spannung{U_m} [\si{\milli\volt}]$ & $\strom{I(t)} = \frac{\spannung{U_m}}{\widerstand{R_m}} [\si{\milli\ampere}]$ & $\phi [°]$ & $P(t) [\si{\milli\watt}]$\\ \hline
-									0 & 1,91 & 477 & 4,77 & 0 & 9,11\\
-									0,05 & 3,48 & 284 & 2,84 & 36 & 9,88\\
-									0,1 & 3,55 & 0 & 0 & 72 & 0\\
-									0,15 & 2,15 & -265 & -2,65 & 108 & -5,69\\
-									0,2 & -0,09 & -422 & -4,22 & 144 & 0,38\\
-									0,25 & -2,45 & -406 & -4,06 & 180 & 9,95\\
-									0,3 & -4 & -223 & -2,23 & 216 & 8,92\\
-									0,35 & -4,05 & 70 & 0,7 & 252 & -2,84\\
-									0,4 & -2,9 & 346 & 3,46 & 288 & -10,03\\
-									0,45 & -0,6 & 502 & 5,02 & 324 & -3,01\\
+									\qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad\\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\\hline
+									 &  &  &  &  & \\
 							   \end{tabular}
                            \end{center}
                        \end{table}
@@ -654,9 +517,7 @@
                    
                    \subsection{Auswertung}
                    \subsubsection{Aufgabe 1:}  Berechnen Sie zu den einzelnen Punkten die momentane Leistung $P(t) = \spannung{U(t)} \cdot \strom{I(t)}$ 
-                   
-                   s.h. Messwertetabelle zur Messaufgabe 3.3.M1
-                   \pagebreak
+
                    \subsubsection{Aufgabe 2:}   Stellen Sie $\spannung{U(t)}$, $\strom{I(t)}$ und $P(t)$ graphisch dar.(In einer Zeichnung, verschieden farbig)
                    
                               
@@ -690,17 +551,17 @@
                     \paragraph{Aufgabe:}Bestimmen Sie die Ihrer Meinung nach beste Art (Sinus, Dreieck, Rechteck) und Größe der Frequenz (Hz, kHz, MHz), um eine gut sichtbare Auf- bzw. Entladekurve
 darzustellen und somit die Größe des Kondensators berechnen zu können. Geben Sie
 die gewählte Art an.
-					\pagebreak
+
             		\paragraph{Ergebnisse:}
             		\begin{center}
-                       \begin{table}[!hbtp]
+                       \begin{table}[H]
                            \caption{Messwertetabelle zur Messaufgabe 3.4.M1}
                            \label{tbl:messergebnisse3.4}
-                           \renewcommand{\arraystretch}{1.3}
+                           \renewcommand{\arraystretch}{1.6}
                            \begin{center}
-                               \begin{tabular}{cccc}
+                               \begin{tabular}{c|c|c|c}
 									Art & $f$ & t Aufladung & t Entladung\\ \hline
-									Rechteck & $\SI{400}{\Hz}$ & $\SI{1,25}{\milli\second}$ & $\SI{1,25}{\milli\second}$
+									\qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad
 							   \end{tabular}
                            \end{center}
                        \end{table}
@@ -708,12 +569,4 @@ die gewählte Art an.
             \subsection{Auswertung}
                 \paragraph{Aufgabe 1:}Auf- und Entladekurve graphisch darstellen. Berechnen Sie aus den Messwerten die Größe des Kondensators. Mathematische Darstellung der Berechnung.
                 	  
-            		  
-            		  Als Näherung wird angenommen, dass sich der Kondensator nach $5 \cdot \tau$ vollständig aufgeladen bzw. entladen hat. Daraus folgt:
-            		  \begin{equation*}
-            		  	\tau = \frac{t_{Aufl}}{5} = \frac{\SI{1,25}{\milli\second}}{5} = \SI{0,25}{\milli\second}						
-            		  	\end{equation*}
-            		  \begin{equation*}
-            		  	C = \frac{\tau}{\widerstand{R}} = \frac{\SI{0,25}{\milli\second}}{\SI{10}{\kilo\ohm}} = \SI{25}{\nano\farad}
-            		  \end{equation*}
 \end{document}

@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,titlepage]{scrreprt}
+\documentclass[11pt,a4paper,titlepage,parskip=half]{scrreprt}
 
 \input{../include/packages.tex}
 \input{../include/layout.tex}
@@ -15,8 +15,8 @@
       \paragraph{Versuchsbeschreibung:}
         Anlagen: Datenblatt 74LS00\\
         Bauteile:
-        \begin{itemize}
-          \setlength\itemsep{-1em}
+        \begin{itemize*}
+%        \setlength\itemsep{-1em}
           \item 1 IC Typ 74LS00
           \item 2 Multimeter
           \item 1 Oszillograph
@@ -27,26 +27,24 @@
           \item 1 Potentiometer $\widerstand{R} = \SI{220}{\ohm}$
           \item 1 Potentiometer $\widerstand{R} = \SI{4,7}{\kilo\ohm}$
           \item 2 Ein-/Ausschalter
-        \end{itemize}
+        \end{itemize*}
     
       \paragraph{Darstellung von Binärziffern:} Die Binärwerte '0' und '1' werden bei der technischen Realisierung von Logikschaltungen durch zwei Spannungsbereiche dargestellt.
     
         Für positive Logik gilt:
-        \begin{itemize}
-          \setlength\itemsep{-1em}
+        \begin{itemize*}
           \item logisch \textcolor{red}{1} entspricht \textcolor{red}{'High'}-Potential
           \item logisch \textcolor{blue}{0} entspricht \textcolor{blue}{'Low'}–Potential
-        \end{itemize}
+        \end{itemize*}
     
-        Erklären Sie den Begriff "Worst- Case".
+        Erklären Sie den Begriff "Worst-Case".
     
-        Unter dem Begriff \textit{Worst-Case} versteht man den ungüngstigsten Zustand bei einer Logikschaltung. Wenn es einen undefinierten Bereich gibt, so ist dies der \textit{Worst-Case} da dort keine Logik besteht. Ansonsten liegt der \textit{Worst-Case} am Übergang zwischen Low und High, da dieser Punkt wiederum in beide Richtungen interpretiert werden kann.
-
+       
   \chapter{Logische Spannungspegel-Bereiche}
 
-    \begin{figure}[!htbp]
+    \begin{figure}[H]
       \begin{center}
-        \includegraphics[width=0.6\textwidth]{./1_1_Z1.jpg}
+        \includegraphics[width=0.8\textwidth]{./1_1_Z1.jpg}
       \end{center}
     \end{figure}
 
@@ -58,12 +56,7 @@
 
       \paragraph{Aufgabe 1:} Was versteht man unter dem Gleichspannungs - Störabstand bei logischen Schaltungen? Wie berechnet man ihn? Bsp. für LS-TTL-Logik angeben.
 
-        Wenn ein Transistor belastet wird, so kann die Ausgansspannung auf die Werte $\spannung{U_{aLmax}}$, $\spannung{U_{aHmin}}$ ansteigen beziehungsweise abfallen. Damit eine korrekte Ansteuerung darauf folgender Elemente möglich ist muss folgendes erfüllt sein:  $\spannung{U_{aLmax}} < \spannung{U_{eLmax}}$ und $\spannung{U_{aHmin}} > \spannung{U_{eHmin}}$. Diesen Abstand zwischen Eingang- und Ausgangsspannung nennt man Störabstand.\\
-        Bei der LS-TTL-Logik ist die Berechnung folgendermaßen:
-
-        \begin{align*}
-          \spannung{U_{eLmax}} - \spannung{U_{aLmax}} = \SI{0,8}{\volt} - \SI{0,5}{\volt} = \SI{0,3}{\volt}
-        \end{align*}
+      
 
       \paragraph{Aufgabe 2:} Berechnen Sie die Werte der Störabstände in der unten aufgeführten Tabelle.\\
         Annahme: $\spannung{U_{cc}} = \SI{4,5}{\volt}$
@@ -71,24 +64,24 @@
       \paragraph{Aufgabe 3:} Tragen Sie die fehlenden Werte in die Tabelle ein:
 
         \begin{center}
-          \begin{table}[!hbtp]
+          \begin{table}[H]
             \caption{Kenngrössen verschiedener Logikfamilien}
               \label{tbl:Kenngroessen}
-              \renewcommand{\arraystretch}{1.3}
+              \renewcommand{\arraystretch}{1.6}
               \begin{center}
-                \begin{tabular}{c| ccc}
+                \begin{tabular}{c| c|c|c}
                   & LS-TTL & HCHMOS & Advanced CMOS\\
-                  Versorg.-Spg. $\spannung{U_{CC}}$ & \SI{5}{\volt} & \SI{2}{\volt} - \SI{6}{\volt} & \SI{2}{\volt} - \SI{6}{\volt}\\ \hline
-                  Eingangspegel &&&\\
-                  $\spannung{U_{eLmax}}$&\SI{0,8}{\volt} & $ 0,2 \cdot \spannung{U_{CC}}$ &$ 0,3 \cdot \spannung{U_{CC}}$ \\
-                  $\spannung{U_{eHmin}}$&\SI{2}{\volt} &$ 0,7 \cdot \spannung{U_{CC}}$ &$ 0,7 \cdot \spannung{U_{CC}}$ \\
+                  Versorg.-Spg. $\spannung{U_{CC}}$ & \qquad\qquad\qquad & \SI{2}{\volt} - \SI{6}{\volt} & \SI{2}{\volt} - \SI{6}{\volt}\\ \hline
+                  Eingangspegel &\qquad\qquad\qquad&\qquad\qquad\qquad&\qquad\qquad\qquad\\ 
+                  & &  & \\ \hline
+                  $\spannung{U_{eHmin}}$&&&\\ \hline
                   Ausgangspegel:&&& \\
-                  $\spannung{U_{aLmax}}$&\SI{0,5}{\volt} &\SI{0,4}{\volt} &\SI{0,5}{\volt} \\
-                  $\spannung{U_{aHmin}}$&\SI{2,7}{\volt} &$\spannung{U_{CC}} - \SI{0,5}{\volt}$ &$\spannung{U_{CC}} - \SI{0,5}{\volt}$\\ \hline
-                  Störabstand &&&\\
-                  "`Low"' &\SI{0,3}{\volt} &\SI{0,5}{\volt} &\SI{0,85}{\volt} \\
-                  "`High"' &\SI{0,7}{\volt} &\SI{0,85}{\volt} & \SI{0,85}{\volt}\\ \hline
-                  Arbeitstemperatur & \SI{0}{\degreeCelsius} -- \SI{70}{\degreeCelsius} & \SI{40}[-]{\degreeCelsius} -- \SI{90}{\degreeCelsius} & \SI{40}[-]{\degreeCelsius} -- \SI{85}{\degreeCelsius}
+                  $\spannung{U_{aLmax}}$&&& \\ \hline
+                  $\spannung{U_{aHmin}}$&&&\\ \hline
+                  Störabstand &&&\\ 
+                  "`Low"' & & & \\ \hline
+                  "`High"' & & & \\ \hline
+                  Arbeitstemperatur & \qquad\si{\degreeCelsius} -- \qquad\si{\degreeCelsius} & \qquad\si{\degreeCelsius} -- \qquad\si{\degreeCelsius} & \qquad\si{\degreeCelsius} -- \qquad\si{\degreeCelsius}
                 \end{tabular}
               \end{center}
           \end{table}
@@ -127,14 +120,14 @@
       \begin{center}
         \begin{table}[!hbtp]
           \caption{Wertetabelle NAND-Gatter}
-          \renewcommand{\arraystretch}{1.3}
+          \renewcommand{\arraystretch}{1.6}
           \begin{center}
-            \begin{tabular}{cc|c}
+            \begin{tabular}{c|c|c}
               $\spannung{U_a} [\si{\volt}]$ & $\spannung{U_b} [\si{\volt}]$ & $\spannung{U_y} [\si{\volt}]$ \\ \hline
-              \SI{0,674}{\volt} & \SI{0,674}{\volt} & \SI{3,38}{\volt}\\
-              \SI{0,674}{\volt} & \SI{2,1}{\volt} &\SI{3,23}{\volt}\\
-              \SI{2,1}{\volt}& \SI{0,674}{\volt} &\SI{3,16}{\volt}\\
-              \SI{2,1}{\volt}&\SI{2,1}{\volt} & \SI{0,14}{\volt}\\
+               & &\\\hline
+               &  &\\\hline
+              &  &\\\hline
+              && \\
             \end{tabular}
           \end{center}
         \end{table}
@@ -143,7 +136,6 @@
     \section{Übertragungskennlinie eines TTL-Gatters}
       \paragraph{Vorbereitungsaufgabe:}Wie wird bei einem TTL- Gatter ein unbeschalteter Eingang interpretiert? Begründen Sie dieses.
 
-        Unbeschaltete Eingänge werden bei einem TTL-Gatter meist als "`High"' interpretiert. Dies liegt an der Bauweise des Gatters und ermöglicht, dass die Schaltung auch stabil ist, wenn ein Eingang nicht angeschlossen ist. Wenn eine Eingang nicht definiert ist, so wird die Schaltung instabil, da der Ausgang nicht bestimmt werden kann.
 
       \paragraph{Messschaltung:}
         \begin{center}
@@ -188,21 +180,21 @@
           Eingangsspannung $\spannung{U_e}$ nach Tabelle 1.3 vorgegeben.
 
           \begin{center}
-            \begin{table}[!hbtp]
+            \begin{table}[H]
               \caption{Messwerte Messaufgabe 1}
-              \renewcommand{\arraystretch}{1.3}
+              \renewcommand{\arraystretch}{1.6}
               \begin{center}
                 \begin{tabular}{c|c}
                   $\spannung{U_e} [\si{\volt}]$ & $\spannung{U_a} [\si{\volt}]$ \\ \hline
-                  0,2 & 3,49\\
-                  0,4 & 3,49\\
-                  0,8 & 3,33\\
-                  0,9 & 2,85\\
-                  1,0 & 1,07\\
-                  1,1 & 0,158\\
-                  1,2 & 0,143\\
-                  1,3 & 0,141\\
-                  1,4 & 0,141
+                   0,2& \qquad\qquad\qquad\qquad\\\hline
+                   0,4& \\\hline
+                   0,8& \\\hline
+                   0,9& \\\hline
+                   1,0& \\\hline
+                   1,1& \\\hline
+                   1,2& \\\hline
+                   1,3& \\\hline
+                   1,4&
                 \end{tabular}
               \end{center}
             \end{table}
@@ -211,7 +203,7 @@
         \paragraph{Messaufgabe M2:} Ermitteln Sie die Schaltschwelle Uth. Verbinden Sie dazu einen Eingang mit dem Ausgang des Gatters.
 
           \begin{equation*}
-            \spannung{U_{th}} = \SI{0,858}{\volt}
+            \spannung{U_{th}} =
           \end{equation*}
 
           \begin{center}
@@ -261,25 +253,17 @@
 
         a) $\spannung{U_{th}} = \SI{1,01}{\volt}$\\
         b) Der Kurvenpunkt entspricht dem Punkt bei $\spannung{U_{th}}$
-        %LOOK HERE
-    
+
         \paragraph{Auswertung A3:}\label{sec:auswertung-a3} Warum kann die Schaltschwelle $\spannung{U_{th}}$ bei invertierenden Gattern durch Zusammenschalten von Ein- und Ausgang ermittelt werden?
 
-          Beim Überschreiten der Schaltschwelle schält der Ausgang um und damit (wegen der Rückkopplung) auch der Eingang, dadurch ändert der Spannungsverlauf seine Richtung wieder zurück zur Schaltschwelle, er pendelt also immer um diese herum.
-
         \paragraph{Auswertung A4:} Warum weichen die ermittelten Kenngrößen von den Datenblattangaben ab?
-
-          Da wir unsere Versuche unter anderen Bedingungen durchführen, als im Datenblatt angegeben (andere Temperatur, andere Kabel, unterschiedliche Transistoren) entsprechen sie nicht einander.
 
     \chapter{Belastung logischer Schaltungen}
       \paragraph{Vorbereitungsaufgaben:} Was versteht man unter:\\
         a) Ausgangslastfaktor ("`fan-out"')\\
         b) Eingangslastfaktor ("`fan-in"')
 
-        Unter dem Ausgangslastfaktor "`fan-out"' versteht man den Strom, der vom Gatter ausgehen kann. Durch die Beschränkungen in der Stromzufuhr können nur eine bestimmte Anzahl an Gattern in Reihe geschalten werden, ohne dass eines nicht ausreichend mit Strom versorgt wird.
-
-        Der Eingangslastfaktor "`fan-in"' ist das Gegenstück zum Ausgangslastfaktor. Er beschreibt die Stromaufnahme des Gatters
-
+        
     \section{Übung 1: Eingangskennlinie $I_e = f(U_e)$ eines TTL-Gatters}
       \paragraph{Messschaltung:}
         \begin{center}
@@ -320,21 +304,21 @@
       \subsection{Messaufgaben}
         \paragraph{Messaufgabe M1:} Nehmen Sie die Eingangskennlinie $\strom{I_e} = f(\spannung{U_e})$ eines TTL- Gatters 74LS00 auf. Eingangsspannung mit Potentiometer vorgeben.
             \begin{center}
-                \begin{table}[!hbtp]
+                \begin{table}[H]
                     \caption{Messwerte Messaufgabe 1}
-                    \renewcommand{\arraystretch}{1.3}
+                    \renewcommand{\arraystretch}{1.6}
                     \begin{center}
                         \begin{tabular}{c|c}
                             $\spannung{U_e} [\si{\volt}]$ & $\strom{I_e} [\si{\micro\ampere}]$ \\ \hline
-                            0,2 & 720\\
-                            0,4 & 700\\
-                            0,8 & 670\\
-                            1,0 & 690\\
-                            2,0 & 0\\
-                            2,4 & 0\\
-                            2,7 & 0\\
-                            3,0 & 0\\
-                            5,0 & 0\\
+                            0,2 & \qquad\qquad\qquad\qquad\\\hline
+                            0,4 & \\\hline
+                            0,8 & \\\hline
+                            1,0 & \\\hline
+                            2,0 & \\\hline
+                            2,4 & \\\hline
+                            2,7 & \\\hline
+                            3,0 & \\\hline
+                            5,0 & \\
                         \end{tabular}
                     \end{center}
                 \end{table}
@@ -348,14 +332,14 @@
         \paragraph{Auswertung A2:} Wie groß sind die Eingangsströme bei den "`Worst-Case"' Eingangsspannungen?
 
           \begin{center}
-            \begin{table}[!hbtp]
+            \begin{table}[H]
               \caption{"'Worst-Case"' Eingangsströme}
-              \renewcommand{\arraystretch}{1.3}
+              \renewcommand{\arraystretch}{1.6}
               \begin{center}
-                \begin{tabular}{c|cc}
-                  &$\spannung{U_e} [\si{\volt}]$ & $\strom{I_e} [\si{\milli\ampere}]$\\
-                  "`Worst-Case"' LOW & 0,8 & 670\\
-                  "`Worst-'Case"' HIGHT& 2,0 & 0\\
+                \begin{tabular}{c|c|c}
+                  &$\spannung{U_e} [\si{\volt}]$ & $\strom{I_e} [\si{\milli\ampere}]$\\\hline
+                  "`Worst-Case"' LOW & \qquad\qquad\qquad\qquad & \qquad\qquad\qquad\qquad\\\hline
+                  "`Worst-'Case"' HIGHT& & \\
                 \end{tabular}
               \end{center}
             \end{table}
@@ -434,24 +418,24 @@
           Ausgang stufenweise, durch Ändern des Potentiometerwiderstandes, belasten.
 
           \begin{center}
-            \begin{table}[!hbtp]
+            \begin{table}[H]
               \caption{Messwerte Messaufgabe 1}
-              \renewcommand{\arraystretch}{1.3}
+              \renewcommand{\arraystretch}{1.6}
               \begin{center}
-                \begin{tabular}{cc|c|cc}
+                \begin{tabular}{c|c|c|c|c}
                   \multicolumn{2}{c|}{"'Low"' Pegel am Ausgang} &&\multicolumn{2}{c}{"'High"' Pegel am Ausgang}\\
                   $\spannung{U_a} [\si{\volt}]$ & $\strom{I_a} [\si{\milli\ampere}] $&& $\spannung{U_a} [\si{\volt}]$ & $\strom{I_a} [\si{\milli\ampere}] $\\ \hline
-                  0,2 & 1,6 &  & 1,0 & 16,7\\
-                  0,4 & 10,1 &  & 1,2 & 14,8\\
-                  0,6 & 19,1 &  & 1,4 & 12,4\\
-                  0,8 & 28,6 &  & 1,6 & 11,1\\
-                  1,0 & 33 &  & 1,8 & 9,3\\
-                  1,2 & 33,5 &  & 2,0 & 6,7\\
-                  1,4 & 33,8 &  & 2,2 & 5,0\\
-                  1,6 & 34 &  & 2,4 & 2,2\\
-                  1,8 & 34,3 &  & 2,5 & 1,1\\
-                  2,0 & 34,8 &  &  2,575 & 0,5\\
-                  2,7 & 39,2 &  & &
+                  \qquad\qquad\qquad\qquad & \qquad\qquad\qquad\qquad &  & \qquad\qquad\qquad\qquad & \qquad\qquad\qquad\qquad\\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  &  & \\\hline
+                   &  &  & &
                 \end{tabular}
               \end{center}
             \end{table}
@@ -467,23 +451,15 @@
           b) den zulässigen (empfohlenen) Ausgangslastfaktor aus den Datenblattangaben.
           Warum ist es nicht ratsam ein Gatter mit dem maximal möglichem fan-out zu belasten?
 
-          a)  maximalen Ausgangslastfaktor (HIGH): 23\\
-              maximalen Ausgangslastfaktor (LOW): 54\\
-          b) Laut Datenblatt maximal zulässiger "`fan-out"':
-              \begin{align*}
-                  fan-out_{high} &= \frac{\strom{I_{IOH}}}{\strom{I_{IHmax}}} = \frac{\SI{0,4}{\milli\ampere}}{\SI{40}{\micro\ampere}} = 10\\
-                  fan-out_{low} &= \frac{\strom{I_{IOL}}}{\strom{I_{ILmax}}} = \frac{\SI{16}{\milli\ampere}}{\SI{1,6}{\milli\ampere}} = 10
-              \end{align*}
-             Wenn die Belastung den fan-out übersteigt ändert sich die Ausgabe des Gatters. Im schlimmsten Fall gibt es keine genaue Ausgabe, da der undefinierte Bereich erreicht wird.
+        
              
   \chapter{Schaltzeiten von TTL-Gattern}
     \paragraph{Vorbereitungsaufgaben:} Erklären Sie:\\a) Anstiegszeit \textbf{$t_r$}\\b) Abfallzeit \textbf{$t_f$}
 
-      Wenn das Gatter seinen Wert ändert und somit auch die Ausgangsspannung springt diese auf einen neuen Wert. Physikalisch sind dem Sprung natürlich Grenzen gesetzt, der Wechsel in den neuen Bereich dauert einen kurzen Moment, in dem das Signal in einem nicht definierten Bereich liegt. Der Übergang ist ähnlich einer Flanke in einem Rechteck-Signal. Der Moment den die Spannung braucht, um den Bereich zu wechseln wird als Anstiegszeit  \textbf{$t_r$} (bei Anstieg des Wertes) beziehungsweise Abfallzeit \textbf{$t_f$} (Bei Abfall des Wertes) bezeichnet.
-
+    
     \section{Übung 1: Schaltzeiten eines TTL-Gatters (74LS00)}
       Bei der Realisierung von taktgesteuerten Funktionseinheiten kommt des öfteren eine sogenannte spike-Schaltung zum Einsatz. Die hier vorgestellte Schaltung nutzt zur Impulserzeugung die Gatterlaufzeit aus.
-        \pagebreak
+      
       \paragraph{Messschaltung: Spike-Schaltung:}
         \begin{center}
             \begin{circuitikz}[scale=1]
@@ -576,35 +552,28 @@
                                     to[short] (4E1)
                                     
 
-                
-                
-                
-                
-                
-                
                 ;
             \end{circuitikz}
         \end{center}
 
       Vorgaben/Einstellungen:
-      \begin{itemize}
-        \setlength\itemsep{-1em}
+      \begin{itemize*}
         \item Zum Messen die Tastköpfe benutzen und Masseleitung anschließen
         \item Versorgungsspannung $\spannung{U_{cc}} = \SI{5}{\volt}$
         \item Eingangssignal an X0 mit dem Frequenzgenerator vorgeben: $f = \SI{1}{\mega\Hz}$; TTL-Ausgang verwenden, wenn vorhanden!
         \item Schaltung aufbauen
         \item Leitungsführung kurz halten
-      \end{itemize}
+      \end{itemize*}
 
       \subsection{Messaufgaben}
-        \paragraph{Messaufgabe M1:} Messen Sie die Signalverläufe von X1 und X2 mit dem Oszillograph. Bestimmen Sie:\\
+        \paragraph{Messaufgabe M1:} Messen Sie die Signalverläufe von X1 und X2 mit dem Oszillograph. Bestimmen Sie:
 
-          Anstiegszeit $t_r$ von $X_2$: \SI{50}{\nano\second}\\
-          Abfallzeit $t_f$ von $X_2$: \SI{50}{\nano\second}\\
+          Anstiegszeit $t_r$ von $X_2$: \\
+          Abfallzeit $t_f$ von $X_2$: 
 
           Signallaufzeiten für Gatter N1/2:\\
-          $t_{pHL}$ (Ausgang high nach low): \SI{50}{\nano\second}\\
-          $t_{pLH}$ (Ausgang low nach high): \SI{50}{\nano\second}\\
+          $t_{pHL}$ (Ausgang high nach low): \\
+          $t_{pLH}$ (Ausgang low nach high): \\
 
           Tragen Sie die Signalverläufe X1 und X2 in ein zu erstellendes Zeitdiagramm ein.
 
@@ -614,13 +583,10 @@
 
       \subsection{Auswertung}
         \paragraph{Zwischenaufgabe:} Wie viele Ic's werden benötigt?
-        
-            Es wird nur 1 Ic benötigt, da dieser 4 Gatter enthält
-        
+                
         \paragraph{Auswertung A1:} Vergleichen Sie die Messwerte mit den im Datenblatt angegebenen und erklären Sie
         eventuelle Abweichungen.
 
-          Die Messwerte und die auf dem Datenblatt angegebenen Werte unterscheiden sich. Dies liegt an unterschiedlichen Versuchsbedingungen, Mess- und Produktionsfehlern. Wenn sich diese Werte aufaddieren können sich die Werte deutlich unterscheiden.
 
   \chapter{Impuls-Schaltung}
     \section{Übung 1}
@@ -724,53 +690,20 @@
       \subsection{Messaufgaben}
         \paragraph{Messaufgabe M1:} Messen Sie die Signale X0, X1 und X3 der Schaltung mit dem Oszillograph. Stellen Sie die Signalverläufe von X0, X1 und X3 in einer Zeichnung untereinander da.
 
-
         \paragraph{Messaufgabe M2:} Erklären Sie den Begriff Impulsdauer. Wie groß ist hier die Impulsdauer $t_i$ des Ausgangssignals?
-
-          \begin{equation*}
-            t_i = \SI{70}{\micro\second}
-          \end{equation*}
 
         \paragraph{Messaufgabe M3:} Bestimmen Sie die Schaltschwelle $\spannung{U_{th}}$ des Gatters N1/2:
 
-          \begin{equation*}
-            \spannung{U_{th}} = \SI{750}{\milli\volt}
-          \end{equation*}
-
       \subsection{Auswertung}
-        \paragraph{Auswertung A1:} Beschreiben Sie die Funktionsweise der Schaltung.
+        \paragraph{Auswertung A1:} Beschreiben Sie die Funktionsweise der Schaltung mit Zeitablaufdiagramm und Funktionstabelle.
         
-            An N1/1 wird die Rechteckfrequenz invertiert. Die Frequenz X0 wird auch an einem Eingang des zweiten Gliedes N1/2 angelegt. Das Ausgangssignal von N1/1 wird durch den Kondensator verzögert an N1/2 angelegt. Durch die Verzögerung schält das Glied N1/2 um. Das Signal X2 wird nun an N1/3 invertiert und ergibt bei X3 eine Spannungsspitze ("`spike"').
-              \begin{center}
-                \begin{table}[!hbtp]
-                    \caption{Wahrheitstabelle}
-                    \renewcommand{\arraystretch}{1.3}
-                    \begin{center}
-                        \begin{tabular}{cccc}
-                            X0 & X1 & X2 & X3\\ \hline
-                            0 & 0 & 1 & 0\\
-                            0 & 1 & 1 & 0\\
-                            1 & 0 & 1 & 0\\
-                            1 & 1 & 0 & 1
-                        \end{tabular}
-                    \end{center}
-                \end{table}
-            \end{center}
-
           
         \paragraph{Auswertung A2:} Geben Sie eine Formel zur Berechnung der Impulsdauer $t_i = f(\widerstand{R}, \capacity{C}, \spannung{U_e})$ an.
-
-          \begin{align*}
-              t_i &= -\widerstand{R} \cdot \capacity{C} \cdot  \ln\left(\frac{\spannung{U_{eth}}}{\spannung{U_{CC}}}\right)
-          \end{align*}
 
         \paragraph{Auswertung A3:} Berechnen Sie $t_i$ für obige Schaltung; Rechnen Sie mit der zuvor gemessenen
           Schaltschwelle $\spannung{U_{eth}}$. Vergleichen Sie das Ergebnis mit der Messung.
 
-          \begin{align*}
-          t_i &= -\SI{2,2}{\kilo\ohm} \cdot \SI{0,022}{\micro\farad} \cdot  \ln\left(\frac{\SI{750}{\milli\volt}}{\SI{5}{\volt}}\right) = \SI{91,8}{\milli\second}
-          \end{align*}
-           Gemessene und errechnete Impulsdauer liegen nahe beieinander. Auch hier können Temperaturunterschiede, Messfehler und andere Unterschiede zu abweichenden Ergebnissen führen
+        
   \chapter{Flip-Flop-Speicher}
     \section{Übung 1: RS-Flip-Flop}
       Ergänzen Sie nachfolgende Schaltung mit einem RS-Flip-Flop, aufgebaut aus NAND-Gattern.\\
@@ -855,23 +788,21 @@
         \paragraph{Auswertung A2:} Überprüfen Sie die Funktionstabelle (Spannungspegel eintragen).
 
           \begin{center}
-              \begin{table}[!hbtp]
+              \begin{table}[H]
                   \caption{Logiktabelle RS-FlipFlop}
-                  \renewcommand{\arraystretch}{1.3}
+                  \renewcommand{\arraystretch}{1.6}
                   \begin{center}
-                      \begin{tabular}{cc|cc|cc}
+                      \begin{tabular}{c|c|c|c|c|c}
                           \multicolumn{4}{c|}{Logischer Signalpegel} &\multicolumn{2}{c}{Gemessene Spannung}\\
                           $S$ & $R$ & $Q$ & $\overline{Q}$ & $Q$ & $\overline{Q}$\\ \hline
-                          0 & 0 & 0 & 1 & 0,15 & 3,49\\
-                          0 & 1 & 0 & 1 & 0,14 & 3,49\\
-                          1 & 0 & 1 & 0 & 3,5 & 0,18\\
-                          1 & 1 & \multicolumn{2}{c|}{undefiniert} & 3,5 & 3,5
+                          0&0 & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad & \qquad\qquad\qquad\\\hline
+                          0 & 1 &  &  &  & \\\hline
+                          1 & 0 & &  &  & \\\hline
+                          1 & 1 & & &  & 
                       \end{tabular}
                   \end{center}
               \end{table}
           \end{center}
         \paragraph{Auswertung A3:} Welche Eingangssignalkombination ist undefiniert? Können Sie diesen Sachverhalt an
           der Schaltung nachweisen?
-
-          Die Signalkombination HIGH \& HIGH ist undefiniert, hier liefert die Schaltung auf beiden Ausgängen HIGH.
 \end{document}
