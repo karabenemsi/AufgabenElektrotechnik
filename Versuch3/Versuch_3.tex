@@ -84,8 +84,38 @@
 
 
         \section{Rechenaufgaben und Erklärungen}
+        
+        	Mit einem \textbf{Multimeter}, einem der einfachsten elektrischen Messgeräte, können i.d.R. mehrere elektrische Größen gemessen werden. Gleichspannung (DC), Gleichstrom, Wechselspannung (AC), Wechselstrom und Widerstand.
+        	
+        	\paragraph{Idealer Spannungsmesser} Ein idealer Spannungsmesser zeigt genau den Wert $\spannung{U_V}$ an. Der Innenwiderstand des Messgeräts ist unendlich hoch. Dadurch: $\strom{I_V} = 0$
+        	\begin{center}
+        		\begin{circuitikz}[scale=3]
+        			\draw
+        			(0,1) to[myvoltmeter,v=$\spannung{U_V}$, i=$\strom{I_V}$, o-o] (0,0)
+        		
+        			;
+        		\end{circuitikz}
+        	\end{center}
+        	
+        	\paragraph{Realer Spannungsmesser} Ein realer Spannungsmesser zeigt genau den Wert $\spannung{U_V}$ an. Der Innenwiderstand des Messgeräts ist $\widerstand{R_{iV}}$.
+        	\begin{center}
+        		\begin{circuitikz}[scale=1]
+        			\draw
+        			(0,3) to[myvoltmeter,v=$\spannung{U_V}$, o-o] (0,0)
+        			(0,2.5) to[short] (1,2.5)
+        			 	  to[R, l=$\widerstand{R_{iV}}$] (1,0.5)
+        			 	  to[short] (0,0.5)  
+        			 	 to[short,i^=$\strom{I_V}$] (0,0)     			;
+        		\end{circuitikz}
+        	\end{center}
            
            \subsection{Aufgabe 1:} Wie groß ist der Innenwiderstand eines Voltmeters, wenn in das Voltmeter ein Strom von $\strom{I_V} = \SI{1}{\micro\ampere}$ fließt und ein Wert von \SI{1}{\volt} angezeigt wird?
+           
+           \paragraph{Idealer Strommesser (Amperemeter)}
+           Ein Idealer Strommesser zeigt genau den Wert $\strom{I_A}$ an. Der Innenwiderstand des Messgerätes ist null
+           
+           \paragraph{Realer Strommesser}
+           
             \TODO{Zeichnungen und Erklärungen}
            \subsection{Aufgabe 2:} Wie groß ist der Innenwiderstand eines Amperemeters, wenn über dem Amperemeter eine Spannung von $\spannung{U_A} = \SI{100}{\milli\volt}$ abfällt und ein Wert von \SI{50}{\milli\ampere} angezeigt wird?
            \TODO{Zeichnungen und Erklärungen}
