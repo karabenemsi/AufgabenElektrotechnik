@@ -84,6 +84,7 @@
 
 
         \section{Rechenaufgaben und Erklärungen}
+        \subsection{Spannungsmesser}
         
         	Mit einem \textbf{Multimeter}, einem der einfachsten elektrischen Messgeräte, können i.d.R. mehrere elektrische Größen gemessen werden. Gleichspannung (DC), Gleichstrom, Wechselspannung (AC), Wechselstrom und Widerstand.
         	
@@ -109,19 +110,95 @@
         		\end{circuitikz}
         	\end{center}
            
-           \subsection{Aufgabe 1:} Wie groß ist der Innenwiderstand eines Voltmeters, wenn in das Voltmeter ein Strom von $\strom{I_V} = \SI{1}{\micro\ampere}$ fließt und ein Wert von \SI{1}{\volt} angezeigt wird?
+           \paragraph{Aufgabe:} Wie groß ist der Innenwiderstand eines Voltmeters, wenn in das Voltmeter ein Strom von $\strom{I_V} = \SI{1}{\micro\ampere}$ fließt und ein Wert von \SI{1}{\volt} angezeigt wird?
            
-           \paragraph{Idealer Strommesser (Amperemeter)}
-           Ein Idealer Strommesser zeigt genau den Wert $\strom{I_A}$ an. Der Innenwiderstand des Messgerätes ist null
+          \subsection{Strommesser (Amperemeter)}
            
-           \paragraph{Realer Strommesser}
            
-            \TODO{Zeichnungen und Erklärungen}
-           \subsection{Aufgabe 2:} Wie groß ist der Innenwiderstand eines Amperemeters, wenn über dem Amperemeter eine Spannung von $\spannung{U_A} = \SI{100}{\milli\volt}$ abfällt und ein Wert von \SI{50}{\milli\ampere} angezeigt wird?
-           \TODO{Zeichnungen und Erklärungen}
-           \subsection{Aufgabe 3:}  Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{100}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$ . Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,95}{\volt}$ und $\strom{I_A} = \SI{500}{\micro\ampere}$.  Berechnen Sie $\strom{I_L}$, $\widerstand{R_L}$ und $\spannung{U_0}$.
-          \TODO{Zeichnungen und Erklärungen}
-           \subsection{Aufgabe 4:}Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{1}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$. Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,8}{\volt}$ und $\strom{I_L} = \SI{100}{\micro\ampere}$. Berechnen Sie  $\strom{U_L}$, $\widerstand{R_L}$ und $\spannung{U_0}$.
+           \paragraph{Idealer Strommesser}
+           Ein Idealer Strommesser zeigt genau den Wert $\strom{I_A}$ an. Der Innenwiderstand des Messgerätes ist null.
+           
+           \begin{center}
+               \begin{circuitikz}[scale=3]
+                   \draw
+                   (0,1) to[myammeter,v=$\spannung{U_A}$, i=$\strom{I_A}$, o-o] (0,0)
+                   ;
+               \end{circuitikz}
+           \end{center}
+           
+                    
+           \paragraph{Realer Strommesser} Ein realer Strommesser zeigt genau den Wert $\strom{I_A}$ an. Der Innenwiderstand des Messgeräts ist $\widerstand{R_{iA}}$.
+           
+           \begin{center}
+               \begin{circuitikz}[scale=1]
+                   \draw
+                   (0,3) to[myammeter,, o-] (0,1.5)
+                   
+                   to[R, l=$\widerstand{R_{iA}}$, -o] (0,0)
+                   (-.5,3) to[open, v=$\spannung{U_A}$] (-.5,0)
+                   ;
+               \end{circuitikz}
+           \end{center}
+           
+
+           \paragraph{Aufgabe:} Wie groß ist der Innenwiderstand eines Amperemeters, wenn über dem Amperemeter eine Spannung von $\spannung{U_A} = \SI{100}{\milli\volt}$ abfällt und ein Wert von \SI{50}{\milli\ampere} angezeigt wird?
+           
+           
+           \subsection{Spannungsrichtige Messung}
+           
+           \begin{center}
+               \begin{circuitikz}[scale=1]
+                   \draw
+                   (0,0) rectangle (3, 5) %Netzteil
+                   (3.25,3) rectangle (6.5,5) %Strommesser
+                   (0.5,4) to[R, l=$\widerstand{R_i}$] (3,4)
+                   
+                   to[myammeter] (5,4)
+                   to[R, l=$\widerstand{R_{iA}}$] (7,4)
+%                   (-.5,3) to[open, v=$\spannung{U_A}$] (-.5,0)
+                   
+                   
+ %                  (0,3) to[myvoltmeter,v=$\spannung{U_V}$, o-o] (0,0)
+  %                 (0,2.5) to[short] (1,2.5)
+   %                to[R, l=$\widerstand{R_{iV}}$] (1,0.5)
+    %               to[short] (0,0.5)  
+     %              to[short,i^=$\strom{I_V}$] (0,0)
+                   
+                   ;
+               \end{circuitikz}
+           \end{center}
+           
+           \TODO{Zeichnung}
+           
+           
+           
+           \paragraph{Messfehler} Die Spannung $\spannung{U_L}$ an der Last wird mit dem Spannungsmesser korrekt gemessen und angezeigt. Dagegen zeigt der Strommesser nicht den Strom $\strom{I_L}$ in die Last an, sondern 
+           \begin{equation*}
+               \strom{I_A} = \strom{I_L} + \strom{I_V}
+           \end{equation*}
+           
+           Der zusätzliche Strom IV kann aus dem angezeigten Wert $\spannung{U_L}$ und aus $\widerstand{R_{iV}}$ bestimmt werden, womit auf den eigentlich interessierenden Strom $\strom{I_L}$ zurückgerechnet werden kann.
+            
+           
+           \subsection{Aufgabe:}  Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{100}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$ . Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,95}{\volt}$ und $\strom{I_A} = \SI{500}{\micro\ampere}$.  Berechnen Sie $\strom{I_L}$, $\widerstand{R_L}$ und $\spannung{U_0}$.
+           
+           
+           
+         \subsection{Stromrichtige Messung}
+         
+         \TODO{Zeichnung}
+         
+         \paragraph{Messfehler}
+         Der Strom $\strom{I_L}$ durch die Last wird mit dem Strommesser korrekt gemessen und angezeigt.
+         Dagegen zeigt der Spannungsmesser nicht die korrekte Spannung $\spannung{U_L}$ an der Last an, sondern
+         \begin{equation*}
+             \spannung{U_V} = \spannung{U_L} + \spannung{U_A}
+         \end{equation*}
+         Die zusätzliche Spannung $\spannung{U_A}$ kann aus dem angezeigten Wert $\strom{I_L}$ und aus $\widerstand{R_{iA}}$ bestimmt
+         werden, womit die eigentlich interessierende Spannung $\spannung{U_L}$ berechnet werden kann.
+          
+          
+           \paragraph{Aufgabe:}Das Netzteil hat einen Innenwiderstand $\widerstand{R_i} = \SI{1}{\ohm}$. Die Innenwiderstände der Messgeräte sind $\widerstand{R_{iA}} = \SI{1}{\ohm}$ und $\widerstand{R_{iV}} = \SI{1}{\mega\ohm}$. Die angezeigten Messwerte sind $\spannung{U_L} = \SI{4,8}{\volt}$ und $\strom{I_L} = \SI{100}{\micro\ampere}$. Berechnen Sie  $\strom{U_L}$, $\widerstand{R_L}$ und $\spannung{U_0}$.
 
 		   
        \section{Spannungsrichtiges Messen bei Strom- Spannungs- Messung}
