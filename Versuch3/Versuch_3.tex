@@ -146,30 +146,11 @@
            
            \subsection{Spannungsrichtige Messung}
            
-           \begin{center}
-               \begin{circuitikz}[scale=1]
-                   \draw
-                   (0,0) rectangle (3, 5) %Netzteil
-                   (3.25,3) rectangle (6.5,5) %Strommesser
-                   (0.5,4) to[R, l=$\widerstand{R_i}$] (3,4)
-                   
-                   to[myammeter] (5,4)
-                   to[R, l=$\widerstand{R_{iA}}$] (7,4)
-%                   (-.5,3) to[open, v=$\spannung{U_A}$] (-.5,0)
-                   
-                   
- %                  (0,3) to[myvoltmeter,v=$\spannung{U_V}$, o-o] (0,0)
-  %                 (0,2.5) to[short] (1,2.5)
-   %                to[R, l=$\widerstand{R_{iV}}$] (1,0.5)
-    %               to[short] (0,0.5)  
-     %              to[short,i^=$\strom{I_V}$] (0,0)
-                   
-                   ;
-               \end{circuitikz}
-           \end{center}
-           
-           \TODO{Zeichnung}
-           
+             \begin{figure}[H]
+             \begin{center}
+                 \includegraphics[width=0.8\textwidth]{./Spannung.png}
+             \end{center}
+         \end{figure}
            
            
            \paragraph{Messfehler} Die Spannung $\spannung{U_L}$ an der Last wird mit dem Spannungsmesser korrekt gemessen und angezeigt. Dagegen zeigt der Strommesser nicht den Strom $\strom{I_L}$ in die Last an, sondern 
@@ -186,7 +167,11 @@
            
          \subsection{Stromrichtige Messung}
          
-         \TODO{Zeichnung}
+           \begin{figure}[H]
+             \begin{center}
+                 \includegraphics[width=0.8\textwidth]{./Strom.png}
+             \end{center}
+         \end{figure}
          
          \paragraph{Messfehler}
          Der Strom $\strom{I_L}$ durch die Last wird mit dem Strommesser korrekt gemessen und angezeigt.
@@ -263,8 +248,12 @@
             
             \subsubsection{Aufgabe 2:} Berechnen Sie den Innenwiderstand $\widerstand{R_I}$ des Multimeters M2-H im Strommessbereich \SI{60}{\milli\ampere} anhand der Messwerte.
             
-            \TODO{Zeichnung}
-            
+            \begin{figure}[H]
+                \begin{center}
+                    \includegraphics[width=0.8\textwidth]{./M21.png}
+                \end{center}
+            \end{figure}
+        
     
         \section{Stromrichtiges Messen bei gleichzeitiger Strom- Spannungs- Messung}
        
@@ -331,7 +320,11 @@
                 $\spannung{U_X}=$ \qquad\qquad\qquad $\strom{I_{X1}}=$ \qquad\qquad\qquad $\strom{I_{X2}}=$
                 
                 
-                \TODO{Zeichnung}
+            \begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{./M22.png}
+    \end{center}
+\end{figure}
    
         \section{Einfluss des Messgeräteinnenwiederstandes auf die Messgenauigkeit}
             \paragraph{Messaufbau:}
